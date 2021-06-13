@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1032414338668",
+    "firebase_url": "https://lamandau-travel-app-f0a50-default-rtdb.firebaseio.com",
+    "project_id": "lamandau-travel-app-f0a50",
+    "storage_bucket": "lamandau-travel-app-f0a50.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1032414338668:android:494dce405217c35eec8249",
+        "android_client_info": {
+          "package_name": "com.flutterflow.lamandautravelapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1032414338668-k8r5l1dbito91ulkpegbh04s63tcqit9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.flutterflow.lamandautravelapp",
+            "certificate_hash": "adbbbae18d5ca9216ae66ed843b0e28665e712c6"
+          }
+        },
+        {
+          "client_id": "1032414338668-ar8evht7sd691pa1bi41vvnv2n1lgu3a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDBH6NvqxTTrbrdDfwvML1D85Tc9xX6MrY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1032414338668-ar8evht7sd691pa1bi41vvnv2n1lgu3a.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1032414338668-hhskk874l608htebbk8n9gbbchgnc041.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "lamandau-travel-app"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

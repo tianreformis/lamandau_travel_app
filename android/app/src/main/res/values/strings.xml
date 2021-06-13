@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+    <string name="app_name">lamandau-travel-app</string>
+    <string name="facebook_app_id">313267030255676</string>
+               <string name="fb_login_protocol_scheme">fb313267030255676</string>
+</resources>

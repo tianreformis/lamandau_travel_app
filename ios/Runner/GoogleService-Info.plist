@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>1032414338668-hhskk874l608htebbk8n9gbbchgnc041.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.1032414338668-hhskk874l608htebbk8n9gbbchgnc041</string>
+	<key>API_KEY</key>
+	<string>AIzaSyB-VkPAUsW9DR0Ksci5blQrMLU2kTzUeW8</string>
+	<key>GCM_SENDER_ID</key>
+	<string>1032414338668</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>lamandau-travel-app</string>
+	<key>PROJECT_ID</key>
+	<string>lamandau-travel-app-f0a50</string>
+	<key>STORAGE_BUCKET</key>
+	<string>lamandau-travel-app-f0a50.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:1032414338668:ios:bc5888b3d5e39dd5ec8249</string>
+</dict>
+</plist>
