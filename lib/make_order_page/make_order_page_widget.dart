@@ -76,18 +76,6 @@ class _MakeOrderPageWidgetState extends State<MakeOrderPageWidget> {
         elevation: 4,
       ),
       backgroundColor: Color(0xFFDBE2E7),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          print('FloatingActionButton pressed ...');
-        },
-        backgroundColor: FlutterFlowTheme.primaryColor,
-        elevation: 8,
-        child: Icon(
-          Icons.add,
-          color: FlutterFlowTheme.tertiaryColor,
-          size: 28,
-        ),
-      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(

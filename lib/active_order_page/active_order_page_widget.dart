@@ -86,8 +86,13 @@ class _ActiveOrderPageWidgetState extends State<ActiveOrderPageWidget> {
         backgroundColor: FlutterFlowTheme.primaryColor,
         elevation: 8,
         child: IconButton(
-          onPressed: () {
-            print('IconButton pressed ...');
+          onPressed: () async {
+            await Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => MakeOrderPageWidget(),
+              ),
+            );
           },
           icon: Icon(
             Icons.add,
@@ -187,7 +192,7 @@ class _ActiveOrderPageWidgetState extends State<ActiveOrderPageWidget> {
                                           mainAxisSize: MainAxisSize.max,
                                           children: [
                                             Text(
-                                              '1.7mi',
+                                              listViewIndex.toString(),
                                               style: FlutterFlowTheme.bodyText1
                                                   .override(
                                                 fontFamily: 'Nunito',
