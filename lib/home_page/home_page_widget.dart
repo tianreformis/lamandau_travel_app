@@ -9,6 +9,7 @@ import '../loginpage/loginpage_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:page_transition/page_transition.dart';
 
 class HomePageWidget extends StatefulWidget {
   HomePageWidget({Key key}) : super(key: key);
@@ -69,8 +70,11 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                       onTap: () async {
                         await Navigator.push(
                           context,
-                          MaterialPageRoute(
-                            builder: (context) => EditprofileWidget(
+                          PageTransition(
+                            type: PageTransitionType.fade,
+                            duration: Duration(milliseconds: 300),
+                            reverseDuration: Duration(milliseconds: 300),
+                            child: EditprofileWidget(
                               userRecord: homePageUsersRecord,
                             ),
                           ),
@@ -120,8 +124,11 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                         await signOut();
                         await Navigator.pushAndRemoveUntil(
                           context,
-                          MaterialPageRoute(
-                            builder: (context) => LoginpageWidget(),
+                          PageTransition(
+                            type: PageTransitionType.fade,
+                            duration: Duration(milliseconds: 300),
+                            reverseDuration: Duration(milliseconds: 300),
+                            child: LoginpageWidget(),
                           ),
                           (r) => false,
                         );
@@ -239,9 +246,12 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                   onPressed: () async {
                                     await Navigator.push(
                                       context,
-                                      MaterialPageRoute(
-                                        builder: (context) =>
-                                            ActiveOrderPageWidget(),
+                                      PageTransition(
+                                        type: PageTransitionType.fade,
+                                        duration: Duration(milliseconds: 300),
+                                        reverseDuration:
+                                            Duration(milliseconds: 300),
+                                        child: ActiveOrderPageWidget(),
                                       ),
                                     );
                                   },
@@ -285,9 +295,12 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                 onPressed: () async {
                                   await Navigator.push(
                                     context,
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          InformationPageWidget(),
+                                    PageTransition(
+                                      type: PageTransitionType.fade,
+                                      duration: Duration(milliseconds: 300),
+                                      reverseDuration:
+                                          Duration(milliseconds: 300),
+                                      child: InformationPageWidget(),
                                     ),
                                   );
                                 },

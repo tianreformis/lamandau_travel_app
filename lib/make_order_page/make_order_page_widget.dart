@@ -3,7 +3,9 @@ import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:page_transition/page_transition.dart';
 
 class MakeOrderPageWidget extends StatefulWidget {
   MakeOrderPageWidget({Key key}) : super(key: key);
@@ -13,8 +15,8 @@ class MakeOrderPageWidget extends StatefulWidget {
 }
 
 class _MakeOrderPageWidgetState extends State<MakeOrderPageWidget> {
-  String dropDownValue1;
-  String dropDownValue2;
+  DateTime datePicked = DateTime.now();
+  String dropDownValue;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -99,7 +101,7 @@ class _MakeOrderPageWidgetState extends State<MakeOrderPageWidget> {
                         Padding(
                           padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
                           child: Text(
-                            'Pilih Mobil',
+                            'Tanggal Keberangkatan',
                             style: FlutterFlowTheme.subtitle2.override(
                               fontFamily: 'Nunito',
                               color: Colors.black,
@@ -107,27 +109,19 @@ class _MakeOrderPageWidgetState extends State<MakeOrderPageWidget> {
                             ),
                           ),
                         ),
-                        Padding(
-                          padding: EdgeInsets.fromLTRB(2, 0, 10, 0),
-                          child: FlutterFlowDropDown(
-                            options: ['DA 2021', 'DA 2022'],
-                            onChanged: (value) {
-                              setState(() => dropDownValue1 = value);
-                            },
-                            width: 130,
-                            height: 40,
-                            textStyle: FlutterFlowTheme.subtitle2.override(
-                              fontFamily: 'Nunito',
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                            ),
-                            fillColor: Colors.white,
-                            elevation: 2,
-                            borderColor: Colors.transparent,
-                            borderWidth: 0,
-                            borderRadius: 0,
-                            margin: EdgeInsets.fromLTRB(8, 4, 8, 4),
+                        IconButton(
+                          onPressed: () async {
+                            await DatePicker.showDatePicker(context,
+                                showTitleActions: true, onConfirm: (date) {
+                              setState(() => datePicked = date);
+                            }, currentTime: DateTime.now());
+                          },
+                          icon: Icon(
+                            Icons.date_range_rounded,
+                            color: Colors.black,
+                            size: 30,
                           ),
+                          iconSize: 30,
                         )
                       ],
                     ),
@@ -152,7 +146,7 @@ class _MakeOrderPageWidgetState extends State<MakeOrderPageWidget> {
                         Padding(
                           padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
                           child: Text(
-                            'Pilih Mobil',
+                            'Kursi',
                             style: FlutterFlowTheme.subtitle2.override(
                               fontFamily: 'Nunito',
                               color: Colors.black,
@@ -163,9 +157,9 @@ class _MakeOrderPageWidgetState extends State<MakeOrderPageWidget> {
                         Padding(
                           padding: EdgeInsets.fromLTRB(2, 0, 10, 0),
                           child: FlutterFlowDropDown(
-                            options: ['DA 2021', 'DA 2022'],
+                            options: ['1', '2'],
                             onChanged: (value) {
-                              setState(() => dropDownValue2 = value);
+                              setState(() => dropDownValue = value);
                             },
                             width: 130,
                             height: 40,
@@ -219,7 +213,16 @@ class _MakeOrderPageWidgetState extends State<MakeOrderPageWidget> {
                                     TextButton(
                                       onPressed: () async {
                                         Navigator.pop(alertDialogContext);
-                                        Navigator.pop(context);
+                                        final travelTime = datePicked;
+
+                                        final orderRecordData =
+                                            createOrderRecordData(
+                                          travelTime: travelTime,
+                                        );
+
+                                        await OrderRecord.collection
+                                            .doc()
+                                            .set(orderRecordData);
                                         ;
                                       },
                                       child: Text('Ya, Konfirmasi'),

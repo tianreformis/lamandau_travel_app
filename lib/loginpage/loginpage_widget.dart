@@ -7,6 +7,7 @@ import '../signup/signup_widget.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:page_transition/page_transition.dart';
 
 class LoginpageWidget extends StatefulWidget {
   LoginpageWidget({Key key}) : super(key: key);
@@ -226,9 +227,13 @@ class _LoginpageWidgetState extends State<LoginpageWidget> {
 
                                         await Navigator.pushAndRemoveUntil(
                                           context,
-                                          MaterialPageRoute(
-                                            builder: (context) =>
-                                                HomePageWidget(),
+                                          PageTransition(
+                                            type: PageTransitionType.fade,
+                                            duration:
+                                                Duration(milliseconds: 300),
+                                            reverseDuration:
+                                                Duration(milliseconds: 300),
+                                            child: HomePageWidget(),
                                           ),
                                           (r) => false,
                                         );
@@ -301,9 +306,16 @@ class _LoginpageWidgetState extends State<LoginpageWidget> {
                                                     await Navigator
                                                         .pushAndRemoveUntil(
                                                       context,
-                                                      MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            HomePageWidget(),
+                                                      PageTransition(
+                                                        type: PageTransitionType
+                                                            .fade,
+                                                        duration: Duration(
+                                                            milliseconds: 300),
+                                                        reverseDuration:
+                                                            Duration(
+                                                                milliseconds:
+                                                                    300),
+                                                        child: HomePageWidget(),
                                                       ),
                                                       (r) => false,
                                                     );
@@ -382,9 +394,16 @@ class _LoginpageWidgetState extends State<LoginpageWidget> {
                                                     await Navigator
                                                         .pushAndRemoveUntil(
                                                       context,
-                                                      MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            HomePageWidget(),
+                                                      PageTransition(
+                                                        type: PageTransitionType
+                                                            .fade,
+                                                        duration: Duration(
+                                                            milliseconds: 300),
+                                                        reverseDuration:
+                                                            Duration(
+                                                                milliseconds:
+                                                                    300),
+                                                        child: HomePageWidget(),
                                                       ),
                                                       (r) => false,
                                                     );
@@ -441,9 +460,13 @@ class _LoginpageWidgetState extends State<LoginpageWidget> {
                                       onTap: () async {
                                         await Navigator.push(
                                           context,
-                                          MaterialPageRoute(
-                                            builder: (context) =>
-                                                SignupWidget(),
+                                          PageTransition(
+                                            type: PageTransitionType.fade,
+                                            duration:
+                                                Duration(milliseconds: 300),
+                                            reverseDuration:
+                                                Duration(milliseconds: 300),
+                                            child: SignupWidget(),
                                           ),
                                         );
                                       },
@@ -464,7 +487,7 @@ class _LoginpageWidgetState extends State<LoginpageWidget> {
                               child: Padding(
                                 padding: EdgeInsets.fromLTRB(0, 4, 0, 0),
                                 child: Image.asset(
-                                  'assets/images/logo.png',
+                                  'assets/images/logo_app.png',
                                   width: 50,
                                   height: 50,
                                   fit: BoxFit.cover,

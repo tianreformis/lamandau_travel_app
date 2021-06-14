@@ -4,6 +4,7 @@ import '../flutter_flow/flutter_flow_util.dart';
 import '../make_order_page/make_order_page_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:page_transition/page_transition.dart';
 
 class ActiveOrderPageWidget extends StatefulWidget {
   ActiveOrderPageWidget({Key key}) : super(key: key);
@@ -78,8 +79,11 @@ class _ActiveOrderPageWidgetState extends State<ActiveOrderPageWidget> {
         onPressed: () async {
           await Navigator.push(
             context,
-            MaterialPageRoute(
-              builder: (context) => MakeOrderPageWidget(),
+            PageTransition(
+              type: PageTransitionType.fade,
+              duration: Duration(milliseconds: 300),
+              reverseDuration: Duration(milliseconds: 300),
+              child: MakeOrderPageWidget(),
             ),
           );
         },
@@ -89,8 +93,11 @@ class _ActiveOrderPageWidgetState extends State<ActiveOrderPageWidget> {
           onPressed: () async {
             await Navigator.push(
               context,
-              MaterialPageRoute(
-                builder: (context) => MakeOrderPageWidget(),
+              PageTransition(
+                type: PageTransitionType.fade,
+                duration: Duration(milliseconds: 300),
+                reverseDuration: Duration(milliseconds: 300),
+                child: MakeOrderPageWidget(),
               ),
             );
           },
@@ -141,89 +148,76 @@ class _ActiveOrderPageWidgetState extends State<ActiveOrderPageWidget> {
                         }
                         final shopListItemUsersRecord = snapshot.data;
                         return Padding(
-                          padding: EdgeInsets.fromLTRB(0, 2, 0, 0),
-                          child: Container(
-                            width: MediaQuery.of(context).size.width,
-                            height: 90,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
+                          padding: EdgeInsets.fromLTRB(0, 2, 0, 2),
+                          child: Material(
+                            color: Colors.transparent,
+                            elevation: 3,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
                             ),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                Expanded(
-                                  child: Padding(
-                                    padding: EdgeInsets.fromLTRB(8, 1, 0, 0),
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Row(
-                                          mainAxisSize: MainAxisSize.max,
-                                          children: [
-                                            Text(
-                                              listViewOrderRecord.numberOfChair
-                                                  .toString(),
-                                              style: FlutterFlowTheme.subtitle1
-                                                  .override(
-                                                fontFamily: 'Nunito',
-                                                color: Color(0xFF15212B),
-                                              ),
-                                            )
-                                          ],
-                                        ),
-                                        Row(
-                                          mainAxisSize: MainAxisSize.max,
-                                          children: [
-                                            Text(
-                                              dateTimeFormat(
-                                                  'MMMMEEEEd',
-                                                  listViewOrderRecord
-                                                      .travelTime),
-                                              style: FlutterFlowTheme.bodyText2
-                                                  .override(
-                                                fontFamily: 'Nunito',
-                                              ),
-                                            )
-                                          ],
-                                        ),
-                                        Row(
-                                          mainAxisSize: MainAxisSize.max,
-                                          children: [
-                                            Text(
-                                              listViewIndex.toString(),
-                                              style: FlutterFlowTheme.bodyText1
-                                                  .override(
-                                                fontFamily: 'Nunito',
-                                                color: FlutterFlowTheme
-                                                    .primaryColor,
-                                                fontWeight: FontWeight.w500,
-                                              ),
-                                            )
-                                          ],
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                Column(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Expanded(
-                                      child: Padding(
-                                        padding:
-                                            EdgeInsets.fromLTRB(0, 0, 8, 0),
-                                        child: Icon(
-                                          Icons.chevron_right_outlined,
-                                          color: Color(0xFF95A1AC),
-                                          size: 24,
-                                        ),
+                            child: Container(
+                              width: MediaQuery.of(context).size.width,
+                              height: 90,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                boxShadow: [
+                                  BoxShadow(
+                                    blurRadius: 5,
+                                    color: FlutterFlowTheme.primaryColor,
+                                    spreadRadius: 5,
+                                  )
+                                ],
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Expanded(
+                                    child: Padding(
+                                      padding: EdgeInsets.fromLTRB(8, 1, 0, 0),
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Row(
+                                            mainAxisSize: MainAxisSize.max,
+                                            children: [
+                                              Text(
+                                                listViewOrderRecord
+                                                    .numberOfChair
+                                                    .toString(),
+                                                style: FlutterFlowTheme
+                                                    .subtitle1
+                                                    .override(
+                                                  fontFamily: 'Nunito',
+                                                  color: Color(0xFF15212B),
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                          Row(
+                                            mainAxisSize: MainAxisSize.max,
+                                            children: [
+                                              Text(
+                                                dateTimeFormat(
+                                                    'MMMMEEEEd',
+                                                    listViewOrderRecord
+                                                        .travelTime),
+                                                style: FlutterFlowTheme
+                                                    .bodyText2
+                                                    .override(
+                                                  fontFamily: 'Nunito',
+                                                ),
+                                              )
+                                            ],
+                                          )
+                                        ],
                                       ),
-                                    )
-                                  ],
-                                )
-                              ],
+                                    ),
+                                  )
+                                ],
+                              ),
                             ),
                           ),
                         );
