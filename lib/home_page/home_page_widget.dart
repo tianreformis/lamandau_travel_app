@@ -236,13 +236,102 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(40),
                           ),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Align(
-                                alignment: Alignment(0, 0),
-                                child: IconButton(
+                          child: InkWell(
+                            onTap: () async {
+                              await Navigator.push(
+                                context,
+                                PageTransition(
+                                  type: PageTransitionType.fade,
+                                  duration: Duration(milliseconds: 300),
+                                  reverseDuration: Duration(milliseconds: 300),
+                                  child: ActiveOrderPageWidget(),
+                                ),
+                              );
+                            },
+                            child: Column(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Align(
+                                  alignment: Alignment(0, 0),
+                                  child: IconButton(
+                                    onPressed: () async {
+                                      await Navigator.push(
+                                        context,
+                                        PageTransition(
+                                          type: PageTransitionType.fade,
+                                          duration: Duration(milliseconds: 300),
+                                          reverseDuration:
+                                              Duration(milliseconds: 300),
+                                          child: ActiveOrderPageWidget(),
+                                        ),
+                                      );
+                                    },
+                                    icon: FaIcon(
+                                      FontAwesomeIcons.carAlt,
+                                      color: FlutterFlowTheme.tertiaryColor,
+                                      size: 100,
+                                    ),
+                                    iconSize: 100,
+                                  ),
+                                ),
+                                Align(
+                                  alignment: Alignment(0, -0.65),
+                                  child: InkWell(
+                                    onTap: () async {
+                                      await Navigator.push(
+                                        context,
+                                        PageTransition(
+                                          type: PageTransitionType.fade,
+                                          duration: Duration(milliseconds: 300),
+                                          reverseDuration:
+                                              Duration(milliseconds: 300),
+                                          child: ActiveOrderPageWidget(),
+                                        ),
+                                      );
+                                    },
+                                    child: Text(
+                                      'Buat Order',
+                                      style:
+                                          FlutterFlowTheme.subtitle2.override(
+                                        fontFamily: 'Nunito',
+                                        color: FlutterFlowTheme.tertiaryColor,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(1, 1, 1, 1),
+                        child: InkWell(
+                          onTap: () async {
+                            await Navigator.push(
+                              context,
+                              PageTransition(
+                                type: PageTransitionType.fade,
+                                duration: Duration(milliseconds: 300),
+                                reverseDuration: Duration(milliseconds: 300),
+                                child: InformationPageWidget(),
+                              ),
+                            );
+                          },
+                          child: Card(
+                            clipBehavior: Clip.antiAliasWithSaveLayer,
+                            color: FlutterFlowTheme.primaryColor,
+                            elevation: 5,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(40),
+                            ),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                IconButton(
                                   onPressed: () async {
                                     await Navigator.push(
                                       context,
@@ -251,75 +340,41 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                         duration: Duration(milliseconds: 300),
                                         reverseDuration:
                                             Duration(milliseconds: 300),
-                                        child: ActiveOrderPageWidget(),
+                                        child: InformationPageWidget(),
                                       ),
                                     );
                                   },
-                                  icon: FaIcon(
-                                    FontAwesomeIcons.carAlt,
+                                  icon: Icon(
+                                    Icons.info_outline,
                                     color: FlutterFlowTheme.tertiaryColor,
                                     size: 100,
                                   ),
                                   iconSize: 100,
                                 ),
-                              ),
-                              Align(
-                                alignment: Alignment(0, -0.65),
-                                child: Text(
-                                  'Buat Order',
-                                  style: FlutterFlowTheme.subtitle2.override(
-                                    fontFamily: 'Nunito',
-                                    color: FlutterFlowTheme.tertiaryColor,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.fromLTRB(1, 1, 1, 1),
-                        child: Card(
-                          clipBehavior: Clip.antiAliasWithSaveLayer,
-                          color: FlutterFlowTheme.primaryColor,
-                          elevation: 5,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(40),
-                          ),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              IconButton(
-                                onPressed: () async {
-                                  await Navigator.push(
-                                    context,
-                                    PageTransition(
-                                      type: PageTransitionType.fade,
-                                      duration: Duration(milliseconds: 300),
-                                      reverseDuration:
-                                          Duration(milliseconds: 300),
-                                      child: InformationPageWidget(),
+                                InkWell(
+                                  onTap: () async {
+                                    await Navigator.push(
+                                      context,
+                                      PageTransition(
+                                        type: PageTransitionType.fade,
+                                        duration: Duration(milliseconds: 300),
+                                        reverseDuration:
+                                            Duration(milliseconds: 300),
+                                        child: InformationPageWidget(),
+                                      ),
+                                    );
+                                  },
+                                  child: Text(
+                                    'Informasi',
+                                    style: FlutterFlowTheme.subtitle2.override(
+                                      fontFamily: 'Nunito',
+                                      color: FlutterFlowTheme.tertiaryColor,
+                                      fontWeight: FontWeight.bold,
                                     ),
-                                  );
-                                },
-                                icon: Icon(
-                                  Icons.info_outline,
-                                  color: FlutterFlowTheme.tertiaryColor,
-                                  size: 100,
-                                ),
-                                iconSize: 100,
-                              ),
-                              Text(
-                                'Informasi',
-                                style: FlutterFlowTheme.subtitle2.override(
-                                  fontFamily: 'Nunito',
-                                  color: FlutterFlowTheme.tertiaryColor,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              )
-                            ],
+                                  ),
+                                )
+                              ],
+                            ),
                           ),
                         ),
                       ),

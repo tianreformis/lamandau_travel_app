@@ -6,6 +6,7 @@ import '../home_page/home_page_widget.dart';
 import '../signup/signup_widget.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
 
@@ -68,7 +69,7 @@ class _LoginpageWidgetState extends State<LoginpageWidget> {
                     width: double.infinity,
                     height: 100,
                     decoration: BoxDecoration(
-                      color: Color(0xFFEEEEEE),
+                      color: FlutterFlowTheme.tertiaryColor,
                       borderRadius: BorderRadius.circular(30),
                     ),
                     child: Padding(
@@ -276,21 +277,6 @@ class _LoginpageWidgetState extends State<LoginpageWidget> {
                                         child: Stack(
                                           children: [
                                             Align(
-                                              alignment: Alignment(-0.7, -0.01),
-                                              child: Container(
-                                                width: 18,
-                                                height: 18,
-                                                clipBehavior: Clip.antiAlias,
-                                                decoration: BoxDecoration(
-                                                  shape: BoxShape.circle,
-                                                ),
-                                                child: Image.network(
-                                                  'https://i0.wp.com/nanophorm.com/wp-content/uploads/2018/04/google-logo-icon-PNG-Transparent-Background.png?w=1000&ssl=1',
-                                                  fit: BoxFit.contain,
-                                                ),
-                                              ),
-                                            ),
-                                            Align(
                                               alignment: Alignment(0, 0),
                                               child: Padding(
                                                 padding: EdgeInsets.fromLTRB(
@@ -321,19 +307,21 @@ class _LoginpageWidgetState extends State<LoginpageWidget> {
                                                     );
                                                   },
                                                   text: 'Masuk via Google',
-                                                  icon: Icon(
-                                                    Icons.add,
-                                                    color: Colors.transparent,
+                                                  icon: FaIcon(
+                                                    FontAwesomeIcons.google,
+                                                    color: Colors.black,
                                                     size: 20,
                                                   ),
                                                   options: FFButtonOptions(
                                                     width: 200,
                                                     height: 38,
-                                                    color: Colors.transparent,
+                                                    color: Color(0x00FFFFFF),
                                                     textStyle:
                                                         GoogleFonts.getFont(
                                                       'Open Sans',
-                                                      color: Color(0xFF616161),
+                                                      color: Colors.black,
+                                                      fontWeight:
+                                                          FontWeight.bold,
                                                       fontSize: 14,
                                                     ),
                                                     elevation: 1,
@@ -363,21 +351,6 @@ class _LoginpageWidgetState extends State<LoginpageWidget> {
                                         height: 50,
                                         child: Stack(
                                           children: [
-                                            Align(
-                                              alignment: Alignment(-0.7, -0.01),
-                                              child: Container(
-                                                width: 22,
-                                                height: 22,
-                                                clipBehavior: Clip.antiAlias,
-                                                decoration: BoxDecoration(
-                                                  shape: BoxShape.circle,
-                                                ),
-                                                child: Image.asset(
-                                                  'assets/images/facebook-circle-logo-png-4-Transparent-Images.png',
-                                                  fit: BoxFit.contain,
-                                                ),
-                                              ),
-                                            ),
                                             Align(
                                               alignment: Alignment(0, 0),
                                               child: Padding(
@@ -409,19 +382,22 @@ class _LoginpageWidgetState extends State<LoginpageWidget> {
                                                     );
                                                   },
                                                   text: 'Masuk via Facebook',
-                                                  icon: Icon(
-                                                    Icons.add,
-                                                    color: Colors.transparent,
+                                                  icon: FaIcon(
+                                                    FontAwesomeIcons.facebookF,
+                                                    color: Colors.black,
                                                     size: 20,
                                                   ),
                                                   options: FFButtonOptions(
                                                     width: 200,
                                                     height: 38,
-                                                    color: Colors.transparent,
+                                                    color: FlutterFlowTheme
+                                                        .tertiaryColor,
                                                     textStyle:
                                                         GoogleFonts.getFont(
                                                       'Open Sans',
-                                                      color: Color(0xFF616161),
+                                                      color: Colors.black,
+                                                      fontWeight:
+                                                          FontWeight.bold,
                                                       fontSize: 14,
                                                     ),
                                                     elevation: 1,
@@ -474,6 +450,7 @@ class _LoginpageWidgetState extends State<LoginpageWidget> {
                                         'Daftar',
                                         style: GoogleFonts.getFont(
                                           'Open Sans',
+                                          fontWeight: FontWeight.bold,
                                           fontSize: 14,
                                         ),
                                       ),
