@@ -16,7 +16,8 @@ class MakeOrderPageWidget extends StatefulWidget {
 
 class _MakeOrderPageWidgetState extends State<MakeOrderPageWidget> {
   DateTime datePicked = DateTime.now();
-  String dropDownValue;
+  String dropDownValue1;
+  String dropDownValue2;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -101,7 +102,7 @@ class _MakeOrderPageWidgetState extends State<MakeOrderPageWidget> {
                         Padding(
                           padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
                           child: Text(
-                            'Tanggal Keberangkatan',
+                            'Rute',
                             style: FlutterFlowTheme.subtitle2.override(
                               fontFamily: 'Nunito',
                               color: Colors.black,
@@ -109,22 +110,70 @@ class _MakeOrderPageWidgetState extends State<MakeOrderPageWidget> {
                             ),
                           ),
                         ),
-                        IconButton(
-                          onPressed: () async {
-                            await DatePicker.showDatePicker(context,
-                                showTitleActions: true, onConfirm: (date) {
-                              setState(() => datePicked = date);
-                            }, currentTime: DateTime.now());
+                        FlutterFlowDropDown(
+                          options: ['Armada 1 - Kudangan - Nangabulik'],
+                          onChanged: (value) {
+                            setState(() => dropDownValue1 = value);
                           },
-                          icon: Icon(
-                            Icons.date_range_rounded,
+                          width: 130,
+                          height: 40,
+                          textStyle: FlutterFlowTheme.bodyText1.override(
+                            fontFamily: 'Nunito',
                             color: Colors.black,
-                            size: 30,
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
                           ),
-                          iconSize: 30,
+                          fillColor: Colors.white,
+                          elevation: 2,
+                          borderColor: Colors.transparent,
+                          borderWidth: 0,
+                          borderRadius: 0,
+                          margin: EdgeInsets.fromLTRB(1, 4, 8, 4),
                         )
                       ],
                     ),
+                  ),
+                ),
+              ),
+              Card(
+                clipBehavior: Clip.antiAliasWithSaveLayer,
+                color: FlutterFlowTheme.tertiaryColor,
+                elevation: 8,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(5),
+                ),
+                child: Align(
+                  alignment: Alignment(0, 0),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                        child: Text(
+                          'Tanggal Keberangkatan',
+                          style: FlutterFlowTheme.subtitle2.override(
+                            fontFamily: 'Nunito',
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                      IconButton(
+                        onPressed: () async {
+                          await DatePicker.showDatePicker(context,
+                              showTitleActions: true, onConfirm: (date) {
+                            setState(() => datePicked = date);
+                          }, currentTime: DateTime.now());
+                        },
+                        icon: Icon(
+                          Icons.date_range_rounded,
+                          color: Colors.black,
+                          size: 30,
+                        ),
+                        iconSize: 30,
+                      )
+                    ],
                   ),
                 ),
               ),
@@ -157,13 +206,14 @@ class _MakeOrderPageWidgetState extends State<MakeOrderPageWidget> {
                         FlutterFlowDropDown(
                           options: ['Option 1', '', '', ''],
                           onChanged: (value) {
-                            setState(() => dropDownValue = value);
+                            setState(() => dropDownValue2 = value);
                           },
                           width: 130,
                           height: 40,
                           textStyle: FlutterFlowTheme.bodyText1.override(
                             fontFamily: 'Nunito',
                             color: Colors.black,
+                            fontSize: 15,
                           ),
                           fillColor: Colors.white,
                           elevation: 2,
@@ -177,7 +227,6 @@ class _MakeOrderPageWidgetState extends State<MakeOrderPageWidget> {
                   ),
                 ),
               ),
-              Divider(),
               Padding(
                 padding: EdgeInsets.fromLTRB(4, 20, 0, 0),
                 child: Row(
@@ -211,7 +260,7 @@ class _MakeOrderPageWidgetState extends State<MakeOrderPageWidget> {
                                       onPressed: () async {
                                         Navigator.pop(alertDialogContext);
                                         final travelTime = datePicked;
-                                        final numberOfChair = dropDownValue;
+                                        final numberOfChair = dropDownValue2;
 
                                         final orderRecordData =
                                             createOrderRecordData(
@@ -234,7 +283,7 @@ class _MakeOrderPageWidgetState extends State<MakeOrderPageWidget> {
                           text: 'Simpan',
                           icon: Icon(
                             Icons.save_rounded,
-                            size: 15,
+                            size: 30,
                           ),
                           options: FFButtonOptions(
                             width: 130,
@@ -245,7 +294,6 @@ class _MakeOrderPageWidgetState extends State<MakeOrderPageWidget> {
                               color: Colors.white,
                               fontWeight: FontWeight.w600,
                             ),
-                            elevation: 8,
                             borderSide: BorderSide(
                               color: Colors.transparent,
                               width: 3,
@@ -273,7 +321,7 @@ class _MakeOrderPageWidgetState extends State<MakeOrderPageWidget> {
                             text: 'Batal',
                             icon: Icon(
                               Icons.cancel_presentation_rounded,
-                              size: 15,
+                              size: 30,
                             ),
                             options: FFButtonOptions(
                               width: 130,
@@ -284,7 +332,7 @@ class _MakeOrderPageWidgetState extends State<MakeOrderPageWidget> {
                                 color: Colors.white,
                                 fontWeight: FontWeight.w600,
                               ),
-                              elevation: 8,
+                              elevation: 0,
                               borderSide: BorderSide(
                                 color: Colors.transparent,
                                 width: 3,
