@@ -17,18 +17,18 @@ abstract class OrderRecord implements Built<OrderRecord, OrderRecordBuilder> {
   DateTime get travelTime;
 
   @nullable
-  @BuiltValueField(wireName: 'number_of_chair')
-  int get numberOfChair;
+  DocumentReference get users;
 
   @nullable
-  DocumentReference get users;
+  @BuiltValueField(wireName: 'number_of_chair')
+  String get numberOfChair;
 
   @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference get reference;
 
   static void _initializeBuilder(OrderRecordBuilder builder) =>
-      builder..numberOfChair = 0;
+      builder..numberOfChair = '';
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('order');
@@ -44,20 +44,20 @@ abstract class OrderRecord implements Built<OrderRecord, OrderRecordBuilder> {
 
 Map<String, dynamic> createOrderRecordData({
   DateTime travelTime,
-  int numberOfChair,
   DocumentReference users,
+  String numberOfChair,
 }) =>
     serializers.toFirestore(
         OrderRecord.serializer,
         OrderRecord((o) => o
           ..travelTime = travelTime
-          ..numberOfChair = numberOfChair
-          ..users = users));
+          ..users = users
+          ..numberOfChair = numberOfChair));
 
 OrderRecord get dummyOrderRecord {
   final builder = OrderRecordBuilder()
     ..travelTime = dummyTimestamp
-    ..numberOfChair = dummyInteger;
+    ..numberOfChair = dummyString;
   return builder.build();
 }
 

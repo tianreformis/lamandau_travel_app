@@ -154,33 +154,30 @@ class _MakeOrderPageWidgetState extends State<MakeOrderPageWidget> {
                             ),
                           ),
                         ),
-                        Padding(
-                          padding: EdgeInsets.fromLTRB(2, 0, 10, 0),
-                          child: FlutterFlowDropDown(
-                            options: ['1', '2'],
-                            onChanged: (value) {
-                              setState(() => dropDownValue = value);
-                            },
-                            width: 130,
-                            height: 40,
-                            textStyle: FlutterFlowTheme.subtitle2.override(
-                              fontFamily: 'Nunito',
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                            ),
-                            fillColor: Colors.white,
-                            elevation: 2,
-                            borderColor: Colors.transparent,
-                            borderWidth: 0,
-                            borderRadius: 0,
-                            margin: EdgeInsets.fromLTRB(8, 4, 8, 4),
+                        FlutterFlowDropDown(
+                          options: ['Option 1', '', '', ''],
+                          onChanged: (value) {
+                            setState(() => dropDownValue = value);
+                          },
+                          width: 130,
+                          height: 40,
+                          textStyle: FlutterFlowTheme.bodyText1.override(
+                            fontFamily: 'Nunito',
+                            color: Colors.black,
                           ),
+                          fillColor: Colors.white,
+                          elevation: 2,
+                          borderColor: Colors.transparent,
+                          borderWidth: 0,
+                          borderRadius: 0,
+                          margin: EdgeInsets.fromLTRB(8, 4, 8, 4),
                         )
                       ],
                     ),
                   ),
                 ),
               ),
+              Divider(),
               Padding(
                 padding: EdgeInsets.fromLTRB(4, 20, 0, 0),
                 child: Row(
@@ -214,10 +211,12 @@ class _MakeOrderPageWidgetState extends State<MakeOrderPageWidget> {
                                       onPressed: () async {
                                         Navigator.pop(alertDialogContext);
                                         final travelTime = datePicked;
+                                        final numberOfChair = dropDownValue;
 
                                         final orderRecordData =
                                             createOrderRecordData(
                                           travelTime: travelTime,
+                                          numberOfChair: numberOfChair,
                                         );
 
                                         await OrderRecord.collection

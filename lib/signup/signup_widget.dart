@@ -440,7 +440,8 @@ class _SignupWidgetState extends State<SignupWidget> {
                                                   options: FFButtonOptions(
                                                     width: 200,
                                                     height: 38,
-                                                    color: Color(0x00FFFFFF),
+                                                    color: FlutterFlowTheme
+                                                        .tertiaryColor,
                                                     textStyle:
                                                         GoogleFonts.getFont(
                                                       'Open Sans',
