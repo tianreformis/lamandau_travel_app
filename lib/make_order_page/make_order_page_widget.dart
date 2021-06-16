@@ -1,14 +1,22 @@
-import '../flutter_flow/flutter_flow_drop_down_template.dart';
+import '../auth/auth_util.dart';
+import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
 
 class MakeOrderPageWidget extends StatefulWidget {
-  MakeOrderPageWidget({Key key}) : super(key: key);
+  MakeOrderPageWidget({
+    Key key,
+    this.makeOrderParamater,
+  }) : super(key: key);
+
+  final OrderTravelRecord makeOrderParamater;
 
   @override
   _MakeOrderPageWidgetState createState() => _MakeOrderPageWidgetState();
@@ -16,9 +24,16 @@ class MakeOrderPageWidget extends StatefulWidget {
 
 class _MakeOrderPageWidgetState extends State<MakeOrderPageWidget> {
   DateTime datePicked = DateTime.now();
-  String dropDownValue1;
-  String dropDownValue2;
+  TextEditingController textController1;
+  TextEditingController textController2;
   final scaffoldKey = GlobalKey<ScaffoldState>();
+
+  @override
+  void initState() {
+    super.initState();
+    textController1 = TextEditingController();
+    textController2 = TextEditingController();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -80,274 +95,178 @@ class _MakeOrderPageWidgetState extends State<MakeOrderPageWidget> {
       ),
       backgroundColor: Color(0xFFDBE2E7),
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Padding(
-                padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Expanded(
+              child: Padding(
+                padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
                 child: Card(
                   clipBehavior: Clip.antiAliasWithSaveLayer,
-                  color: FlutterFlowTheme.tertiaryColor,
-                  elevation: 8,
+                  color: Color(0xFFF5F5F5),
+                  elevation: 4,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(5),
-                  ),
-                  child: Align(
-                    alignment: Alignment(0, 0),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                          child: Text(
-                            'Rute',
-                            style: FlutterFlowTheme.subtitle2.override(
-                              fontFamily: 'Nunito',
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                        FlutterFlowDropDown(
-                          options: ['Armada 1 - Kudangan - Nangabulik'],
-                          onChanged: (value) {
-                            setState(() => dropDownValue1 = value);
-                          },
-                          width: 130,
-                          height: 40,
-                          textStyle: FlutterFlowTheme.bodyText1.override(
-                            fontFamily: 'Nunito',
-                            color: Colors.black,
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                          ),
-                          fillColor: Colors.white,
-                          elevation: 2,
-                          borderColor: Colors.transparent,
-                          borderWidth: 0,
-                          borderRadius: 0,
-                          margin: EdgeInsets.fromLTRB(1, 4, 8, 4),
-                        )
-                      ],
+                    borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(0),
+                      bottomRight: Radius.circular(20),
+                      topLeft: Radius.circular(20),
+                      topRight: Radius.circular(0),
                     ),
                   ),
-                ),
-              ),
-              Card(
-                clipBehavior: Clip.antiAliasWithSaveLayer,
-                color: FlutterFlowTheme.tertiaryColor,
-                elevation: 8,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(5),
-                ),
-                child: Align(
-                  alignment: Alignment(0, 0),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                        child: Text(
+                  child: Padding(
+                    padding: EdgeInsets.fromLTRB(5, 5, 0, 0),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Rute',
+                          style: FlutterFlowTheme.title3.override(
+                            fontFamily: 'Nunito',
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        TextFormField(
+                          controller: textController1,
+                          obscureText: false,
+                          decoration: InputDecoration(
+                            hintText: 'Silahkan Pilih Rute',
+                            hintStyle: FlutterFlowTheme.bodyText1.override(
+                              fontFamily: 'Nunito',
+                            ),
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color(0x00000000),
+                                width: 1,
+                              ),
+                              borderRadius: const BorderRadius.only(
+                                topLeft: Radius.circular(4.0),
+                                topRight: Radius.circular(4.0),
+                              ),
+                            ),
+                            focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color(0x00000000),
+                                width: 1,
+                              ),
+                              borderRadius: const BorderRadius.only(
+                                topLeft: Radius.circular(4.0),
+                                topRight: Radius.circular(4.0),
+                              ),
+                            ),
+                          ),
+                          style: FlutterFlowTheme.bodyText1.override(
+                            fontFamily: 'Nunito',
+                          ),
+                        ),
+                        Text(
+                          'Kursi',
+                          style: FlutterFlowTheme.title3.override(
+                            fontFamily: 'Nunito',
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        TextFormField(
+                          controller: textController2,
+                          obscureText: false,
+                          decoration: InputDecoration(
+                            hintText: 'Silahkan Pilih Kursi',
+                            hintStyle: FlutterFlowTheme.bodyText1.override(
+                              fontFamily: 'Nunito',
+                            ),
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color(0x00000000),
+                                width: 1,
+                              ),
+                              borderRadius: const BorderRadius.only(
+                                topLeft: Radius.circular(4.0),
+                                topRight: Radius.circular(4.0),
+                              ),
+                            ),
+                            focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color(0x00000000),
+                                width: 1,
+                              ),
+                              borderRadius: const BorderRadius.only(
+                                topLeft: Radius.circular(4.0),
+                                topRight: Radius.circular(4.0),
+                              ),
+                            ),
+                          ),
+                          style: FlutterFlowTheme.bodyText1.override(
+                            fontFamily: 'Nunito',
+                          ),
+                        ),
+                        Text(
                           'Tanggal Keberangkatan',
-                          style: FlutterFlowTheme.subtitle2.override(
+                          style: FlutterFlowTheme.title3.override(
                             fontFamily: 'Nunito',
-                            color: Colors.black,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                      ),
-                      IconButton(
-                        onPressed: () async {
-                          await DatePicker.showDatePicker(context,
-                              showTitleActions: true, onConfirm: (date) {
-                            setState(() => datePicked = date);
-                          }, currentTime: DateTime.now());
-                        },
-                        icon: Icon(
-                          Icons.date_range_rounded,
-                          color: Colors.black,
-                          size: 30,
-                        ),
-                        iconSize: 30,
-                      )
-                    ],
-                  ),
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.fromLTRB(0, 1, 0, 0),
-                child: Card(
-                  clipBehavior: Clip.antiAliasWithSaveLayer,
-                  color: FlutterFlowTheme.tertiaryColor,
-                  elevation: 8,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(5),
-                  ),
-                  child: Align(
-                    alignment: Alignment(0, 0),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                          child: Text(
-                            'Kursi',
-                            style: FlutterFlowTheme.subtitle2.override(
-                              fontFamily: 'Nunito',
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                        FlutterFlowDropDown(
-                          options: ['Option 1', '', '', ''],
-                          onChanged: (value) {
-                            setState(() => dropDownValue2 = value);
+                        InkWell(
+                          onTap: () async {
+                            await DatePicker.showDatePicker(context,
+                                showTitleActions: true, onConfirm: (date) {
+                              setState(() => datePicked = date);
+                            }, currentTime: DateTime.now());
                           },
-                          width: 130,
-                          height: 40,
-                          textStyle: FlutterFlowTheme.bodyText1.override(
-                            fontFamily: 'Nunito',
+                          child: Icon(
+                            Icons.date_range_sharp,
                             color: Colors.black,
-                            fontSize: 15,
+                            size: 35,
                           ),
-                          fillColor: Colors.white,
-                          elevation: 2,
-                          borderColor: Colors.transparent,
-                          borderWidth: 0,
-                          borderRadius: 0,
-                          margin: EdgeInsets.fromLTRB(8, 4, 8, 4),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.fromLTRB(4, 20, 0, 0),
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Card(
-                      clipBehavior: Clip.antiAliasWithSaveLayer,
-                      color: Color(0xFFF5F5F5),
-                      elevation: 8,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: Padding(
-                        padding: EdgeInsets.fromLTRB(3, 2, 2, 2),
-                        child: FFButtonWidget(
+                        ),
+                        FFButtonWidget(
                           onPressed: () async {
-                            await showDialog(
-                              context: context,
-                              builder: (alertDialogContext) {
-                                return AlertDialog(
-                                  title: Text('Simpan..'),
-                                  content: Text('Yakin Simpan'),
-                                  actions: [
-                                    TextButton(
-                                      onPressed: () =>
-                                          Navigator.pop(alertDialogContext),
-                                      child: Text('Cancel'),
-                                    ),
-                                    TextButton(
-                                      onPressed: () async {
-                                        Navigator.pop(alertDialogContext);
-                                        final travelTime = datePicked;
-                                        final numberOfChair = dropDownValue2;
+                            final rute = textController1.text;
+                            final users = currentUserReference;
+                            final seatNumber = textController2.text;
+                            final createdAt = datePicked;
 
-                                        final orderRecordData =
-                                            createOrderRecordData(
-                                          travelTime: travelTime,
-                                          numberOfChair: numberOfChair,
-                                        );
-
-                                        await OrderRecord.collection
-                                            .doc()
-                                            .set(orderRecordData);
-                                        ;
-                                      },
-                                      child: Text('Ya, Konfirmasi'),
-                                    ),
-                                  ],
-                                );
-                              },
+                            final orderTravelRecordData =
+                                createOrderTravelRecordData(
+                              rute: rute,
+                              users: users,
+                              seatNumber: seatNumber,
+                              createdAt: createdAt,
                             );
+
+                            await OrderTravelRecord.collection
+                                .doc()
+                                .set(orderTravelRecordData);
+                            Navigator.pop(context);
                           },
-                          text: 'Simpan',
-                          icon: Icon(
-                            Icons.save_rounded,
-                            size: 30,
+                          text: 'Button',
+                          icon: FaIcon(
+                            FontAwesomeIcons.save,
                           ),
                           options: FFButtonOptions(
                             width: 130,
-                            height: 50,
-                            color: Color(0xFF34E07A),
+                            height: 40,
+                            color: FlutterFlowTheme.primaryColor,
                             textStyle: FlutterFlowTheme.subtitle2.override(
                               fontFamily: 'Nunito',
                               color: Colors.white,
-                              fontWeight: FontWeight.w600,
                             ),
                             borderSide: BorderSide(
                               color: Colors.transparent,
-                              width: 3,
+                              width: 1,
                             ),
                             borderRadius: 12,
                           ),
-                        ),
-                      ),
+                        )
+                      ],
                     ),
-                    Padding(
-                      padding: EdgeInsets.fromLTRB(0, 0, 4, 0),
-                      child: Card(
-                        clipBehavior: Clip.antiAliasWithSaveLayer,
-                        color: Color(0xFFF5F5F5),
-                        elevation: 8,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: Padding(
-                          padding: EdgeInsets.fromLTRB(3, 2, 2, 2),
-                          child: FFButtonWidget(
-                            onPressed: () async {
-                              Navigator.pop(context);
-                            },
-                            text: 'Batal',
-                            icon: Icon(
-                              Icons.cancel_presentation_rounded,
-                              size: 30,
-                            ),
-                            options: FFButtonOptions(
-                              width: 130,
-                              height: 50,
-                              color: FlutterFlowTheme.customColor2,
-                              textStyle: FlutterFlowTheme.subtitle2.override(
-                                fontFamily: 'Nunito',
-                                color: Colors.white,
-                                fontWeight: FontWeight.w600,
-                              ),
-                              elevation: 0,
-                              borderSide: BorderSide(
-                                color: Colors.transparent,
-                                width: 3,
-                              ),
-                              borderRadius: 12,
-                            ),
-                          ),
-                        ),
-                      ),
-                    )
-                  ],
+                  ),
                 ),
-              )
-            ],
-          ),
+              ),
+            )
+          ],
         ),
       ),
     );

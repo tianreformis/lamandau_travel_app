@@ -4,7 +4,6 @@ import '../backend/backend.dart';
 import '../editprofile/editprofile_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
-import '../information_page/information_page_widget.dart';
 import '../loginpage/loginpage_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -308,73 +307,37 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                       ),
                       Padding(
                         padding: EdgeInsets.fromLTRB(1, 1, 1, 1),
-                        child: InkWell(
-                          onTap: () async {
-                            await Navigator.push(
-                              context,
-                              PageTransition(
-                                type: PageTransitionType.fade,
-                                duration: Duration(milliseconds: 300),
-                                reverseDuration: Duration(milliseconds: 300),
-                                child: InformationPageWidget(),
-                              ),
-                            );
-                          },
-                          child: Card(
-                            clipBehavior: Clip.antiAliasWithSaveLayer,
-                            color: FlutterFlowTheme.primaryColor,
-                            elevation: 5,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(40),
-                            ),
-                            child: Column(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                IconButton(
-                                  onPressed: () async {
-                                    await Navigator.push(
-                                      context,
-                                      PageTransition(
-                                        type: PageTransitionType.fade,
-                                        duration: Duration(milliseconds: 300),
-                                        reverseDuration:
-                                            Duration(milliseconds: 300),
-                                        child: InformationPageWidget(),
-                                      ),
-                                    );
-                                  },
-                                  icon: Icon(
-                                    Icons.info_outline,
-                                    color: FlutterFlowTheme.tertiaryColor,
-                                    size: 100,
-                                  ),
-                                  iconSize: 100,
+                        child: Card(
+                          clipBehavior: Clip.antiAliasWithSaveLayer,
+                          color: FlutterFlowTheme.primaryColor,
+                          elevation: 5,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(40),
+                          ),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              IconButton(
+                                onPressed: () {
+                                  print('IconButton pressed ...');
+                                },
+                                icon: Icon(
+                                  Icons.info_outline,
+                                  color: FlutterFlowTheme.tertiaryColor,
+                                  size: 100,
                                 ),
-                                InkWell(
-                                  onTap: () async {
-                                    await Navigator.push(
-                                      context,
-                                      PageTransition(
-                                        type: PageTransitionType.fade,
-                                        duration: Duration(milliseconds: 300),
-                                        reverseDuration:
-                                            Duration(milliseconds: 300),
-                                        child: InformationPageWidget(),
-                                      ),
-                                    );
-                                  },
-                                  child: Text(
-                                    'Informasi',
-                                    style: FlutterFlowTheme.subtitle2.override(
-                                      fontFamily: 'Nunito',
-                                      color: FlutterFlowTheme.tertiaryColor,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                )
-                              ],
-                            ),
+                                iconSize: 100,
+                              ),
+                              Text(
+                                'Informasi',
+                                style: FlutterFlowTheme.subtitle2.override(
+                                  fontFamily: 'Nunito',
+                                  color: FlutterFlowTheme.tertiaryColor,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              )
+                            ],
                           ),
                         ),
                       ),

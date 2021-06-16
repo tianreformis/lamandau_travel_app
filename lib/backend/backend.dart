@@ -5,13 +5,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 
 import 'schema/users_record.dart';
-import 'schema/order_record.dart';
+import 'schema/order_travel_record.dart';
 import 'schema/serializers.dart';
 
 export 'package:cloud_firestore/cloud_firestore.dart';
 export 'schema/serializers.dart';
 export 'schema/users_record.dart';
-export 'schema/order_record.dart';
+export 'schema/order_travel_record.dart';
 
 Stream<List<UsersRecord>> queryUsersRecord(
         {Query Function(Query) queryBuilder,
@@ -20,11 +20,11 @@ Stream<List<UsersRecord>> queryUsersRecord(
     queryCollection(UsersRecord.collection, UsersRecord.serializer,
         queryBuilder: queryBuilder, limit: limit, singleRecord: singleRecord);
 
-Stream<List<OrderRecord>> queryOrderRecord(
+Stream<List<OrderTravelRecord>> queryOrderTravelRecord(
         {Query Function(Query) queryBuilder,
         int limit = -1,
         bool singleRecord = false}) =>
-    queryCollection(OrderRecord.collection, OrderRecord.serializer,
+    queryCollection(OrderTravelRecord.collection, OrderTravelRecord.serializer,
         queryBuilder: queryBuilder, limit: limit, singleRecord: singleRecord);
 
 Stream<List<T>> queryCollection<T>(

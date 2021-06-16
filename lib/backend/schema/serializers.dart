@@ -5,7 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:latlong/latlong.dart';
 
 import 'users_record.dart';
-import 'order_record.dart';
+import 'order_travel_record.dart';
 
 part 'serializers.g.dart';
 
@@ -13,7 +13,7 @@ const kDocumentReferenceField = 'Document__Reference__Field';
 
 @SerializersFor(const [
   UsersRecord,
-  OrderRecord,
+  OrderTravelRecord,
 ])
 final Serializers serializers = (_$serializers.toBuilder()
       ..add(DocumentReferenceSerializer())
