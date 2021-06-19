@@ -5,6 +5,7 @@ import '../editprofile/editprofile_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../loginpage/loginpage_widget.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -98,7 +99,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                             child: Text(
                               'Edit Profil',
                               style: FlutterFlowTheme.title3.override(
-                                fontFamily: 'Nunito',
+                                fontFamily: 'Ubuntu',
                                 color: FlutterFlowTheme.tertiaryColor,
                                 fontWeight: FontWeight.bold,
                               ),
@@ -151,7 +152,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                             child: Text(
                               'Keluar',
                               style: FlutterFlowTheme.title3.override(
-                                fontFamily: 'Nunito',
+                                fontFamily: 'Ubuntu',
                                 color: FlutterFlowTheme.tertiaryColor,
                                 fontWeight: FontWeight.bold,
                               ),
@@ -187,29 +188,63 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.fromLTRB(30, 0, 5, 5),
+                        padding: EdgeInsets.fromLTRB(20, 0, 5, 5),
                         child: Column(
                           mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Padding(
-                              padding: EdgeInsets.fromLTRB(0, 0, 5, 0),
+                              padding: EdgeInsets.fromLTRB(0, 5, 5, 0),
                               child: Text(
                                 'Selamat Datang',
                                 style: FlutterFlowTheme.title3.override(
-                                  fontFamily: 'Nunito',
+                                  fontFamily: 'Ubuntu',
                                   fontWeight: FontWeight.w900,
                                 ),
                               ),
                             ),
-                            Text(
-                              homePageUsersRecord.displayName,
-                              style: FlutterFlowTheme.bodyText1.override(
-                                fontFamily: 'Nunito',
+                            Padding(
+                              padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
+                              child: Text(
+                                homePageUsersRecord.displayName,
+                                style: FlutterFlowTheme.bodyText1.override(
+                                  fontFamily: 'Ubuntu',
+                                ),
                               ),
                             )
                           ],
+                        ),
+                      ),
+                      Expanded(
+                        child: Align(
+                          alignment: Alignment(-0.3, -0.75),
+                          child: Container(
+                            width: 60,
+                            height: 60,
+                            child: Stack(
+                              children: [
+                                Align(
+                                  alignment: Alignment(0, 0),
+                                  child: AutoSizeText(
+                                    dateTimeFormat('jm', getCurrentTimestamp),
+                                    style: FlutterFlowTheme.bodyText1.override(
+                                      fontFamily: 'Ubuntu',
+                                      fontWeight: FontWeight.w800,
+                                    ),
+                                  ),
+                                ),
+                                Align(
+                                  alignment: Alignment(0, 0),
+                                  child: FaIcon(
+                                    FontAwesomeIcons.clock,
+                                    color: Color(0x39000000),
+                                    size: 60,
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
                         ),
                       )
                     ],
@@ -293,7 +328,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                       'Buat Order',
                                       style:
                                           FlutterFlowTheme.subtitle2.override(
-                                        fontFamily: 'Nunito',
+                                        fontFamily: 'Ubuntu',
                                         color: FlutterFlowTheme.tertiaryColor,
                                         fontWeight: FontWeight.bold,
                                       ),
@@ -332,7 +367,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                               Text(
                                 'Informasi',
                                 style: FlutterFlowTheme.subtitle2.override(
-                                  fontFamily: 'Nunito',
+                                  fontFamily: 'Ubuntu',
                                   color: FlutterFlowTheme.tertiaryColor,
                                   fontWeight: FontWeight.bold,
                                 ),
@@ -419,7 +454,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                 Text(
                                   'Keluar',
                                   style: FlutterFlowTheme.subtitle2.override(
-                                    fontFamily: 'Nunito',
+                                    fontFamily: 'Ubuntu',
                                     color: FlutterFlowTheme.tertiaryColor,
                                     fontWeight: FontWeight.bold,
                                   ),

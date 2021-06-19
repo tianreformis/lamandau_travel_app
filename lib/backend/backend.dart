@@ -6,12 +6,14 @@ import '../flutter_flow/flutter_flow_util.dart';
 
 import 'schema/users_record.dart';
 import 'schema/order_travel_record.dart';
+import 'schema/seat_number_record.dart';
 import 'schema/serializers.dart';
 
 export 'package:cloud_firestore/cloud_firestore.dart';
 export 'schema/serializers.dart';
 export 'schema/users_record.dart';
 export 'schema/order_travel_record.dart';
+export 'schema/seat_number_record.dart';
 
 Stream<List<UsersRecord>> queryUsersRecord(
         {Query Function(Query) queryBuilder,
@@ -25,6 +27,13 @@ Stream<List<OrderTravelRecord>> queryOrderTravelRecord(
         int limit = -1,
         bool singleRecord = false}) =>
     queryCollection(OrderTravelRecord.collection, OrderTravelRecord.serializer,
+        queryBuilder: queryBuilder, limit: limit, singleRecord: singleRecord);
+
+Stream<List<SeatNumberRecord>> querySeatNumberRecord(
+        {Query Function(Query) queryBuilder,
+        int limit = -1,
+        bool singleRecord = false}) =>
+    queryCollection(SeatNumberRecord.collection, SeatNumberRecord.serializer,
         queryBuilder: queryBuilder, limit: limit, singleRecord: singleRecord);
 
 Stream<List<T>> queryCollection<T>(

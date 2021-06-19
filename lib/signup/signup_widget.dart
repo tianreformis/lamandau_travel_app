@@ -90,7 +90,7 @@ class _SignupWidgetState extends State<SignupWidget> {
                                 child: Text(
                                   'Pendaftaran Akun',
                                   style: FlutterFlowTheme.title1.override(
-                                    fontFamily: 'Nunito',
+                                    fontFamily: 'Ubuntu',
                                   ),
                                 ),
                               ),
@@ -115,7 +115,7 @@ class _SignupWidgetState extends State<SignupWidget> {
                                           decoration: InputDecoration(
                                             hintText: 'Email',
                                             hintStyle: GoogleFonts.getFont(
-                                              'Open Sans',
+                                              'Ubuntu',
                                               color: Color(0xFF455A64),
                                               fontWeight: FontWeight.normal,
                                             ),
@@ -143,7 +143,7 @@ class _SignupWidgetState extends State<SignupWidget> {
                                             ),
                                           ),
                                           style: GoogleFonts.getFont(
-                                            'Open Sans',
+                                            'Ubuntu',
                                             color: Color(0xFF455A64),
                                             fontWeight: FontWeight.normal,
                                           ),
@@ -169,7 +169,7 @@ class _SignupWidgetState extends State<SignupWidget> {
                                           decoration: InputDecoration(
                                             hintText: 'Password',
                                             hintStyle: GoogleFonts.getFont(
-                                              'Open Sans',
+                                              'Ubuntu',
                                               color: Color(0xFF455A64),
                                               fontWeight: FontWeight.normal,
                                             ),
@@ -210,7 +210,7 @@ class _SignupWidgetState extends State<SignupWidget> {
                                             ),
                                           ),
                                           style: GoogleFonts.getFont(
-                                            'Open Sans',
+                                            'Ubuntu',
                                             color: Color(0xFF455A64),
                                             fontWeight: FontWeight.normal,
                                           ),
@@ -237,7 +237,7 @@ class _SignupWidgetState extends State<SignupWidget> {
                                           decoration: InputDecoration(
                                             hintText: 'Ulangi Password',
                                             hintStyle: GoogleFonts.getFont(
-                                              'Open Sans',
+                                              'Ubuntu',
                                               color: Color(0xFF455A64),
                                               fontWeight: FontWeight.normal,
                                             ),
@@ -278,7 +278,7 @@ class _SignupWidgetState extends State<SignupWidget> {
                                             ),
                                           ),
                                           style: GoogleFonts.getFont(
-                                            'Open Sans',
+                                            'Ubuntu',
                                             color: Color(0xFF455A64),
                                             fontWeight: FontWeight.normal,
                                           ),
@@ -332,8 +332,9 @@ class _SignupWidgetState extends State<SignupWidget> {
                                         height: 50,
                                         color: Color(0xFF0F2A58),
                                         textStyle: GoogleFonts.getFont(
-                                          'Open Sans',
+                                          'Ubuntu',
                                           color: Color(0xFFDEDEDE),
+                                          fontWeight: FontWeight.bold,
                                           fontSize: 16,
                                         ),
                                         borderSide: BorderSide(
@@ -363,7 +364,7 @@ class _SignupWidgetState extends State<SignupWidget> {
                                           child: Text(
                                             'Sudah Punya Akun',
                                             style: GoogleFonts.getFont(
-                                              'Open Sans',
+                                              'Ubuntu',
                                               color: Color(0xFFADADAD),
                                               fontSize: 14,
                                             ),
@@ -387,7 +388,8 @@ class _SignupWidgetState extends State<SignupWidget> {
                                           child: Text(
                                             'Masuk',
                                             style: GoogleFonts.getFont(
-                                              'Open Sans',
+                                              'Ubuntu',
+                                              fontWeight: FontWeight.bold,
                                               fontSize: 14,
                                             ),
                                           ),
@@ -444,7 +446,7 @@ class _SignupWidgetState extends State<SignupWidget> {
                                                         .tertiaryColor,
                                                     textStyle:
                                                         GoogleFonts.getFont(
-                                                      'Open Sans',
+                                                      'Ubuntu',
                                                       color: Colors.black,
                                                       fontWeight:
                                                           FontWeight.bold,
@@ -514,7 +516,7 @@ class _SignupWidgetState extends State<SignupWidget> {
                                                         .tertiaryColor,
                                                     textStyle:
                                                         GoogleFonts.getFont(
-                                                      'Open Sans',
+                                                      'Ubuntu',
                                                       color: Colors.black,
                                                       fontWeight:
                                                           FontWeight.bold,
@@ -542,7 +544,7 @@ class _SignupWidgetState extends State<SignupWidget> {
                                 child: Padding(
                                   padding: EdgeInsets.fromLTRB(0, 4, 0, 0),
                                   child: Image.asset(
-                                    'assets/images/logo.png',
+                                    'assets/images/logo_app.png',
                                     width: 50,
                                     height: 50,
                                     fit: BoxFit.cover,

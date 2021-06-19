@@ -2,6 +2,7 @@ import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../make_order_page/make_order_page_widget.dart';
+import '../testpage/testpage_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -61,11 +62,24 @@ class _ActiveOrderPageWidgetState extends State<ActiveOrderPageWidget> {
             ),
             child: Padding(
               padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
-              child: Text(
-                'Pesanan Aktif',
-                textAlign: TextAlign.center,
-                style: FlutterFlowTheme.title1.override(
-                  fontFamily: 'Nunito',
+              child: InkWell(
+                onTap: () async {
+                  await Navigator.push(
+                    context,
+                    PageTransition(
+                      type: PageTransitionType.fade,
+                      duration: Duration(milliseconds: 300),
+                      reverseDuration: Duration(milliseconds: 300),
+                      child: TestpageWidget(),
+                    ),
+                  );
+                },
+                child: Text(
+                  'Pesanan Aktif',
+                  textAlign: TextAlign.center,
+                  style: FlutterFlowTheme.title1.override(
+                    fontFamily: 'Ubuntu',
+                  ),
                 ),
               ),
             ),
@@ -117,7 +131,7 @@ class _ActiveOrderPageWidgetState extends State<ActiveOrderPageWidget> {
             child: StreamBuilder<List<OrderTravelRecord>>(
               stream: queryOrderTravelRecord(
                 queryBuilder: (orderTravelRecord) =>
-                    orderTravelRecord.orderBy('created_at'),
+                    orderTravelRecord.orderBy('created_at', descending: true),
               ),
               builder: (context, snapshot) {
                 // Customize what your widget looks like when it's loading.
@@ -163,57 +177,160 @@ class _ActiveOrderPageWidgetState extends State<ActiveOrderPageWidget> {
                               mainAxisSize: MainAxisSize.max,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Padding(
-                                      padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                                      child: FaIcon(
-                                        FontAwesomeIcons.carSide,
-                                        color: FlutterFlowTheme.primaryColor,
-                                        size: 24,
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.max,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            listViewOrderTravelRecord.rute,
-                                            style: FlutterFlowTheme.title3
-                                                .override(
-                                              fontFamily: 'Nunito',
-                                              color: Colors.black,
-                                              fontWeight: FontWeight.bold,
-                                              fontStyle: FontStyle.italic,
+                                Padding(
+                                  padding: EdgeInsets.fromLTRB(0, 5, 0, 5),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Padding(
+                                        padding:
+                                            EdgeInsets.fromLTRB(20, 0, 0, 0),
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.max,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Padding(
+                                              padding: EdgeInsets.fromLTRB(
+                                                  0, 4, 0, 4),
+                                              child: Row(
+                                                mainAxisSize: MainAxisSize.max,
+                                                children: [
+                                                  FaIcon(
+                                                    FontAwesomeIcons
+                                                        .locationArrow,
+                                                    color: Colors.black,
+                                                    size: 24,
+                                                  ),
+                                                  Padding(
+                                                    padding:
+                                                        EdgeInsets.fromLTRB(
+                                                            10, 0, 0, 0),
+                                                    child: Text(
+                                                      listViewOrderTravelRecord
+                                                          .rute,
+                                                      style: FlutterFlowTheme
+                                                          .title3
+                                                          .override(
+                                                        fontFamily: 'Ubuntu',
+                                                        color: Colors.black,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                      ),
+                                                    ),
+                                                  )
+                                                ],
+                                              ),
                                             ),
-                                          ),
-                                          Text(
-                                            listViewOrderTravelRecord
-                                                .seatNumber,
-                                            style: FlutterFlowTheme.bodyText1
-                                                .override(
-                                              fontFamily: 'Nunito',
+                                            Padding(
+                                              padding: EdgeInsets.fromLTRB(
+                                                  0, 4, 0, 4),
+                                              child: Row(
+                                                mainAxisSize: MainAxisSize.max,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.center,
+                                                children: [
+                                                  Padding(
+                                                    padding:
+                                                        EdgeInsets.fromLTRB(
+                                                            1, 0, 0, 0),
+                                                    child: FaIcon(
+                                                      FontAwesomeIcons.carAlt,
+                                                      color: Colors.black,
+                                                      size: 24,
+                                                    ),
+                                                  ),
+                                                  Padding(
+                                                    padding:
+                                                        EdgeInsets.fromLTRB(
+                                                            10, 4, 0, 4),
+                                                    child: Text(
+                                                      listViewOrderTravelRecord
+                                                          .seatNumber,
+                                                      style: FlutterFlowTheme
+                                                          .subtitle2
+                                                          .override(
+                                                        fontFamily: 'Ubuntu',
+                                                        color: Colors.black,
+                                                      ),
+                                                    ),
+                                                  )
+                                                ],
+                                              ),
                                             ),
-                                          ),
-                                          Text(
-                                            dateTimeFormat(
-                                                'MMMEd',
-                                                listViewOrderTravelRecord
-                                                    .createdAt),
-                                            textAlign: TextAlign.start,
-                                            style: FlutterFlowTheme.bodyText1
-                                                .override(
-                                              fontFamily: 'Nunito',
+                                            Padding(
+                                              padding: EdgeInsets.fromLTRB(
+                                                  0, 4, 0, 4),
+                                              child: Row(
+                                                mainAxisSize: MainAxisSize.max,
+                                                children: [
+                                                  FaIcon(
+                                                    FontAwesomeIcons
+                                                        .calendarCheck,
+                                                    color: Colors.black,
+                                                    size: 24,
+                                                  ),
+                                                  Padding(
+                                                    padding:
+                                                        EdgeInsets.fromLTRB(
+                                                            10, 4, 0, 4),
+                                                    child: Text(
+                                                      dateTimeFormat(
+                                                          'MMMEd',
+                                                          listViewOrderTravelRecord
+                                                              .createdAt),
+                                                      textAlign:
+                                                          TextAlign.start,
+                                                      style: FlutterFlowTheme
+                                                          .subtitle2
+                                                          .override(
+                                                        fontFamily: 'Ubuntu',
+                                                        color: Colors.black,
+                                                      ),
+                                                    ),
+                                                  )
+                                                ],
+                                              ),
                                             ),
-                                          )
-                                        ],
-                                      ),
-                                    )
-                                  ],
+                                            Padding(
+                                              padding: EdgeInsets.fromLTRB(
+                                                  0, 4, 0, 4),
+                                              child: Row(
+                                                mainAxisSize: MainAxisSize.max,
+                                                children: [
+                                                  Icon(
+                                                    Icons.people_alt_sharp,
+                                                    color: Colors.black,
+                                                    size: 24,
+                                                  ),
+                                                  Padding(
+                                                    padding:
+                                                        EdgeInsets.fromLTRB(
+                                                            10, 0, 0, 0),
+                                                    child: Text(
+                                                      cardUsersRecord
+                                                          .displayName,
+                                                      style: FlutterFlowTheme
+                                                          .title3
+                                                          .override(
+                                                        fontFamily: 'Ubuntu',
+                                                        color: Colors.black,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                      ),
+                                                    ),
+                                                  )
+                                                ],
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                      )
+                                    ],
+                                  ),
                                 )
                               ],
                             ),

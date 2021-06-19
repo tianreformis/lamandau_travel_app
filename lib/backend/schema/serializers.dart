@@ -6,6 +6,7 @@ import 'package:latlong/latlong.dart';
 
 import 'users_record.dart';
 import 'order_travel_record.dart';
+import 'seat_number_record.dart';
 
 part 'serializers.g.dart';
 
@@ -14,6 +15,7 @@ const kDocumentReferenceField = 'Document__Reference__Field';
 @SerializersFor(const [
   UsersRecord,
   OrderTravelRecord,
+  SeatNumberRecord,
 ])
 final Serializers serializers = (_$serializers.toBuilder()
       ..add(DocumentReferenceSerializer())

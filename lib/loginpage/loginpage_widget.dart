@@ -84,7 +84,7 @@ class _LoginpageWidgetState extends State<LoginpageWidget> {
                               child: Text(
                                 'Silahkan Masuk',
                                 style: FlutterFlowTheme.title1.override(
-                                  fontFamily: 'Nunito',
+                                  fontFamily: 'Ubuntu',
                                 ),
                               ),
                             ),
@@ -110,7 +110,7 @@ class _LoginpageWidgetState extends State<LoginpageWidget> {
                                           decoration: InputDecoration(
                                             hintText: 'Email',
                                             hintStyle: GoogleFonts.getFont(
-                                              'Open Sans',
+                                              'Ubuntu',
                                               color: Color(0xFF455A64),
                                               fontWeight: FontWeight.normal,
                                             ),
@@ -138,7 +138,7 @@ class _LoginpageWidgetState extends State<LoginpageWidget> {
                                             ),
                                           ),
                                           style: GoogleFonts.getFont(
-                                            'Open Sans',
+                                            'Ubuntu',
                                             color: Color(0xFF455A64),
                                             fontWeight: FontWeight.normal,
                                           ),
@@ -164,7 +164,7 @@ class _LoginpageWidgetState extends State<LoginpageWidget> {
                                           decoration: InputDecoration(
                                             hintText: 'Password',
                                             hintStyle: GoogleFonts.getFont(
-                                              'Open Sans',
+                                              'Ubuntu',
                                               color: Color(0xFF455A64),
                                               fontWeight: FontWeight.normal,
                                             ),
@@ -205,7 +205,7 @@ class _LoginpageWidgetState extends State<LoginpageWidget> {
                                             ),
                                           ),
                                           style: GoogleFonts.getFont(
-                                            'Open Sans',
+                                            'Ubuntu',
                                             color: Color(0xFF455A64),
                                             fontWeight: FontWeight.normal,
                                           ),
@@ -319,7 +319,7 @@ class _LoginpageWidgetState extends State<LoginpageWidget> {
                                                         .tertiaryColor,
                                                     textStyle:
                                                         GoogleFonts.getFont(
-                                                      'Open Sans',
+                                                      'Ubuntu',
                                                       color: Colors.black,
                                                       fontWeight:
                                                           FontWeight.bold,
@@ -395,7 +395,7 @@ class _LoginpageWidgetState extends State<LoginpageWidget> {
                                                         .tertiaryColor,
                                                     textStyle:
                                                         GoogleFonts.getFont(
-                                                      'Open Sans',
+                                                      'Ubuntu',
                                                       color: Colors.black,
                                                       fontWeight:
                                                           FontWeight.bold,

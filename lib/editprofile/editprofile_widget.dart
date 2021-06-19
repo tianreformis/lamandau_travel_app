@@ -6,6 +6,7 @@ import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../flutter_flow/upload_media.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
 
@@ -60,7 +61,7 @@ class _EditprofileWidgetState extends State<EditprofileWidget> {
                     'Edit Profile',
                     textAlign: TextAlign.center,
                     style: FlutterFlowTheme.title1.override(
-                      fontFamily: 'Nunito',
+                      fontFamily: 'Ubuntu',
                     ),
                   ),
                 ),
@@ -88,7 +89,7 @@ class _EditprofileWidgetState extends State<EditprofileWidget> {
                         'Edit Profile',
                         textAlign: TextAlign.center,
                         style: FlutterFlowTheme.title1.override(
-                          fontFamily: 'Nunito',
+                          fontFamily: 'Ubuntu',
                         ),
                       ),
                     )
@@ -150,8 +151,10 @@ class _EditprofileWidgetState extends State<EditprofileWidget> {
                   padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
                   child: Text(
                     'Nama Lengkap',
-                    style: FlutterFlowTheme.bodyText1.override(
-                      fontFamily: 'Nunito',
+                    style: FlutterFlowTheme.subtitle2.override(
+                      fontFamily: 'Ubuntu',
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),
@@ -192,7 +195,7 @@ class _EditprofileWidgetState extends State<EditprofileWidget> {
                           ),
                         ),
                         style: GoogleFonts.getFont(
-                          'Open Sans',
+                          'Ubuntu',
                           color: Color(0xFF455A64),
                           fontWeight: FontWeight.normal,
                         ),
@@ -204,8 +207,10 @@ class _EditprofileWidgetState extends State<EditprofileWidget> {
                   padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
                   child: Text(
                     'Nomor Handphone',
-                    style: FlutterFlowTheme.bodyText1.override(
-                      fontFamily: 'Nunito',
+                    style: FlutterFlowTheme.subtitle2.override(
+                      fontFamily: 'Ubuntu',
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),
@@ -226,7 +231,7 @@ class _EditprofileWidgetState extends State<EditprofileWidget> {
                         decoration: InputDecoration(
                           hintText: 'Nomor Handphone',
                           hintStyle: GoogleFonts.getFont(
-                            'Open Sans',
+                            'Ubuntu',
                             color: Color(0xFF455A64),
                             fontWeight: FontWeight.normal,
                           ),
@@ -252,7 +257,7 @@ class _EditprofileWidgetState extends State<EditprofileWidget> {
                           ),
                         ),
                         style: GoogleFonts.getFont(
-                          'Open Sans',
+                          'Ubuntu',
                           color: Color(0xFF455A64),
                           fontWeight: FontWeight.normal,
                         ),
@@ -307,12 +312,15 @@ class _EditprofileWidgetState extends State<EditprofileWidget> {
                           );
                         },
                         text: 'Simpan',
+                        icon: FaIcon(
+                          FontAwesomeIcons.save,
+                        ),
                         options: FFButtonOptions(
                           width: 100,
                           height: 50,
                           color: Color(0xFF15D434),
                           textStyle: GoogleFonts.getFont(
-                            'Open Sans',
+                            'Ubuntu',
                             color: Color(0xFFDEDEDE),
                             fontWeight: FontWeight.bold,
                             fontSize: 16,
@@ -332,12 +340,16 @@ class _EditprofileWidgetState extends State<EditprofileWidget> {
                           Navigator.pop(context);
                         },
                         text: 'Batal',
+                        icon: Icon(
+                          Icons.cancel_outlined,
+                          size: 15,
+                        ),
                         options: FFButtonOptions(
                           width: 100,
                           height: 50,
                           color: Color(0xFFFF0003),
                           textStyle: GoogleFonts.getFont(
-                            'Open Sans',
+                            'Ubuntu',
                             color: Color(0xFFDEDEDE),
                             fontWeight: FontWeight.bold,
                             fontSize: 16,
