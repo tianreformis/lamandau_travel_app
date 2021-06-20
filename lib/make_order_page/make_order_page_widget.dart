@@ -25,9 +25,8 @@ class MakeOrderPageWidget extends StatefulWidget {
 
 class _MakeOrderPageWidgetState extends State<MakeOrderPageWidget> {
   DateTimeRange calendarSelectedDay;
-  String radioButtonPilihKursiValue;
+  String radioButtonValue;
   TextEditingController textController;
-  OrderTravelRecord RadioButton_PilihKursi;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -178,17 +177,9 @@ class _MakeOrderPageWidgetState extends State<MakeOrderPageWidget> {
                             ),
                           ),
                           FlutterFlowRadioButton(
-                            options: [
-                              'Kursi 1 - Depan',
-                              'Kursi 2 - Belakang Supir',
-                              'Kursi 3 - Tengah',
-                              'Kursi 4 - Samping',
-                              'Kursi 5 - Belakang',
-                              'Kursi 6 - Belakang'
-                            ],
+                            options: ['Kursi Depan', 'Tengah'],
                             onChanged: (value) {
-                              setState(
-                                  () => radioButtonPilihKursiValue = value);
+                              setState(() => radioButtonValue = value);
                             },
                             optionHeight: 25,
                             textStyle: FlutterFlowTheme.bodyText1.override(
@@ -196,7 +187,7 @@ class _MakeOrderPageWidgetState extends State<MakeOrderPageWidget> {
                               color: Colors.black,
                             ),
                             buttonPosition: RadioButtonPosition.left,
-                            direction: Axis.horizontal,
+                            direction: Axis.vertical,
                             radioButtonColor: Colors.blue,
                             toggleable: false,
                             horizontalAlignment: WrapAlignment.start,
@@ -247,8 +238,7 @@ class _MakeOrderPageWidgetState extends State<MakeOrderPageWidget> {
                               final rute = textController.text;
                               final users = currentUserReference;
                               final createdAt = calendarSelectedDay.start;
-                              final seatNumber =
-                                  RadioButton_PilihKursi.seatNumber;
+                              final seatNumber = radioButtonValue;
 
                               final orderTravelRecordData =
                                   createOrderTravelRecordData(
@@ -258,17 +248,10 @@ class _MakeOrderPageWidgetState extends State<MakeOrderPageWidget> {
                                 seatNumber: seatNumber,
                               );
 
-                              final orderTravelRecordReference =
-                                  OrderTravelRecord.collection.doc();
-                              await orderTravelRecordReference
+                              await OrderTravelRecord.collection
+                                  .doc()
                                   .set(orderTravelRecordData);
-                              RadioButton_PilihKursi =
-                                  OrderTravelRecord.getDocumentFromData(
-                                      orderTravelRecordData,
-                                      orderTravelRecordReference);
                               Navigator.pop(context);
-
-                              setState(() {});
                             },
                             text: 'Simpan',
                             icon: FaIcon(

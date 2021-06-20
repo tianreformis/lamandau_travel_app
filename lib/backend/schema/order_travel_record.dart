@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 import 'package:built_collection/built_collection.dart';
@@ -46,6 +48,11 @@ abstract class OrderTravelRecord
   OrderTravelRecord._();
   factory OrderTravelRecord([void Function(OrderTravelRecordBuilder) updates]) =
       _$OrderTravelRecord;
+
+  static OrderTravelRecord getDocumentFromData(
+          Map<String, dynamic> data, DocumentReference reference) =>
+      serializers.deserializeWith(
+          serializer, {...data, kDocumentReferenceField: reference});
 }
 
 Map<String, dynamic> createOrderTravelRecordData({

@@ -42,6 +42,7 @@ dependencies:
   json_serializable: ^3.5.1
   latlong:
   location:
+  mapbox_search:
   mime_type: ^1.0.0
   page_transition:
   rxdart: ^0.25.0

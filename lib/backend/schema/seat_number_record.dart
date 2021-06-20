@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 import 'package:built_collection/built_collection.dart';
@@ -35,6 +37,11 @@ abstract class SeatNumberRecord
   SeatNumberRecord._();
   factory SeatNumberRecord([void Function(SeatNumberRecordBuilder) updates]) =
       _$SeatNumberRecord;
+
+  static SeatNumberRecord getDocumentFromData(
+          Map<String, dynamic> data, DocumentReference reference) =>
+      serializers.deserializeWith(
+          serializer, {...data, kDocumentReferenceField: reference});
 }
 
 Map<String, dynamic> createSeatNumberRecordData({
