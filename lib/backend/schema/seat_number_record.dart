@@ -21,11 +21,15 @@ abstract class SeatNumberRecord
   String get kursi;
 
   @nullable
+  BuiltList<String> get route;
+
+  @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference get reference;
 
-  static void _initializeBuilder(SeatNumberRecordBuilder builder) =>
-      builder..kursi = '';
+  static void _initializeBuilder(SeatNumberRecordBuilder builder) => builder
+    ..kursi = ''
+    ..route = ListBuilder();
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('seatNumber');
@@ -48,10 +52,15 @@ Map<String, dynamic> createSeatNumberRecordData({
   String kursi,
 }) =>
     serializers.toFirestore(
-        SeatNumberRecord.serializer, SeatNumberRecord((s) => s..kursi = kursi));
+        SeatNumberRecord.serializer,
+        SeatNumberRecord((s) => s
+          ..kursi = kursi
+          ..route = null));
 
 SeatNumberRecord get dummySeatNumberRecord {
-  final builder = SeatNumberRecordBuilder()..kursi = dummyString;
+  final builder = SeatNumberRecordBuilder()
+    ..kursi = dummyString
+    ..route = ListBuilder([dummyString, dummyString]);
   return builder.build();
 }
 

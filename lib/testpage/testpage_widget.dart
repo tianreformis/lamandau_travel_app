@@ -102,6 +102,26 @@ class _TestpageWidgetState extends State<TestpageWidget> {
                 ),
                 borderRadius: 12,
               ),
+            ),
+            FFButtonWidget(
+              onPressed: () {
+                print('Button pressed ...');
+              },
+              text: 'Button',
+              options: FFButtonOptions(
+                width: 130,
+                height: 40,
+                color: FlutterFlowTheme.primaryColor,
+                textStyle: FlutterFlowTheme.subtitle2.override(
+                  fontFamily: 'Ubuntu',
+                  color: Colors.white,
+                ),
+                borderSide: BorderSide(
+                  color: Colors.transparent,
+                  width: 1,
+                ),
+                borderRadius: 12,
+              ),
             )
           ],
         ),

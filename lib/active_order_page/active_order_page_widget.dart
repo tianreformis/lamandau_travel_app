@@ -1,3 +1,4 @@
+import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -130,8 +131,9 @@ class _ActiveOrderPageWidgetState extends State<ActiveOrderPageWidget> {
           Expanded(
             child: StreamBuilder<List<OrderTravelRecord>>(
               stream: queryOrderTravelRecord(
-                queryBuilder: (orderTravelRecord) =>
-                    orderTravelRecord.orderBy('created_at', descending: true),
+                queryBuilder: (orderTravelRecord) => orderTravelRecord
+                    .where('users', isNotEqualTo: currentUserReference)
+                    .orderBy('created_at', descending: true),
               ),
               builder: (context, snapshot) {
                 // Customize what your widget looks like when it's loading.

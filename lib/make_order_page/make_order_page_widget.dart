@@ -1,6 +1,7 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_calendar.dart';
+import '../flutter_flow/flutter_flow_drop_down_template.dart';
 import '../flutter_flow/flutter_flow_radio_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -14,10 +15,10 @@ import 'package:page_transition/page_transition.dart';
 class MakeOrderPageWidget extends StatefulWidget {
   MakeOrderPageWidget({
     Key key,
-    this.makeOrderParamater,
+    this.seatParameter,
   }) : super(key: key);
 
-  final OrderTravelRecord makeOrderParamater;
+  final String seatParameter;
 
   @override
   _MakeOrderPageWidgetState createState() => _MakeOrderPageWidgetState();
@@ -25,8 +26,8 @@ class MakeOrderPageWidget extends StatefulWidget {
 
 class _MakeOrderPageWidgetState extends State<MakeOrderPageWidget> {
   DateTimeRange calendarSelectedDay;
+  String dropDownValue;
   String radioButtonValue;
-  TextEditingController textController;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -36,7 +37,6 @@ class _MakeOrderPageWidgetState extends State<MakeOrderPageWidget> {
       start: DateTime.now().startOfDay,
       end: DateTime.now().endOfDay,
     );
-    textController = TextEditingController();
   }
 
   @override
@@ -133,38 +133,52 @@ class _MakeOrderPageWidgetState extends State<MakeOrderPageWidget> {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          TextFormField(
-                            controller: textController,
-                            obscureText: false,
-                            decoration: InputDecoration(
-                              hintText: 'Silahkan Pilih Rute',
-                              hintStyle: FlutterFlowTheme.bodyText1.override(
-                                fontFamily: 'Ubuntu',
-                              ),
-                              enabledBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: Color(0x00000000),
-                                  width: 1,
-                                ),
-                                borderRadius: const BorderRadius.only(
-                                  topLeft: Radius.circular(4.0),
-                                  topRight: Radius.circular(4.0),
-                                ),
-                              ),
-                              focusedBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: Color(0x00000000),
-                                  width: 1,
-                                ),
-                                borderRadius: const BorderRadius.only(
-                                  topLeft: Radius.circular(4.0),
-                                  topRight: Radius.circular(4.0),
-                                ),
-                              ),
+                          StreamBuilder<List<SeatNumberRecord>>(
+                            stream: querySeatNumberRecord(
+                              singleRecord: true,
                             ),
-                            style: FlutterFlowTheme.bodyText1.override(
-                              fontFamily: 'Ubuntu',
-                            ),
+                            builder: (context, snapshot) {
+                              // Customize what your widget looks like when it's loading.
+                              if (!snapshot.hasData) {
+                                return Center(
+                                    child: CircularProgressIndicator());
+                              }
+                              List<SeatNumberRecord>
+                                  dropDownSeatNumberRecordList = snapshot.data;
+                              // Customize what your widget looks like with no query results.
+                              if (snapshot.data.isEmpty) {
+                                // return Container();
+                                // For now, we'll just include some dummy data.
+                                dropDownSeatNumberRecordList =
+                                    createDummySeatNumberRecord(count: 1);
+                              }
+                              final dropDownSeatNumberRecord =
+                                  dropDownSeatNumberRecordList.first;
+                              return FlutterFlowDropDown(
+                                initialOption: 'Options 1',
+                                options: [
+                                  'Kudangan - Nangabulik',
+                                  'Lopung - Nangabulik'
+                                ],
+                                onChanged: (value) {
+                                  setState(() => dropDownValue = value);
+                                },
+                                height: 40,
+                                textStyle: FlutterFlowTheme.bodyText1.override(
+                                  fontFamily: 'Ubuntu',
+                                  color: Colors.black,
+                                ),
+                                icon: FaIcon(
+                                  FontAwesomeIcons.route,
+                                ),
+                                fillColor: Colors.white,
+                                elevation: 2,
+                                borderColor: Colors.transparent,
+                                borderWidth: 0,
+                                borderRadius: 0,
+                                margin: EdgeInsets.fromLTRB(8, 4, 8, 4),
+                              );
+                            },
                           ),
                           Padding(
                             padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
@@ -177,7 +191,12 @@ class _MakeOrderPageWidgetState extends State<MakeOrderPageWidget> {
                             ),
                           ),
                           FlutterFlowRadioButton(
-                            options: ['Kursi Depan', 'Tengah'],
+                            options: [
+                              '2 - Depan Samping Sopir',
+                              '3 - Belakang Sopir',
+                              '4 - Tengah',
+                              '5 - Samping'
+                            ],
                             onChanged: (value) {
                               setState(() => radioButtonValue = value);
                             },
@@ -185,10 +204,11 @@ class _MakeOrderPageWidgetState extends State<MakeOrderPageWidget> {
                             textStyle: FlutterFlowTheme.bodyText1.override(
                               fontFamily: 'Ubuntu',
                               color: Colors.black,
+                              fontStyle: FontStyle.italic,
                             ),
                             buttonPosition: RadioButtonPosition.left,
                             direction: Axis.vertical,
-                            radioButtonColor: Colors.blue,
+                            radioButtonColor: FlutterFlowTheme.secondaryColor,
                             toggleable: false,
                             horizontalAlignment: WrapAlignment.start,
                             verticalAlignment: WrapCrossAlignment.start,
@@ -235,7 +255,7 @@ class _MakeOrderPageWidgetState extends State<MakeOrderPageWidget> {
                           ),
                           FFButtonWidget(
                             onPressed: () async {
-                              final rute = textController.text;
+                              final rute = dropDownValue;
                               final users = currentUserReference;
                               final createdAt = calendarSelectedDay.start;
                               final seatNumber = radioButtonValue;

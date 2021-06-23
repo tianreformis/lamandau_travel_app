@@ -1,5 +1,4 @@
 import '../auth/auth_util.dart';
-import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
@@ -11,14 +10,15 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
 
-class SignupWidget extends StatefulWidget {
-  SignupWidget({Key key}) : super(key: key);
+class ForgotPasswordPageWidget extends StatefulWidget {
+  ForgotPasswordPageWidget({Key key}) : super(key: key);
 
   @override
-  _SignupWidgetState createState() => _SignupWidgetState();
+  _ForgotPasswordPageWidgetState createState() =>
+      _ForgotPasswordPageWidgetState();
 }
 
-class _SignupWidgetState extends State<SignupWidget> {
+class _ForgotPasswordPageWidgetState extends State<ForgotPasswordPageWidget> {
   TextEditingController confirmPasswordTextController;
   bool passwordVisibility2;
   TextEditingController emailTextController;
@@ -89,7 +89,7 @@ class _SignupWidgetState extends State<SignupWidget> {
                               Padding(
                                 padding: EdgeInsets.fromLTRB(0, 0, 0, 20),
                                 child: Text(
-                                  'Pendaftaran Akun',
+                                  'Lupa Kata Sandi',
                                   style: FlutterFlowTheme.title1.override(
                                     fontFamily: 'Ubuntu',
                                   ),
@@ -291,41 +291,21 @@ class _SignupWidgetState extends State<SignupWidget> {
                                     padding: EdgeInsets.fromLTRB(0, 0, 0, 20),
                                     child: FFButtonWidget(
                                       onPressed: () async {
-                                        if (passwordTextController.text !=
-                                            confirmPasswordTextController
-                                                .text) {
+                                        if (emailTextController.text.isEmpty) {
                                           ScaffoldMessenger.of(context)
                                               .showSnackBar(
                                             SnackBar(
                                               content: Text(
-                                                "Passwords don't match!",
+                                                'Email required!',
                                               ),
                                             ),
                                           );
                                           return;
                                         }
-
-                                        final user =
-                                            await createAccountWithEmail(
-                                          context,
-                                          emailTextController.text,
-                                          passwordTextController.text,
+                                        await resetPassword(
+                                          email: emailTextController.text,
+                                          context: context,
                                         );
-                                        if (user == null) {
-                                          return;
-                                        }
-
-                                        final email = '';
-
-                                        final usersRecordData =
-                                            createUsersRecordData(
-                                          email: email,
-                                        );
-
-                                        await UsersRecord.collection
-                                            .doc(user.uid)
-                                            .update(usersRecordData);
-
                                         await Navigator.push(
                                           context,
                                           PageTransition(

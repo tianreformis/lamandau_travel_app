@@ -31,12 +31,21 @@ abstract class OrderTravelRecord
   String get seatNumber;
 
   @nullable
+  @BuiltValueField(wireName: 'switch_seat')
+  bool get switchSeat;
+
+  @nullable
+  String get price;
+
+  @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference get reference;
 
   static void _initializeBuilder(OrderTravelRecordBuilder builder) => builder
     ..rute = ''
-    ..seatNumber = '';
+    ..seatNumber = ''
+    ..switchSeat = false
+    ..price = '';
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('order_travel');
@@ -60,6 +69,8 @@ Map<String, dynamic> createOrderTravelRecordData({
   DocumentReference users,
   DateTime createdAt,
   String seatNumber,
+  bool switchSeat,
+  String price,
 }) =>
     serializers.toFirestore(
         OrderTravelRecord.serializer,
@@ -67,13 +78,17 @@ Map<String, dynamic> createOrderTravelRecordData({
           ..rute = rute
           ..users = users
           ..createdAt = createdAt
-          ..seatNumber = seatNumber));
+          ..seatNumber = seatNumber
+          ..switchSeat = switchSeat
+          ..price = price));
 
 OrderTravelRecord get dummyOrderTravelRecord {
   final builder = OrderTravelRecordBuilder()
     ..rute = dummyString
     ..createdAt = dummyTimestamp
-    ..seatNumber = dummyString;
+    ..seatNumber = dummyString
+    ..switchSeat = dummyBoolean
+    ..price = dummyString;
   return builder.build();
 }
 
