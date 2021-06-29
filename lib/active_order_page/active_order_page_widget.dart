@@ -24,7 +24,7 @@ class _ActiveOrderPageWidgetState extends State<ActiveOrderPageWidget> {
     return Scaffold(
       key: scaffoldKey,
       appBar: AppBar(
-        backgroundColor: FlutterFlowTheme.primaryColor,
+        backgroundColor: FlutterFlowTheme.tertiary1,
         automaticallyImplyLeading: false,
         leading: Padding(
           padding: EdgeInsets.fromLTRB(0, 0, 0, 5),
@@ -132,7 +132,7 @@ class _ActiveOrderPageWidgetState extends State<ActiveOrderPageWidget> {
             child: StreamBuilder<List<OrderTravelRecord>>(
               stream: queryOrderTravelRecord(
                 queryBuilder: (orderTravelRecord) => orderTravelRecord
-                    .where('users', isNotEqualTo: currentUserReference)
+                    .where('uid', isEqualTo: currentUserReference)
                     .orderBy('created_at', descending: true),
               ),
               builder: (context, snapshot) {
@@ -142,12 +142,10 @@ class _ActiveOrderPageWidgetState extends State<ActiveOrderPageWidget> {
                 }
                 List<OrderTravelRecord> listViewOrderTravelRecordList =
                     snapshot.data;
-                // Customize what your widget looks like with no query results.
-                if (snapshot.data.isEmpty) {
-                  // return Container();
-                  // For now, we'll just include some dummy data.
-                  listViewOrderTravelRecordList =
-                      createDummyOrderTravelRecord(count: 4);
+                if (listViewOrderTravelRecordList.isEmpty) {
+                  return Image.asset(
+                    'assets/images/app_launcher.png',
+                  );
                 }
                 return ListView.builder(
                   padding: EdgeInsets.zero,
@@ -170,7 +168,7 @@ class _ActiveOrderPageWidgetState extends State<ActiveOrderPageWidget> {
                           padding: EdgeInsets.fromLTRB(5, 5, 5, 0),
                           child: Card(
                             clipBehavior: Clip.antiAliasWithSaveLayer,
-                            color: Color(0xFFF5F5F5),
+                            color: FlutterFlowTheme.base1,
                             elevation: 4,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10),
@@ -183,7 +181,8 @@ class _ActiveOrderPageWidgetState extends State<ActiveOrderPageWidget> {
                                   padding: EdgeInsets.fromLTRB(0, 5, 0, 5),
                                   child: Row(
                                     mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
                                       Padding(
                                         padding:
@@ -329,6 +328,52 @@ class _ActiveOrderPageWidgetState extends State<ActiveOrderPageWidget> {
                                               ),
                                             )
                                           ],
+                                        ),
+                                      ),
+                                      Align(
+                                        alignment: Alignment(0.5, 0.45),
+                                        child: Padding(
+                                          padding:
+                                              EdgeInsets.fromLTRB(0, 0, 25, 0),
+                                          child: IconButton(
+                                            onPressed: () async {
+                                              await showDialog(
+                                                context: context,
+                                                builder: (alertDialogContext) {
+                                                  return AlertDialog(
+                                                    title: Text('Batal'),
+                                                    content: Text(
+                                                        'Yakin membatalkan tiket ?'),
+                                                    actions: [
+                                                      TextButton(
+                                                        onPressed: () =>
+                                                            Navigator.pop(
+                                                                alertDialogContext),
+                                                        child: Text('Batal'),
+                                                      ),
+                                                      TextButton(
+                                                        onPressed: () async {
+                                                          Navigator.pop(
+                                                              alertDialogContext);
+                                                          await listViewOrderTravelRecord
+                                                              .reference
+                                                              .delete();
+                                                          ;
+                                                        },
+                                                        child: Text('Ya'),
+                                                      ),
+                                                    ],
+                                                  );
+                                                },
+                                              );
+                                            },
+                                            icon: Icon(
+                                              Icons.cancel_outlined,
+                                              color: Color(0xFFDA0037),
+                                              size: 45,
+                                            ),
+                                            iconSize: 45,
+                                          ),
                                         ),
                                       )
                                     ],

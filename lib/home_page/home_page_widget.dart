@@ -34,7 +34,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
         return Scaffold(
           key: scaffoldKey,
           appBar: AppBar(
-            backgroundColor: FlutterFlowTheme.primaryColor,
+            backgroundColor: FlutterFlowTheme.tertiary1,
             automaticallyImplyLeading: false,
             leading: IconButton(
               onPressed: () async {
@@ -51,6 +51,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
             centerTitle: true,
             elevation: 4,
           ),
+          backgroundColor: FlutterFlowTheme.base1,
           drawer: Drawer(
             elevation: 20,
             child: Column(
@@ -61,7 +62,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                   padding: EdgeInsets.fromLTRB(10, 50, 10, 0),
                   child: Card(
                     clipBehavior: Clip.antiAliasWithSaveLayer,
-                    color: FlutterFlowTheme.primaryColor,
+                    color: FlutterFlowTheme.tertiary1,
                     elevation: 5,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(50),
@@ -114,7 +115,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                   padding: EdgeInsets.fromLTRB(10, 10, 10, 50),
                   child: Card(
                     clipBehavior: Clip.antiAliasWithSaveLayer,
-                    color: FlutterFlowTheme.customColor2,
+                    color: FlutterFlowTheme.tertiary1,
                     elevation: 5,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(50),
@@ -265,7 +266,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                         padding: EdgeInsets.fromLTRB(1, 1, 1, 1),
                         child: Card(
                           clipBehavior: Clip.antiAliasWithSaveLayer,
-                          color: FlutterFlowTheme.primaryColor,
+                          color: FlutterFlowTheme.secondary1,
                           elevation: 5,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(40),
@@ -344,7 +345,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                         padding: EdgeInsets.fromLTRB(1, 1, 1, 1),
                         child: Card(
                           clipBehavior: Clip.antiAliasWithSaveLayer,
-                          color: FlutterFlowTheme.primaryColor,
+                          color: FlutterFlowTheme.secondary1,
                           elevation: 5,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(40),
@@ -380,7 +381,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                         padding: EdgeInsets.fromLTRB(1, 1, 1, 1),
                         child: Card(
                           clipBehavior: Clip.antiAliasWithSaveLayer,
-                          color: FlutterFlowTheme.primaryColor,
+                          color: FlutterFlowTheme.secondary1,
                           elevation: 5,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(40),

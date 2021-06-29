@@ -1,13 +1,8 @@
 import 'dart:async';
 
-import 'package:built_value/built_value.dart';
-import 'package:built_value/serializer.dart';
-import 'package:built_collection/built_collection.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:latlong/latlong.dart';
-
-import 'schema_util.dart';
+import 'index.dart';
 import 'serializers.dart';
+import 'package:built_value/built_value.dart';
 
 part 'seat_number_record.g.dart';
 
@@ -17,19 +12,14 @@ abstract class SeatNumberRecord
       _$seatNumberRecordSerializer;
 
   @nullable
-  @BuiltValueField(wireName: 'Kursi')
-  String get kursi;
-
-  @nullable
   BuiltList<String> get route;
 
   @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference get reference;
 
-  static void _initializeBuilder(SeatNumberRecordBuilder builder) => builder
-    ..kursi = ''
-    ..route = ListBuilder();
+  static void _initializeBuilder(SeatNumberRecordBuilder builder) =>
+      builder..route = ListBuilder();
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('seatNumber');
@@ -48,21 +38,5 @@ abstract class SeatNumberRecord
           serializer, {...data, kDocumentReferenceField: reference});
 }
 
-Map<String, dynamic> createSeatNumberRecordData({
-  String kursi,
-}) =>
-    serializers.toFirestore(
-        SeatNumberRecord.serializer,
-        SeatNumberRecord((s) => s
-          ..kursi = kursi
-          ..route = null));
-
-SeatNumberRecord get dummySeatNumberRecord {
-  final builder = SeatNumberRecordBuilder()
-    ..kursi = dummyString
-    ..route = ListBuilder([dummyString, dummyString]);
-  return builder.build();
-}
-
-List<SeatNumberRecord> createDummySeatNumberRecord({int count}) =>
-    List.generate(count, (_) => dummySeatNumberRecord);
+Map<String, dynamic> createSeatNumberRecordData() => serializers.toFirestore(
+    SeatNumberRecord.serializer, SeatNumberRecord((s) => s..route = null));

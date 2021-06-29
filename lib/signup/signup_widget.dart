@@ -104,7 +104,7 @@ class _SignupWidgetState extends State<SignupWidget> {
                                       width: 300,
                                       height: 50,
                                       decoration: BoxDecoration(
-                                        color: Color(0xFFE0E0E0),
+                                        color: FlutterFlowTheme.base1,
                                         borderRadius: BorderRadius.circular(25),
                                       ),
                                       child: Padding(
@@ -158,7 +158,7 @@ class _SignupWidgetState extends State<SignupWidget> {
                                       width: 300,
                                       height: 50,
                                       decoration: BoxDecoration(
-                                        color: Color(0xFFE0E0E0),
+                                        color: FlutterFlowTheme.base1,
                                         borderRadius: BorderRadius.circular(25),
                                       ),
                                       child: Padding(
@@ -225,7 +225,7 @@ class _SignupWidgetState extends State<SignupWidget> {
                                       width: 300,
                                       height: 50,
                                       decoration: BoxDecoration(
-                                        color: Color(0xFFE0E0E0),
+                                        color: FlutterFlowTheme.base1,
                                         borderRadius: BorderRadius.circular(25),
                                       ),
                                       child: Padding(
@@ -342,7 +342,7 @@ class _SignupWidgetState extends State<SignupWidget> {
                                       options: FFButtonOptions(
                                         width: 300,
                                         height: 50,
-                                        color: Color(0xFF0F2A58),
+                                        color: FlutterFlowTheme.primary1,
                                         textStyle: GoogleFonts.getFont(
                                           'Ubuntu',
                                           color: Color(0xFFDEDEDE),

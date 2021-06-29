@@ -82,16 +82,6 @@ class _EditprofileWidgetState extends State<EditprofileWidget> {
                         ),
                         iconSize: 30,
                       ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.fromLTRB(3, 0, 0, 2),
-                      child: Text(
-                        'Edit Profile',
-                        textAlign: TextAlign.center,
-                        style: FlutterFlowTheme.title1.override(
-                          fontFamily: 'Ubuntu',
-                        ),
-                      ),
                     )
                   ],
                 ),
@@ -318,7 +308,7 @@ class _EditprofileWidgetState extends State<EditprofileWidget> {
                         options: FFButtonOptions(
                           width: 100,
                           height: 50,
-                          color: Color(0xFF15D434),
+                          color: FlutterFlowTheme.primary1,
                           textStyle: GoogleFonts.getFont(
                             'Ubuntu',
                             color: Color(0xFFDEDEDE),

@@ -7,9 +7,10 @@ class FlutterFlowTheme {
   static const Color secondaryColor = Color(0xFFEE8B60);
   static const Color tertiaryColor = Color(0xFFFFFFFF);
 
-  static const Color customColor1 = Color(0xFF968C4D);
-  static const Color customColor2 = Color(0xFFE93A13);
-  static const Color customColor3 = Color(0xFFC4D94E);
+  static const Color primary1 = Color(0xFF053742);
+  static const Color secondary1 = Color(0xFF39A2DB);
+  static const Color tertiary1 = Color(0xFFA2DBFA);
+  static const Color base1 = Color(0xFFE8F0F2);
 
   String primaryFontFamily = 'Poppins';
   String secondaryFontFamily = 'Roboto';

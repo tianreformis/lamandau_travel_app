@@ -1,12 +1,12 @@
 import 'dart:io';
 
-import 'package:latlong/latlong.dart';
-import 'package:location/location.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:intl/intl.dart';
+import 'package:timeago/timeago.dart' as timeago;
 import 'package:url_launcher/url_launcher.dart';
 import 'package:json_path/json_path.dart';
 
-import 'package:timeago/timeago.dart' as timeago;
-import 'package:intl/intl.dart';
+import 'lat_lng.dart';
 
 String dateTimeFormat(String format, DateTime dateTime) {
   if (format == 'relative') {
@@ -32,24 +32,34 @@ dynamic getJsonField(dynamic response, String jsonPath) {
 }
 
 bool get isIos => Platform.isIOS;
-final locationManager = Location();
-Future<LatLng> get getCurrentUserLocation async {
-  var serviceEnabled = await locationManager.serviceEnabled();
+
+Future<LatLng> get getCurrentUserLocation =>
+    queryCurrentUserLocation().onError((error, _) {
+      print("Error querying user location: $error");
+      return null;
+    });
+
+Future<LatLng> queryCurrentUserLocation() async {
+  final serviceEnabled = await Geolocator.isLocationServiceEnabled();
   if (!serviceEnabled) {
-    serviceEnabled = await locationManager.requestService();
-    if (!serviceEnabled) {
-      return null;
+    return Future.error('Location services are disabled.');
+  }
+
+  var permission = await Geolocator.checkPermission();
+  if (permission == LocationPermission.denied) {
+    permission = await Geolocator.requestPermission();
+    if (permission == LocationPermission.denied) {
+      return Future.error('Location permissions are denied');
     }
   }
-  var permissionGranted = await locationManager.hasPermission();
-  if (permissionGranted == PermissionStatus.denied) {
-    permissionGranted = await locationManager.requestPermission();
-    if (permissionGranted != PermissionStatus.granted) {
-      return null;
-    }
+
+  if (permission == LocationPermission.deniedForever) {
+    return Future.error(
+        'Location permissions are permanently denied, we cannot request permissions.');
   }
-  final location = await locationManager.getLocation();
-  return location != null && location.latitude != 0 && location.longitude != 0
-      ? LatLng(location.latitude, location.longitude)
+
+  final position = await Geolocator.getCurrentPosition();
+  return position != null && position.latitude != 0 && position.longitude != 0
+      ? LatLng(position.latitude, position.longitude)
       : null;
 }

@@ -1,13 +1,8 @@
 import 'dart:async';
 
-import 'package:built_value/built_value.dart';
-import 'package:built_value/serializer.dart';
-import 'package:built_collection/built_collection.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:latlong/latlong.dart';
-
-import 'schema_util.dart';
+import 'index.dart';
 import 'serializers.dart';
+import 'package:built_value/built_value.dart';
 
 part 'order_travel_record.g.dart';
 
@@ -36,6 +31,9 @@ abstract class OrderTravelRecord
 
   @nullable
   String get price;
+
+  @nullable
+  DocumentReference get uid;
 
   @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
@@ -71,6 +69,7 @@ Map<String, dynamic> createOrderTravelRecordData({
   String seatNumber,
   bool switchSeat,
   String price,
+  DocumentReference uid,
 }) =>
     serializers.toFirestore(
         OrderTravelRecord.serializer,
@@ -80,17 +79,5 @@ Map<String, dynamic> createOrderTravelRecordData({
           ..createdAt = createdAt
           ..seatNumber = seatNumber
           ..switchSeat = switchSeat
-          ..price = price));
-
-OrderTravelRecord get dummyOrderTravelRecord {
-  final builder = OrderTravelRecordBuilder()
-    ..rute = dummyString
-    ..createdAt = dummyTimestamp
-    ..seatNumber = dummyString
-    ..switchSeat = dummyBoolean
-    ..price = dummyString;
-  return builder.build();
-}
-
-List<OrderTravelRecord> createDummyOrderTravelRecord({int count}) =>
-    List.generate(count, (_) => dummyOrderTravelRecord);
+          ..price = price
+          ..uid = uid));
