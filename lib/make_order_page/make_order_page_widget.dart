@@ -5,7 +5,6 @@ import '../flutter_flow/flutter_flow_drop_down_template.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
-import '../testpage/testpage_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -150,6 +149,9 @@ class _MakeOrderPageWidgetState extends State<MakeOrderPageWidget> {
                                 fontFamily: 'Ubuntu',
                                 color: Colors.black,
                               ),
+                              icon: FaIcon(
+                                FontAwesomeIcons.streetView,
+                              ),
                               fillColor: Colors.white,
                               elevation: 2,
                               borderColor: Colors.transparent,
@@ -178,6 +180,10 @@ class _MakeOrderPageWidgetState extends State<MakeOrderPageWidget> {
                             textStyle: FlutterFlowTheme.bodyText1.override(
                               fontFamily: 'Ubuntu',
                               color: Colors.black,
+                            ),
+                            icon: Icon(
+                              Icons.event_seat_rounded,
+                              size: 15,
                             ),
                             fillColor: Colors.white,
                             elevation: 2,
@@ -228,19 +234,14 @@ class _MakeOrderPageWidgetState extends State<MakeOrderPageWidget> {
                           ),
                           FFButtonWidget(
                             onPressed: () async {
-                              final rute = dropdownRuteValue;
-                              final users = currentUserReference;
-                              final createdAt = calendarSelectedDay.start;
-                              final seatNumber = dropdownSeatValue;
-
                               final orderTravelRecordData =
                                   createOrderTravelRecordData(
-                                rute: rute,
-                                users: users,
-                                createdAt: createdAt,
-                                seatNumber: seatNumber,
+                                rute: dropdownRuteValue,
+                                createdAt: calendarSelectedDay.start,
+                                seatNumber: dropdownSeatValue,
+                                uid: currentUserReference,
+                                users: currentUserReference,
                               );
-
                               await OrderTravelRecord.collection
                                   .doc()
                                   .set(orderTravelRecordData);
@@ -266,40 +267,11 @@ class _MakeOrderPageWidgetState extends State<MakeOrderPageWidget> {
                               borderRadius: 12,
                             ),
                           ),
-                          Padding(
-                            padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
-                            child: FFButtonWidget(
-                              onPressed: () async {
-                                await Navigator.push(
-                                  context,
-                                  PageTransition(
-                                    type: PageTransitionType.fade,
-                                    duration: Duration(milliseconds: 300),
-                                    reverseDuration:
-                                        Duration(milliseconds: 300),
-                                    child: TestpageWidget(),
-                                  ),
-                                );
-                              },
-                              text: 'Simpan',
-                              icon: FaIcon(
-                                FontAwesomeIcons.save,
-                              ),
-                              options: FFButtonOptions(
-                                width: 130,
-                                height: 40,
-                                color: Color(0xFF34E07A),
-                                textStyle: FlutterFlowTheme.subtitle2.override(
-                                  fontFamily: 'Ubuntu',
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w800,
-                                ),
-                                borderSide: BorderSide(
-                                  color: Colors.transparent,
-                                  width: 1,
-                                ),
-                                borderRadius: 12,
-                              ),
+                          Card(
+                            clipBehavior: Clip.antiAliasWithSaveLayer,
+                            color: Color(0xFFF5F5F5),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20),
                             ),
                           )
                         ],

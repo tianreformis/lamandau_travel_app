@@ -36,7 +36,7 @@ dependencies:
   flutter_facebook_auth: ^2.0.2+1
   font_awesome_flutter:
   geolocator:
-  google_fonts:
+  google_fonts: ^1.1.2
   google_sign_in: ^4.0.16
   image_picker: ^0.6.7+22
   intl:

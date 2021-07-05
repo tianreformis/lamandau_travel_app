@@ -26,10 +26,6 @@ abstract class OrderTravelRecord
   String get seatNumber;
 
   @nullable
-  @BuiltValueField(wireName: 'switch_seat')
-  bool get switchSeat;
-
-  @nullable
   String get price;
 
   @nullable
@@ -42,7 +38,6 @@ abstract class OrderTravelRecord
   static void _initializeBuilder(OrderTravelRecordBuilder builder) => builder
     ..rute = ''
     ..seatNumber = ''
-    ..switchSeat = false
     ..price = '';
 
   static CollectionReference get collection =>
@@ -67,7 +62,6 @@ Map<String, dynamic> createOrderTravelRecordData({
   DocumentReference users,
   DateTime createdAt,
   String seatNumber,
-  bool switchSeat,
   String price,
   DocumentReference uid,
 }) =>
@@ -78,6 +72,5 @@ Map<String, dynamic> createOrderTravelRecordData({
           ..users = users
           ..createdAt = createdAt
           ..seatNumber = seatNumber
-          ..switchSeat = switchSeat
           ..price = price
           ..uid = uid));

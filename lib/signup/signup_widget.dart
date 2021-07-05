@@ -315,13 +315,10 @@ class _SignupWidgetState extends State<SignupWidget> {
                                           return;
                                         }
 
-                                        final email = '';
-
                                         final usersRecordData =
                                             createUsersRecordData(
-                                          email: email,
+                                          email: '',
                                         );
-
                                         await UsersRecord.collection
                                             .doc(user.uid)
                                             .update(usersRecordData);

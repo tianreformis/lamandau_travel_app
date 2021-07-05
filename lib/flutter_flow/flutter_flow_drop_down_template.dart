@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 
 class FlutterFlowDropDown extends StatefulWidget {
   const FlutterFlowDropDown({
@@ -15,6 +16,7 @@ class FlutterFlowDropDown extends StatefulWidget {
     this.borderRadius,
     this.borderColor,
     this.margin,
+    this.hidesUnderline = false,
   });
 
   final String initialOption;
@@ -30,6 +32,7 @@ class FlutterFlowDropDown extends StatefulWidget {
   final double borderRadius;
   final Color borderColor;
   final EdgeInsetsGeometry margin;
+  final bool hidesUnderline;
 
   @override
   State<FlutterFlowDropDown> createState() => _FlutterFlowDropDownState();
@@ -43,12 +46,34 @@ class _FlutterFlowDropDownState extends State<FlutterFlowDropDown> {
   @override
   void initState() {
     super.initState();
-    dropDownValue = widget.initialOption;
-    widget.onChanged(dropDownValue);
+    SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+      dropDownValue = widget.initialOption ?? widget.options.first;
+      widget.onChanged(dropDownValue);
+    });
   }
 
   @override
   Widget build(BuildContext context) {
+    final dropdownWidget = DropdownButton<String>(
+      value: effectiveOptions.contains(dropDownValue) ? dropDownValue : null,
+      items: effectiveOptions
+          .map((e) => DropdownMenuItem(
+                value: e,
+                child: Text(
+                  e,
+                  style: widget.textStyle,
+                ),
+              ))
+          .toList(),
+      elevation: widget.elevation.toInt(),
+      onChanged: (value) {
+        dropDownValue = value;
+        widget.onChanged(value);
+      },
+      icon: widget.icon,
+      isExpanded: true,
+      dropdownColor: widget.fillColor,
+    );
     final childWidget = DecoratedBox(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(widget.borderRadius ?? 28),
@@ -60,27 +85,9 @@ class _FlutterFlowDropDownState extends State<FlutterFlowDropDown> {
       ),
       child: Padding(
         padding: widget.margin,
-        child: DropdownButton<String>(
-          value:
-              effectiveOptions.contains(dropDownValue) ? dropDownValue : null,
-          items: effectiveOptions
-              .map((e) => DropdownMenuItem(
-                    value: e,
-                    child: Text(
-                      e,
-                      style: widget.textStyle,
-                    ),
-                  ))
-              .toList(),
-          elevation: widget.elevation.toInt(),
-          onChanged: (value) {
-            dropDownValue = value;
-            widget.onChanged(value);
-          },
-          icon: widget.icon,
-          isExpanded: true,
-          dropdownColor: widget.fillColor,
-        ),
+        child: widget.hidesUnderline
+            ? DropdownButtonHideUnderline(child: dropdownWidget)
+            : dropdownWidget,
       ),
     );
     if (widget.height != null || widget.width != null) {

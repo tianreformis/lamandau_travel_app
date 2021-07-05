@@ -2,7 +2,9 @@ import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
+import '../flutter_flow/flutter_flow_widgets.dart';
 import '../make_order_page/make_order_page_widget.dart';
+import '../report_page/report_page_widget.dart';
 import '../testpage/testpage_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -132,7 +134,7 @@ class _ActiveOrderPageWidgetState extends State<ActiveOrderPageWidget> {
             child: StreamBuilder<List<OrderTravelRecord>>(
               stream: queryOrderTravelRecord(
                 queryBuilder: (orderTravelRecord) => orderTravelRecord
-                    .where('uid', isEqualTo: currentUserReference)
+                    .where('users', isEqualTo: currentUserReference)
                     .orderBy('created_at', descending: true),
               ),
               builder: (context, snapshot) {
@@ -330,50 +332,116 @@ class _ActiveOrderPageWidgetState extends State<ActiveOrderPageWidget> {
                                           ],
                                         ),
                                       ),
-                                      Align(
-                                        alignment: Alignment(0.5, 0.45),
-                                        child: Padding(
-                                          padding:
-                                              EdgeInsets.fromLTRB(0, 0, 25, 0),
-                                          child: IconButton(
-                                            onPressed: () async {
-                                              await showDialog(
-                                                context: context,
-                                                builder: (alertDialogContext) {
-                                                  return AlertDialog(
-                                                    title: Text('Batal'),
-                                                    content: Text(
-                                                        'Yakin membatalkan tiket ?'),
-                                                    actions: [
-                                                      TextButton(
-                                                        onPressed: () =>
-                                                            Navigator.pop(
-                                                                alertDialogContext),
-                                                        child: Text('Batal'),
-                                                      ),
-                                                      TextButton(
-                                                        onPressed: () async {
-                                                          Navigator.pop(
-                                                              alertDialogContext);
-                                                          await listViewOrderTravelRecord
-                                                              .reference
-                                                              .delete();
-                                                          ;
-                                                        },
-                                                        child: Text('Ya'),
-                                                      ),
-                                                    ],
+                                      Padding(
+                                        padding:
+                                            EdgeInsets.fromLTRB(0, 0, 10, 0),
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.max,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Padding(
+                                              padding: EdgeInsets.fromLTRB(
+                                                  0, 0, 0, 10),
+                                              child: FFButtonWidget(
+                                                onPressed: () async {
+                                                  await Navigator.push(
+                                                    context,
+                                                    PageTransition(
+                                                      type: PageTransitionType
+                                                          .fade,
+                                                      duration: Duration(
+                                                          milliseconds: 300),
+                                                      reverseDuration: Duration(
+                                                          milliseconds: 300),
+                                                      child: ReportPageWidget(),
+                                                    ),
                                                   );
                                                 },
-                                              );
-                                            },
-                                            icon: Icon(
-                                              Icons.cancel_outlined,
-                                              color: Color(0xFFDA0037),
-                                              size: 45,
+                                                text: 'Cetak',
+                                                icon: FaIcon(
+                                                  FontAwesomeIcons.print,
+                                                  size: 20,
+                                                ),
+                                                options: FFButtonOptions(
+                                                  width: 130,
+                                                  height: 40,
+                                                  color: Color(0xFF44CB85),
+                                                  textStyle: FlutterFlowTheme
+                                                      .subtitle2
+                                                      .override(
+                                                    fontFamily: 'Ubuntu',
+                                                    color: Colors.white,
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                                  elevation: 3,
+                                                  borderSide: BorderSide(
+                                                    color: Colors.transparent,
+                                                    width: 1,
+                                                  ),
+                                                  borderRadius: 12,
+                                                ),
+                                              ),
                                             ),
-                                            iconSize: 45,
-                                          ),
+                                            FFButtonWidget(
+                                              onPressed: () async {
+                                                await showDialog(
+                                                  context: context,
+                                                  builder:
+                                                      (alertDialogContext) {
+                                                    return AlertDialog(
+                                                      title: Text(
+                                                          'Batalkan Pesanan'),
+                                                      content: Text(
+                                                          'Apakah anda yakin ingin membatalkan pesanan?'),
+                                                      actions: [
+                                                        TextButton(
+                                                          onPressed: () =>
+                                                              Navigator.pop(
+                                                                  alertDialogContext),
+                                                          child: Text(
+                                                              'Tidak Jadi'),
+                                                        ),
+                                                        TextButton(
+                                                          onPressed: () async {
+                                                            Navigator.pop(
+                                                                alertDialogContext);
+                                                            await listViewOrderTravelRecord
+                                                                .reference
+                                                                .delete();
+                                                            ;
+                                                          },
+                                                          child: Text('Ya'),
+                                                        ),
+                                                      ],
+                                                    );
+                                                  },
+                                                );
+                                              },
+                                              text: 'Batal',
+                                              icon: Icon(
+                                                Icons.cancel_outlined,
+                                                size: 20,
+                                              ),
+                                              options: FFButtonOptions(
+                                                width: 130,
+                                                height: 40,
+                                                color: Color(0xFFE05034),
+                                                textStyle: FlutterFlowTheme
+                                                    .subtitle2
+                                                    .override(
+                                                  fontFamily: 'Ubuntu',
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                                borderSide: BorderSide(
+                                                  color: Colors.transparent,
+                                                  width: 1,
+                                                ),
+                                                borderRadius: 12,
+                                              ),
+                                            )
+                                          ],
                                         ),
                                       )
                                     ],

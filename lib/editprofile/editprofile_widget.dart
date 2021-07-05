@@ -5,7 +5,9 @@ import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../flutter_flow/upload_media.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
@@ -23,6 +25,7 @@ class EditprofileWidget extends StatefulWidget {
 }
 
 class _EditprofileWidgetState extends State<EditprofileWidget> {
+  DateTime datePicked = DateTime.now();
   String uploadedFileUrl = '';
   TextEditingController textController1;
   TextEditingController textController2;
@@ -58,7 +61,7 @@ class _EditprofileWidgetState extends State<EditprofileWidget> {
                 Padding(
                   padding: EdgeInsets.fromLTRB(3, 0, 0, 2),
                   child: Text(
-                    'Edit Profile',
+                    'Edit Profil',
                     textAlign: TextAlign.center,
                     style: FlutterFlowTheme.title1.override(
                       fontFamily: 'Ubuntu',
@@ -85,60 +88,66 @@ class _EditprofileWidgetState extends State<EditprofileWidget> {
                     )
                   ],
                 ),
-                Padding(
-                  padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
-                  child: InkWell(
-                    onTap: () async {
-                      final selectedMedia = await selectMedia();
-                      if (selectedMedia != null &&
-                          validateFileFormat(
-                              selectedMedia.storagePath, context)) {
-                        showUploadMessage(context, 'Uploading file...',
-                            showLoading: true);
-                        final downloadUrl = await uploadData(
-                            selectedMedia.storagePath, selectedMedia.bytes);
-                        ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                        if (downloadUrl != null) {
-                          setState(() => uploadedFileUrl = downloadUrl);
-                          showUploadMessage(context, 'Success!');
-                        } else {
-                          showUploadMessage(context, 'Failed to upload media');
-                        }
+                InkWell(
+                  onTap: () async {
+                    final selectedMedia = await selectMedia();
+                    if (selectedMedia != null &&
+                        validateFileFormat(
+                            selectedMedia.storagePath, context)) {
+                      showUploadMessage(context, 'Uploading file...',
+                          showLoading: true);
+                      final downloadUrl = await uploadData(
+                          selectedMedia.storagePath, selectedMedia.bytes);
+                      ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                      if (downloadUrl != null) {
+                        setState(() => uploadedFileUrl = downloadUrl);
+                        showUploadMessage(context, 'Success!');
+                      } else {
+                        showUploadMessage(context, 'Failed to upload media');
                       }
-                    },
-                    child: Stack(
-                      children: [
-                        Align(
-                          alignment: Alignment(0, 0),
-                          child: Container(
-                            width: 120,
-                            height: 120,
-                            clipBehavior: Clip.antiAlias,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                            ),
-                            child: Image.network(
-                              editprofileUsersRecord.photoUrl,
-                            ),
+                    }
+                  },
+                  child: Stack(
+                    children: [
+                      Align(
+                        alignment: Alignment(0, 0),
+                        child: Container(
+                          width: 120,
+                          height: 120,
+                          clipBehavior: Clip.antiAlias,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                          ),
+                          child: Image.network(
+                            editprofileUsersRecord.photoUrl,
                           ),
                         ),
-                        Align(
-                          alignment: Alignment(0, 0),
-                          child: Padding(
-                            padding: EdgeInsets.fromLTRB(0, 25, 0, 0),
-                            child: Icon(
-                              Icons.camera_alt_rounded,
-                              color: Color(0x8FFFFFFF),
-                              size: 50,
-                            ),
+                      ),
+                      Align(
+                        alignment: Alignment(0, 0),
+                        child: Padding(
+                          padding: EdgeInsets.fromLTRB(0, 25, 0, 0),
+                          child: Icon(
+                            Icons.camera_alt_rounded,
+                            color: Color(0x8FFFFFFF),
+                            size: 50,
                           ),
-                        )
-                      ],
-                    ),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+                Text(
+                  'Ganti Foto Profil',
+                  textAlign: TextAlign.center,
+                  style: FlutterFlowTheme.bodyText1.override(
+                    fontFamily: 'Ubuntu',
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                  padding: EdgeInsets.fromLTRB(10, 30, 0, 0),
                   child: Text(
                     'Nama Lengkap',
                     style: FlutterFlowTheme.subtitle2.override(
@@ -256,6 +265,67 @@ class _EditprofileWidgetState extends State<EditprofileWidget> {
                     ),
                   ),
                 ),
+                Padding(
+                  padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                  child: Text(
+                    'Tanggal Lahir',
+                    style: FlutterFlowTheme.subtitle2.override(
+                      fontFamily: 'Ubuntu',
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.fromLTRB(10, 5, 10, 20),
+                  child: Container(
+                    width: 300,
+                    height: 50,
+                    decoration: BoxDecoration(
+                      color: Color(0xFFE0E0E0),
+                      borderRadius: BorderRadius.circular(25),
+                    ),
+                    child: Padding(
+                      padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
+                      child: InkWell(
+                        onTap: () async {
+                          await DatePicker.showDatePicker(context,
+                              showTitleActions: true, onConfirm: (date) {
+                            setState(() => datePicked = date);
+                          }, currentTime: DateTime.now());
+                        },
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                              child: Text(
+                                editprofileUsersRecord.birthDate.toString(),
+                                style: FlutterFlowTheme.bodyText1.override(
+                                  fontFamily: 'Ubuntu',
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                            IconButton(
+                              onPressed: () {
+                                print('IconButton pressed ...');
+                              },
+                              icon: Icon(
+                                Icons.calendar_today,
+                                color: Colors.black,
+                                size: 30,
+                              ),
+                              iconSize: 30,
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
                 Row(
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -279,17 +349,14 @@ class _EditprofileWidgetState extends State<EditprofileWidget> {
                                   TextButton(
                                     onPressed: () async {
                                       Navigator.pop(alertDialogContext);
-                                      final displayName = textController1.text;
-                                      final phoneNumber = textController2.text;
-                                      final photoUrl = uploadedFileUrl;
 
                                       final usersRecordData =
                                           createUsersRecordData(
-                                        displayName: displayName,
-                                        phoneNumber: phoneNumber,
-                                        photoUrl: photoUrl,
+                                        displayName: textController1.text,
+                                        phoneNumber: textController2.text,
+                                        photoUrl: uploadedFileUrl,
+                                        birthDate: datePicked,
                                       );
-
                                       await editprofileUsersRecord.reference
                                           .update(usersRecordData);
                                       ;
@@ -306,7 +373,7 @@ class _EditprofileWidgetState extends State<EditprofileWidget> {
                           FontAwesomeIcons.save,
                         ),
                         options: FFButtonOptions(
-                          width: 100,
+                          width: 120,
                           height: 50,
                           color: FlutterFlowTheme.primary1,
                           textStyle: GoogleFonts.getFont(
@@ -335,7 +402,7 @@ class _EditprofileWidgetState extends State<EditprofileWidget> {
                           size: 15,
                         ),
                         options: FFButtonOptions(
-                          width: 100,
+                          width: 120,
                           height: 50,
                           color: Color(0xFFFF0003),
                           textStyle: GoogleFonts.getFont(
