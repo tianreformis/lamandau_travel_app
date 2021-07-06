@@ -167,7 +167,7 @@ class _ReportPageWidgetState extends State<ReportPageWidget> {
                             ),
                           ),
                           Text(
-                            '08.00 WIB',
+                            widget.orderTravelParameter.seatNumber,
                             style: FlutterFlowTheme.bodyText1.override(
                               fontFamily: 'Ubuntu',
                             ),

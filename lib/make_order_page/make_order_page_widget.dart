@@ -27,6 +27,7 @@ class _MakeOrderPageWidgetState extends State<MakeOrderPageWidget> {
   DateTimeRange calendarSelectedDay;
   String dropdownRuteValue;
   String dropdownSeatValue;
+  String dropdownPriceValue;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -111,12 +112,7 @@ class _MakeOrderPageWidgetState extends State<MakeOrderPageWidget> {
                   color: Color(0xFFF5F5F5),
                   elevation: 4,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(0),
-                      bottomRight: Radius.circular(20),
-                      topLeft: Radius.circular(20),
-                      topRight: Radius.circular(0),
-                    ),
+                    borderRadius: BorderRadius.circular(20),
                   ),
                   child: Padding(
                     padding: EdgeInsets.fromLTRB(15, 10, 15, 0),
@@ -135,19 +131,29 @@ class _MakeOrderPageWidgetState extends State<MakeOrderPageWidget> {
                           Card(
                             clipBehavior: Clip.antiAliasWithSaveLayer,
                             color: Color(0xFFF5F5F5),
+                            elevation: 4,
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20),
+                              borderRadius: BorderRadius.circular(10),
                             ),
                             child: FlutterFlowDropDown(
-                              options: ['Option 1'],
+                              options: [
+                                'Kubung - Nangabulik',
+                                'Sekombulan - Nangabulik',
+                                'Kudangan - Nangabulik',
+                                'Lopus - Nangabulik ',
+                                'Nyalang - Nangabulik ',
+                                'Landau Kantu - Nangabulik ',
+                                ''
+                              ],
                               onChanged: (value) {
                                 setState(() => dropdownRuteValue = value);
                               },
-                              width: 130,
+                              width: double.infinity,
                               height: 40,
                               textStyle: FlutterFlowTheme.bodyText1.override(
                                 fontFamily: 'Ubuntu',
                                 color: Colors.black,
+                                fontWeight: FontWeight.w500,
                               ),
                               icon: FaIcon(
                                 FontAwesomeIcons.streetView,
@@ -170,27 +176,43 @@ class _MakeOrderPageWidgetState extends State<MakeOrderPageWidget> {
                               ),
                             ),
                           ),
-                          FlutterFlowDropDown(
-                            options: ['Option 1'],
-                            onChanged: (value) {
-                              setState(() => dropdownSeatValue = value);
-                            },
-                            width: 130,
-                            height: 40,
-                            textStyle: FlutterFlowTheme.bodyText1.override(
-                              fontFamily: 'Ubuntu',
-                              color: Colors.black,
+                          Card(
+                            clipBehavior: Clip.antiAliasWithSaveLayer,
+                            color: Color(0xFFF5F5F5),
+                            elevation: 4,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
                             ),
-                            icon: Icon(
-                              Icons.event_seat_rounded,
-                              size: 15,
+                            child: FlutterFlowDropDown(
+                              options: [
+                                '02. Samping Supir',
+                                '03. Belakang Supir',
+                                '04. Tengah',
+                                '05. Samping',
+                                '06. Belakang',
+                                '07. Belakang'
+                              ],
+                              onChanged: (value) {
+                                setState(() => dropdownSeatValue = value);
+                              },
+                              width: double.infinity,
+                              height: 40,
+                              textStyle: FlutterFlowTheme.bodyText1.override(
+                                fontFamily: 'Ubuntu',
+                                color: Colors.black,
+                                fontWeight: FontWeight.w500,
+                              ),
+                              icon: Icon(
+                                Icons.airline_seat_recline_normal,
+                                size: 15,
+                              ),
+                              fillColor: Colors.white,
+                              elevation: 2,
+                              borderColor: Colors.transparent,
+                              borderWidth: 0,
+                              borderRadius: 0,
+                              margin: EdgeInsets.fromLTRB(8, 4, 8, 4),
                             ),
-                            fillColor: Colors.white,
-                            elevation: 2,
-                            borderColor: Colors.transparent,
-                            borderWidth: 0,
-                            borderRadius: 0,
-                            margin: EdgeInsets.fromLTRB(8, 4, 8, 4),
                           ),
                           Padding(
                             padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
@@ -232,47 +254,71 @@ class _MakeOrderPageWidgetState extends State<MakeOrderPageWidget> {
                               ),
                             ),
                           ),
-                          FFButtonWidget(
-                            onPressed: () async {
-                              final orderTravelRecordData =
-                                  createOrderTravelRecordData(
-                                rute: dropdownRuteValue,
-                                createdAt: calendarSelectedDay.start,
-                                seatNumber: dropdownSeatValue,
-                                uid: currentUserReference,
-                                users: currentUserReference,
-                              );
-                              await OrderTravelRecord.collection
-                                  .doc()
-                                  .set(orderTravelRecordData);
-                              Navigator.pop(context);
-                            },
-                            text: 'Simpan',
-                            icon: FaIcon(
-                              FontAwesomeIcons.save,
-                            ),
-                            options: FFButtonOptions(
-                              width: 130,
-                              height: 40,
-                              color: Color(0xFF34E07A),
-                              textStyle: FlutterFlowTheme.subtitle2.override(
-                                fontFamily: 'Ubuntu',
-                                color: Colors.white,
-                                fontWeight: FontWeight.w800,
+                          Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              FFButtonWidget(
+                                onPressed: () async {
+                                  final orderTravelRecordData =
+                                      createOrderTravelRecordData(
+                                    rute: dropdownRuteValue,
+                                    createdAt: calendarSelectedDay.start,
+                                    seatNumber: dropdownSeatValue,
+                                    uid: currentUserReference,
+                                    users: currentUserReference,
+                                    price: dropdownPriceValue,
+                                  );
+                                  await OrderTravelRecord.collection
+                                      .doc()
+                                      .set(orderTravelRecordData);
+                                  Navigator.pop(context);
+                                },
+                                text: 'Simpan',
+                                icon: FaIcon(
+                                  FontAwesomeIcons.save,
+                                ),
+                                options: FFButtonOptions(
+                                  width: 130,
+                                  height: 40,
+                                  color: Color(0xFF34E07A),
+                                  textStyle:
+                                      FlutterFlowTheme.subtitle2.override(
+                                    fontFamily: 'Ubuntu',
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w800,
+                                  ),
+                                  borderSide: BorderSide(
+                                    color: Colors.transparent,
+                                    width: 1,
+                                  ),
+                                  borderRadius: 12,
+                                ),
                               ),
-                              borderSide: BorderSide(
-                                color: Colors.transparent,
-                                width: 1,
-                              ),
-                              borderRadius: 12,
-                            ),
-                          ),
-                          Card(
-                            clipBehavior: Clip.antiAliasWithSaveLayer,
-                            color: Color(0xFFF5F5F5),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20),
-                            ),
+                              FlutterFlowDropDown(
+                                options: [''],
+                                onChanged: (value) {
+                                  setState(() => dropdownPriceValue = value);
+                                },
+                                width: 100,
+                                height: 40,
+                                textStyle: FlutterFlowTheme.bodyText1.override(
+                                  fontFamily: 'Ubuntu',
+                                  color: Colors.black,
+                                ),
+                                icon: Icon(
+                                  Icons.money_sharp,
+                                  size: 15,
+                                ),
+                                fillColor: Colors.white,
+                                elevation: 2,
+                                borderColor: Colors.transparent,
+                                borderWidth: 0,
+                                borderRadius: 0,
+                                margin: EdgeInsets.fromLTRB(8, 4, 8, 4),
+                                hidesUnderline: true,
+                              )
+                            ],
                           )
                         ],
                       ),

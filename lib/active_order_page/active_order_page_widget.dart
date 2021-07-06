@@ -1,4 +1,3 @@
-import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -12,7 +11,12 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
 
 class ActiveOrderPageWidget extends StatefulWidget {
-  ActiveOrderPageWidget({Key key}) : super(key: key);
+  ActiveOrderPageWidget({
+    Key key,
+    this.userRecord,
+  }) : super(key: key);
+
+  final UsersRecord userRecord;
 
   @override
   _ActiveOrderPageWidgetState createState() => _ActiveOrderPageWidgetState();
@@ -134,7 +138,7 @@ class _ActiveOrderPageWidgetState extends State<ActiveOrderPageWidget> {
             child: StreamBuilder<List<OrderTravelRecord>>(
               stream: queryOrderTravelRecord(
                 queryBuilder: (orderTravelRecord) => orderTravelRecord
-                    .where('users', isEqualTo: currentUserReference)
+                    .where('users', isEqualTo: widget.userRecord.reference)
                     .orderBy('created_at', descending: true),
               ),
               builder: (context, snapshot) {

@@ -5,7 +5,6 @@ import '../editprofile/editprofile_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../loginpage/loginpage_widget.dart';
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -215,37 +214,6 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                               ),
                             )
                           ],
-                        ),
-                      ),
-                      Expanded(
-                        child: Align(
-                          alignment: Alignment(-0.3, -0.75),
-                          child: Container(
-                            width: 60,
-                            height: 60,
-                            child: Stack(
-                              children: [
-                                Align(
-                                  alignment: Alignment(0, 0),
-                                  child: AutoSizeText(
-                                    dateTimeFormat('jm', getCurrentTimestamp),
-                                    style: FlutterFlowTheme.bodyText1.override(
-                                      fontFamily: 'Ubuntu',
-                                      fontWeight: FontWeight.w800,
-                                    ),
-                                  ),
-                                ),
-                                Align(
-                                  alignment: Alignment(0, 0),
-                                  child: FaIcon(
-                                    FontAwesomeIcons.clock,
-                                    color: Color(0x39000000),
-                                    size: 60,
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
                         ),
                       )
                     ],

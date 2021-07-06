@@ -119,7 +119,7 @@ class _EditprofileWidgetState extends State<EditprofileWidget> {
                             shape: BoxShape.circle,
                           ),
                           child: Image.network(
-                            editprofileUsersRecord.photoUrl,
+                            widget.userRecord.photoUrl,
                           ),
                         ),
                       ),
