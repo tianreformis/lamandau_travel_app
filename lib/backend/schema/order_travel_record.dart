@@ -32,6 +32,9 @@ abstract class OrderTravelRecord
   DocumentReference get uid;
 
   @nullable
+  LatLng get userLocation;
+
+  @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference get reference;
 
@@ -64,6 +67,7 @@ Map<String, dynamic> createOrderTravelRecordData({
   String seatNumber,
   String price,
   DocumentReference uid,
+  LatLng userLocation,
 }) =>
     serializers.toFirestore(
         OrderTravelRecord.serializer,
@@ -73,4 +77,5 @@ Map<String, dynamic> createOrderTravelRecordData({
           ..createdAt = createdAt
           ..seatNumber = seatNumber
           ..price = price
-          ..uid = uid));
+          ..uid = uid
+          ..userLocation = userLocation));

@@ -215,7 +215,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                             Padding(
                               padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
                               child: Text(
-                                homePageUsersRecord.displayName,
+                                currentUserDisplayName,
                                 style: FlutterFlowTheme.bodyText1.override(
                                   fontFamily: 'Ubuntu',
                                 ),

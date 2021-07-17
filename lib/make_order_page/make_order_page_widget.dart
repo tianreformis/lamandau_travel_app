@@ -2,9 +2,12 @@ import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_calendar.dart';
 import '../flutter_flow/flutter_flow_drop_down_template.dart';
+import '../flutter_flow/flutter_flow_place_picker.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
+import '../flutter_flow/lat_lng.dart';
+import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -27,6 +30,7 @@ class _MakeOrderPageWidgetState extends State<MakeOrderPageWidget> {
   DateTimeRange calendarSelectedDay;
   String dropdownRuteValue;
   String dropdownSeatValue;
+  var placePickerValue = LatLng(0.0, 0.0);
   TextEditingController textFieldPriceController;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -218,6 +222,45 @@ class _MakeOrderPageWidgetState extends State<MakeOrderPageWidget> {
                           Padding(
                             padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
                             child: Text(
+                              'Lokasi Jemput',
+                              style: FlutterFlowTheme.title3.override(
+                                fontFamily: 'Ubuntu',
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                          FlutterFlowPlacePicker(
+                            googleMapsApiKey: Platform.isAndroid
+                                ? ''
+                                : Platform.isIOS
+                                    ? ''
+                                    : '',
+                            onSelect: (latlng) =>
+                                setState(() => placePickerValue = latlng),
+                            defaultText: 'Select Location',
+                            icon: Icon(
+                              Icons.place,
+                              color: Colors.white,
+                              size: 16,
+                            ),
+                            buttonOptions: FFButtonOptions(
+                              width: 200,
+                              height: 40,
+                              color: FlutterFlowTheme.primaryColor,
+                              textStyle: FlutterFlowTheme.subtitle2.override(
+                                fontFamily: 'Ubuntu',
+                                color: Colors.white,
+                              ),
+                              borderSide: BorderSide(
+                                color: Colors.transparent,
+                                width: 1,
+                              ),
+                              borderRadius: 12,
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
+                            child: Text(
                               'Tanggal Keberangkatan',
                               style: FlutterFlowTheme.title3.override(
                                 fontFamily: 'Ubuntu',
@@ -269,6 +312,7 @@ class _MakeOrderPageWidgetState extends State<MakeOrderPageWidget> {
                                     uid: currentUserReference,
                                     users: currentUserReference,
                                     price: textFieldPriceController.text,
+                                    userLocation: placePickerValue,
                                   );
                                   await OrderTravelRecord.collection
                                       .doc()
