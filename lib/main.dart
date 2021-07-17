@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'auth/firebase_user_provider.dart';
 import 'package:lamandau_travel_app/loginpage/loginpage_widget.dart';
 import 'package:lamandau_travel_app/home_page/home_page_widget.dart';
+import 'flutter_flow/flutter_flow_theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

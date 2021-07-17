@@ -54,12 +54,14 @@ class FFButtonWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textWidget = AutoSizeText(
+    Widget textWidget = AutoSizeText(
       text,
       style: options.textStyle,
       maxLines: 1,
+      overflow: TextOverflow.ellipsis,
     );
     if (icon != null || iconData != null) {
+      textWidget = Flexible(child: textWidget);
       return Container(
         height: options.height,
         width: options.width,

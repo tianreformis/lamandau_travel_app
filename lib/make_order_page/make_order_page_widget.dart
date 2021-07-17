@@ -27,7 +27,7 @@ class _MakeOrderPageWidgetState extends State<MakeOrderPageWidget> {
   DateTimeRange calendarSelectedDay;
   String dropdownRuteValue;
   String dropdownSeatValue;
-  String dropdownPriceValue;
+  TextEditingController textFieldPriceController;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -37,6 +37,7 @@ class _MakeOrderPageWidgetState extends State<MakeOrderPageWidget> {
       start: DateTime.now().startOfDay,
       end: DateTime.now().endOfDay,
     );
+    textFieldPriceController = TextEditingController();
   }
 
   @override
@@ -260,18 +261,18 @@ class _MakeOrderPageWidgetState extends State<MakeOrderPageWidget> {
                             children: [
                               FFButtonWidget(
                                 onPressed: () async {
-                                  final orderTravelRecordData =
+                                  final orderTravelCreateData =
                                       createOrderTravelRecordData(
                                     rute: dropdownRuteValue,
                                     createdAt: calendarSelectedDay.start,
                                     seatNumber: dropdownSeatValue,
                                     uid: currentUserReference,
                                     users: currentUserReference,
-                                    price: dropdownPriceValue,
+                                    price: textFieldPriceController.text,
                                   );
                                   await OrderTravelRecord.collection
                                       .doc()
-                                      .set(orderTravelRecordData);
+                                      .set(orderTravelCreateData);
                                   Navigator.pop(context);
                                 },
                                 text: 'Simpan',
@@ -295,28 +296,47 @@ class _MakeOrderPageWidgetState extends State<MakeOrderPageWidget> {
                                   borderRadius: 12,
                                 ),
                               ),
-                              FlutterFlowDropDown(
-                                options: [''],
-                                onChanged: (value) {
-                                  setState(() => dropdownPriceValue = value);
-                                },
-                                width: 100,
-                                height: 40,
-                                textStyle: FlutterFlowTheme.bodyText1.override(
-                                  fontFamily: 'Ubuntu',
-                                  color: Colors.black,
+                              Expanded(
+                                child: Padding(
+                                  padding: EdgeInsets.fromLTRB(30, 0, 0, 0),
+                                  child: TextFormField(
+                                    controller: textFieldPriceController,
+                                    obscureText: false,
+                                    decoration: InputDecoration(
+                                      enabledBorder: UnderlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: Color(0x00000000),
+                                          width: 1,
+                                        ),
+                                        borderRadius: BorderRadius.only(
+                                          bottomLeft: Radius.circular(10),
+                                          bottomRight: Radius.circular(10),
+                                          topLeft: Radius.circular(10),
+                                          topRight: Radius.circular(10),
+                                        ),
+                                      ),
+                                      focusedBorder: UnderlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: Color(0x00000000),
+                                          width: 1,
+                                        ),
+                                        borderRadius: BorderRadius.only(
+                                          bottomLeft: Radius.circular(10),
+                                          bottomRight: Radius.circular(10),
+                                          topLeft: Radius.circular(10),
+                                          topRight: Radius.circular(10),
+                                        ),
+                                      ),
+                                      prefixIcon: FaIcon(
+                                        FontAwesomeIcons.moneyBillWave,
+                                        size: 20,
+                                      ),
+                                    ),
+                                    style: FlutterFlowTheme.bodyText1.override(
+                                      fontFamily: 'Ubuntu',
+                                    ),
+                                  ),
                                 ),
-                                icon: Icon(
-                                  Icons.money_sharp,
-                                  size: 15,
-                                ),
-                                fillColor: Colors.white,
-                                elevation: 2,
-                                borderColor: Colors.transparent,
-                                borderWidth: 0,
-                                borderRadius: 0,
-                                margin: EdgeInsets.fromLTRB(8, 4, 8, 4),
-                                hidesUnderline: true,
                               )
                             ],
                           )
