@@ -35,13 +35,36 @@ abstract class OrderTravelRecord
   LatLng get userLocation;
 
   @nullable
+  String get email;
+
+  @nullable
+  @BuiltValueField(wireName: 'display_name')
+  String get displayName;
+
+  @nullable
+  @BuiltValueField(wireName: 'photo_url')
+  String get photoUrl;
+
+  @nullable
+  @BuiltValueField(wireName: 'created_time')
+  DateTime get createdTime;
+
+  @nullable
+  @BuiltValueField(wireName: 'phone_number')
+  String get phoneNumber;
+
+  @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference get reference;
 
   static void _initializeBuilder(OrderTravelRecordBuilder builder) => builder
     ..rute = ''
     ..seatNumber = ''
-    ..price = '';
+    ..price = ''
+    ..email = ''
+    ..displayName = ''
+    ..photoUrl = ''
+    ..phoneNumber = '';
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('order_travel');
@@ -68,6 +91,11 @@ Map<String, dynamic> createOrderTravelRecordData({
   String price,
   DocumentReference uid,
   LatLng userLocation,
+  String email,
+  String displayName,
+  String photoUrl,
+  DateTime createdTime,
+  String phoneNumber,
 }) =>
     serializers.toFirestore(
         OrderTravelRecord.serializer,
@@ -78,4 +106,9 @@ Map<String, dynamic> createOrderTravelRecordData({
           ..seatNumber = seatNumber
           ..price = price
           ..uid = uid
-          ..userLocation = userLocation));
+          ..userLocation = userLocation
+          ..email = email
+          ..displayName = displayName
+          ..photoUrl = photoUrl
+          ..createdTime = createdTime
+          ..phoneNumber = phoneNumber));

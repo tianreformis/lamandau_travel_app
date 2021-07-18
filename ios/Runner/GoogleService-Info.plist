@@ -6,6 +6,8 @@
 	<string>1032414338668-hhskk874l608htebbk8n9gbbchgnc041.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
 	<string>com.googleusercontent.apps.1032414338668-hhskk874l608htebbk8n9gbbchgnc041</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>1032414338668-k8r5l1dbito91ulkpegbh04s63tcqit9.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
 	<string>AIzaSyB-VkPAUsW9DR0Ksci5blQrMLU2kTzUeW8</string>
 	<key>GCM_SENDER_ID</key>
@@ -30,5 +32,7 @@
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
 	<string>1:1032414338668:ios:bc5888b3d5e39dd5ec8249</string>
+	<key>DATABASE_URL</key>
+	<string>https://lamandau-travel-app-f0a50-default-rtdb.firebaseio.com</string>
 </dict>
 </plist>

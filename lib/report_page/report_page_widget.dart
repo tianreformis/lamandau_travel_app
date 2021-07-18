@@ -1,9 +1,14 @@
 import '../backend/backend.dart';
+import '../flutter_flow/flutter_flow_static_map.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
+import '../flutter_flow/lat_lng.dart';
+import '../testpage/testpage_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mapbox_search/mapbox_search.dart';
+import 'package:page_transition/page_transition.dart';
 
 class ReportPageWidget extends StatefulWidget {
   ReportPageWidget({
@@ -44,134 +49,228 @@ class _ReportPageWidgetState extends State<ReportPageWidget> {
         return Scaffold(
           key: scaffoldKey,
           appBar: AppBar(
-            backgroundColor: FlutterFlowTheme.primaryColor,
-            automaticallyImplyLeading: true,
-            actions: [],
-            centerTitle: true,
-            elevation: 4,
-          ),
-          body: SafeArea(
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                Card(
+            backgroundColor: Color(0x00A2DBFA),
+            automaticallyImplyLeading: false,
+            leading: Padding(
+              padding: EdgeInsets.fromLTRB(0, 0, 0, 5),
+              child: InkWell(
+                onTap: () async {
+                  Navigator.pop(context);
+                },
+                child: Card(
                   clipBehavior: Clip.antiAliasWithSaveLayer,
-                  color: FlutterFlowTheme.primaryColor,
-                  elevation: 5,
+                  color: Color(0x00EC5555),
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
+                    borderRadius: BorderRadius.circular(0),
                   ),
-                  child: Align(
-                    alignment: Alignment(0, 0),
-                    child: Padding(
-                      padding: EdgeInsets.fromLTRB(0, 20, 0, 20),
-                      child: Text(
-                        'Tiket Travel',
-                        style: FlutterFlowTheme.title1.override(
-                          fontFamily: 'Ubuntu',
-                          color: FlutterFlowTheme.tertiaryColor,
+                  child: InkWell(
+                    onTap: () async {
+                      Navigator.pop(context);
+                    },
+                    child: Icon(
+                      Icons.arrow_back,
+                      color: FlutterFlowTheme.tertiaryColor,
+                      size: 24,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            title: Padding(
+              padding: EdgeInsets.fromLTRB(0, 0, 0, 5),
+              child: Container(
+                width: 200,
+                height: 45,
+                decoration: BoxDecoration(
+                  color: Color(0x00FFFFFF),
+                  borderRadius: BorderRadius.circular(20),
+                  shape: BoxShape.rectangle,
+                ),
+                child: Padding(
+                  padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
+                  child: InkWell(
+                    onTap: () async {
+                      await Navigator.push(
+                        context,
+                        PageTransition(
+                          type: PageTransitionType.fade,
+                          duration: Duration(milliseconds: 300),
+                          reverseDuration: Duration(milliseconds: 300),
+                          child: TestpageWidget(),
                         ),
+                      );
+                    },
+                    child: Text(
+                      'Tiket Travel',
+                      textAlign: TextAlign.center,
+                      style: FlutterFlowTheme.title1.override(
+                        fontFamily: 'Ubuntu',
+                        color: FlutterFlowTheme.tertiaryColor,
                       ),
                     ),
                   ),
                 ),
+              ),
+            ),
+            actions: [],
+            centerTitle: true,
+            elevation: 0,
+          ),
+          backgroundColor: FlutterFlowTheme.primaryColor,
+          body: SafeArea(
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
                 Padding(
-                  padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
-                  child: Container(
-                    width: double.infinity,
-                    height: 100,
-                    decoration: BoxDecoration(
-                      color: Color(0xFFEEEEEE),
+                  padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                  child: Material(
+                    color: Colors.transparent,
+                    elevation: 4,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(25),
                     ),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.fromLTRB(4, 0, 4, 0),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                'Tanggal Keberangkatan',
+                    child: Container(
+                      constraints: BoxConstraints(
+                        maxWidth: double.infinity,
+                        maxHeight: double.infinity,
+                      ),
+                      decoration: BoxDecoration(
+                        color: Color(0xFFEEEEEE),
+                        borderRadius: BorderRadius.circular(25),
+                      ),
+                      child: Padding(
+                        padding: EdgeInsets.fromLTRB(10, 10, 0, 10),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            Text(
+                              widget.orderTravelParameter.rute,
+                              textAlign: TextAlign.center,
+                              style: FlutterFlowTheme.title2.override(
+                                fontFamily: 'Ubuntu',
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
+                              child: Text(
+                                'Nama Penumpang',
+                                textAlign: TextAlign.start,
                                 style: FlutterFlowTheme.title3.override(
                                   fontFamily: 'Ubuntu',
                                 ),
                               ),
-                              Text(
-                                widget.orderTravelParameter.createdAt
+                            ),
+                            Padding(
+                              padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
+                              child: Text(
+                                widget.orderTravelParameter.displayName,
+                                style: FlutterFlowTheme.bodyText1.override(
+                                  fontFamily: 'Ubuntu',
+                                  color: Colors.black,
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
+                              child: Text(
+                                'Tanggal Keberangkatan',
+                                textAlign: TextAlign.start,
+                                style: FlutterFlowTheme.title3.override(
+                                  fontFamily: 'Ubuntu',
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
+                              child: Text(
+                                widget.orderTravelParameter.createdTime
                                     .toString(),
                                 style: FlutterFlowTheme.bodyText1.override(
                                   fontFamily: 'Ubuntu',
+                                  color: Colors.black,
                                 ),
-                              )
-                            ],
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.fromLTRB(4, 0, 4, 0),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                'Waktu Keberangaktan',
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
+                              child: Text(
+                                'Jam Keberangkatan',
+                                textAlign: TextAlign.start,
                                 style: FlutterFlowTheme.title3.override(
                                   fontFamily: 'Ubuntu',
                                 ),
                               ),
-                              Text(
-                                '08.00 WIB',
+                            ),
+                            Padding(
+                              padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
+                              child: Text(
+                                dateTimeFormat('jm',
+                                    widget.orderTravelParameter.createdTime),
                                 style: FlutterFlowTheme.bodyText1.override(
                                   fontFamily: 'Ubuntu',
+                                  color: Colors.black,
                                 ),
-                              )
-                            ],
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.fromLTRB(4, 0, 4, 0),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                'Rute',
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
+                              child: Text(
+                                'Nomor Kursi',
+                                textAlign: TextAlign.start,
                                 style: FlutterFlowTheme.title3.override(
                                   fontFamily: 'Ubuntu',
                                 ),
                               ),
-                              Text(
-                                widget.orderTravelParameter.rute,
-                                style: FlutterFlowTheme.bodyText1.override(
-                                  fontFamily: 'Ubuntu',
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.fromLTRB(4, 0, 4, 0),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                'Kursi',
-                                style: FlutterFlowTheme.title3.override(
-                                  fontFamily: 'Ubuntu',
-                                ),
-                              ),
-                              Text(
+                            ),
+                            Padding(
+                              padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
+                              child: Text(
                                 widget.orderTravelParameter.seatNumber,
                                 style: FlutterFlowTheme.bodyText1.override(
                                   fontFamily: 'Ubuntu',
+                                  color: Colors.black,
                                 ),
-                              )
-                            ],
-                          ),
-                        )
-                      ],
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
+                              child: Text(
+                                'Lokasi Jemput',
+                                textAlign: TextAlign.start,
+                                style: FlutterFlowTheme.title3.override(
+                                  fontFamily: 'Ubuntu',
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
+                              child: FlutterFlowStaticMap(
+                                location:
+                                    widget.orderTravelParameter.userLocation,
+                                apiKey:
+                                    'pk.eyJ1IjoidGlhbnJlZm9ybWlzIiwiYSI6ImNrcTRnbng5ajB4enQydnA0eWV5cGVyejgifQ.8-uIw9iTuzHLu_3gZb3Kjw',
+                                style: MapBoxStyle.Light,
+                                width: 150,
+                                height: 150,
+                                fit: BoxFit.cover,
+                                borderRadius: BorderRadius.only(
+                                  bottomLeft: Radius.circular(25),
+                                  bottomRight: Radius.circular(25),
+                                  topLeft: Radius.circular(0),
+                                  topRight: Radius.circular(0),
+                                ),
+                                cached: true,
+                                zoom: 12,
+                                tilt: 0,
+                                rotation: 0,
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
                     ),
                   ),
                 )

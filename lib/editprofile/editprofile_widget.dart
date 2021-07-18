@@ -13,12 +13,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
 
 class EditprofileWidget extends StatefulWidget {
-  EditprofileWidget({
-    Key key,
-    this.userRecord,
-  }) : super(key: key);
-
-  final UsersRecord userRecord;
+  EditprofileWidget({Key key}) : super(key: key);
 
   @override
   _EditprofileWidgetState createState() => _EditprofileWidgetState();
@@ -34,10 +29,8 @@ class _EditprofileWidgetState extends State<EditprofileWidget> {
   @override
   void initState() {
     super.initState();
-    textController1 =
-        TextEditingController(text: widget.userRecord.displayName);
-    textController2 =
-        TextEditingController(text: widget.userRecord.phoneNumber);
+    textController1 = TextEditingController();
+    textController2 = TextEditingController();
   }
 
   @override
@@ -127,7 +120,7 @@ class _EditprofileWidgetState extends State<EditprofileWidget> {
                             shape: BoxShape.circle,
                           ),
                           child: Image.network(
-                            widget.userRecord.photoUrl,
+                            editprofileUsersRecord.photoUrl,
                           ),
                         ),
                       ),
@@ -309,7 +302,8 @@ class _EditprofileWidgetState extends State<EditprofileWidget> {
                             Padding(
                               padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
                               child: Text(
-                                editprofileUsersRecord.birthDate.toString(),
+                                dateTimeFormat('MMMMEEEEd',
+                                    editprofileUsersRecord.birthDate),
                                 style: FlutterFlowTheme.bodyText1.override(
                                   fontFamily: 'Ubuntu',
                                   color: Colors.black,

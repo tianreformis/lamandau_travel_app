@@ -82,9 +82,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                             type: PageTransitionType.fade,
                             duration: Duration(milliseconds: 300),
                             reverseDuration: Duration(milliseconds: 300),
-                            child: EditprofileWidget(
-                              userRecord: homePageUsersRecord,
-                            ),
+                            child: EditprofileWidget(),
                           ),
                         );
                       },
@@ -184,15 +182,18 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Container(
-                        width: 120,
-                        height: 120,
-                        clipBehavior: Clip.antiAlias,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                        ),
-                        child: Image.network(
-                          homePageUsersRecord.photoUrl,
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
+                        child: Container(
+                          width: 120,
+                          height: 120,
+                          clipBehavior: Clip.antiAlias,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                          ),
+                          child: Image.network(
+                            currentUserPhoto,
+                          ),
                         ),
                       ),
                       Padding(

@@ -237,7 +237,7 @@ class _MakeOrderPageWidgetState extends State<MakeOrderPageWidget> {
                                     : '',
                             onSelect: (latlng) =>
                                 setState(() => placePickerValue = latlng),
-                            defaultText: 'Select Location',
+                            defaultText: 'Pilih Lokasi',
                             icon: Icon(
                               Icons.place,
                               color: Colors.white,

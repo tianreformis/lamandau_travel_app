@@ -15,11 +15,38 @@ abstract class SeatNumberRecord
   BuiltList<String> get route;
 
   @nullable
+  String get email;
+
+  @nullable
+  @BuiltValueField(wireName: 'display_name')
+  String get displayName;
+
+  @nullable
+  @BuiltValueField(wireName: 'photo_url')
+  String get photoUrl;
+
+  @nullable
+  String get uid;
+
+  @nullable
+  @BuiltValueField(wireName: 'created_time')
+  DateTime get createdTime;
+
+  @nullable
+  @BuiltValueField(wireName: 'phone_number')
+  String get phoneNumber;
+
+  @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference get reference;
 
-  static void _initializeBuilder(SeatNumberRecordBuilder builder) =>
-      builder..route = ListBuilder();
+  static void _initializeBuilder(SeatNumberRecordBuilder builder) => builder
+    ..route = ListBuilder()
+    ..email = ''
+    ..displayName = ''
+    ..photoUrl = ''
+    ..uid = ''
+    ..phoneNumber = '';
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('seatNumber');
@@ -38,5 +65,21 @@ abstract class SeatNumberRecord
           serializer, {...data, kDocumentReferenceField: reference});
 }
 
-Map<String, dynamic> createSeatNumberRecordData() => serializers.toFirestore(
-    SeatNumberRecord.serializer, SeatNumberRecord((s) => s..route = null));
+Map<String, dynamic> createSeatNumberRecordData({
+  String email,
+  String displayName,
+  String photoUrl,
+  String uid,
+  DateTime createdTime,
+  String phoneNumber,
+}) =>
+    serializers.toFirestore(
+        SeatNumberRecord.serializer,
+        SeatNumberRecord((s) => s
+          ..route = null
+          ..email = email
+          ..displayName = displayName
+          ..photoUrl = photoUrl
+          ..uid = uid
+          ..createdTime = createdTime
+          ..phoneNumber = phoneNumber));
