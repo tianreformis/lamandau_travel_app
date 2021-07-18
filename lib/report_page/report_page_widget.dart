@@ -1,3 +1,4 @@
+import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_static_map.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
@@ -146,11 +147,14 @@ class _ReportPageWidgetState extends State<ReportPageWidget> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
-                            Text(
-                              widget.orderTravelParameter.rute,
-                              textAlign: TextAlign.center,
-                              style: FlutterFlowTheme.title2.override(
-                                fontFamily: 'Ubuntu',
+                            Padding(
+                              padding: EdgeInsets.fromLTRB(0, 0, 0, 20),
+                              child: Text(
+                                widget.orderTravelParameter.rute,
+                                textAlign: TextAlign.center,
+                                style: FlutterFlowTheme.title2.override(
+                                  fontFamily: 'Ubuntu',
+                                ),
                               ),
                             ),
                             Padding(
@@ -166,7 +170,7 @@ class _ReportPageWidgetState extends State<ReportPageWidget> {
                             Padding(
                               padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
                               child: Text(
-                                widget.orderTravelParameter.displayName,
+                                currentUserDisplayName,
                                 style: FlutterFlowTheme.bodyText1.override(
                                   fontFamily: 'Ubuntu',
                                   color: Colors.black,
@@ -186,8 +190,8 @@ class _ReportPageWidgetState extends State<ReportPageWidget> {
                             Padding(
                               padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
                               child: Text(
-                                widget.orderTravelParameter.createdTime
-                                    .toString(),
+                                dateTimeFormat('MMMMEEEEd',
+                                    widget.orderTravelParameter.createdAt),
                                 style: FlutterFlowTheme.bodyText1.override(
                                   fontFamily: 'Ubuntu',
                                   color: Colors.black,
@@ -207,8 +211,8 @@ class _ReportPageWidgetState extends State<ReportPageWidget> {
                             Padding(
                               padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
                               child: Text(
-                                dateTimeFormat('jm',
-                                    widget.orderTravelParameter.createdTime),
+                                dateTimeFormat('Hm',
+                                    widget.orderTravelParameter.createdAt),
                                 style: FlutterFlowTheme.bodyText1.override(
                                   fontFamily: 'Ubuntu',
                                   color: Colors.black,
@@ -251,10 +255,10 @@ class _ReportPageWidgetState extends State<ReportPageWidget> {
                                 location:
                                     widget.orderTravelParameter.userLocation,
                                 apiKey:
-                                    'pk.eyJ1IjoidGlhbnJlZm9ybWlzIiwiYSI6ImNrcTRnbng5ajB4enQydnA0eWV5cGVyejgifQ.8-uIw9iTuzHLu_3gZb3Kjw',
-                                style: MapBoxStyle.Light,
+                                    'pk.eyJ1IjoidGlhbnJlZm9ybWlzIiwiYSI6ImNrcTRncTI3dDAxZ3Eyb210NHJ4NjJ1dHQifQ.IDCAp-YvimdPGJ--sNjozg',
+                                style: MapBoxStyle.Outdoors,
                                 width: 150,
-                                height: 150,
+                                height: 340,
                                 fit: BoxFit.cover,
                                 borderRadius: BorderRadius.only(
                                   bottomLeft: Radius.circular(25),

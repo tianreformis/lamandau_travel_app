@@ -63,7 +63,7 @@ class _ActiveOrderPageWidgetState extends State<ActiveOrderPageWidget> {
         return Scaffold(
           key: scaffoldKey,
           appBar: AppBar(
-            backgroundColor: FlutterFlowTheme.tertiary1,
+            backgroundColor: FlutterFlowTheme.primaryColor,
             automaticallyImplyLeading: false,
             leading: Padding(
               padding: EdgeInsets.fromLTRB(0, 0, 0, 5),
@@ -73,7 +73,8 @@ class _ActiveOrderPageWidgetState extends State<ActiveOrderPageWidget> {
                 },
                 child: Card(
                   clipBehavior: Clip.antiAliasWithSaveLayer,
-                  color: Color(0xFFF5F5F5),
+                  color: FlutterFlowTheme.primaryColor,
+                  elevation: 0,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20),
                   ),
@@ -83,7 +84,7 @@ class _ActiveOrderPageWidgetState extends State<ActiveOrderPageWidget> {
                     },
                     child: Icon(
                       Icons.arrow_back,
-                      color: Colors.black,
+                      color: FlutterFlowTheme.tertiaryColor,
                       size: 24,
                     ),
                   ),
@@ -96,7 +97,7 @@ class _ActiveOrderPageWidgetState extends State<ActiveOrderPageWidget> {
                 width: 200,
                 height: 45,
                 decoration: BoxDecoration(
-                  color: FlutterFlowTheme.tertiaryColor,
+                  color: FlutterFlowTheme.primaryColor,
                   borderRadius: BorderRadius.circular(20),
                   shape: BoxShape.rectangle,
                 ),
@@ -119,6 +120,7 @@ class _ActiveOrderPageWidgetState extends State<ActiveOrderPageWidget> {
                       textAlign: TextAlign.center,
                       style: FlutterFlowTheme.title1.override(
                         fontFamily: 'Ubuntu',
+                        color: FlutterFlowTheme.tertiaryColor,
                       ),
                     ),
                   ),
@@ -127,9 +129,9 @@ class _ActiveOrderPageWidgetState extends State<ActiveOrderPageWidget> {
             ),
             actions: [],
             centerTitle: true,
-            elevation: 4,
+            elevation: 0,
           ),
-          backgroundColor: Color(0xFFF1F4F8),
+          backgroundColor: FlutterFlowTheme.primaryColor,
           floatingActionButton: FloatingActionButton(
             onPressed: () async {
               await Navigator.push(
@@ -192,7 +194,9 @@ class _ActiveOrderPageWidgetState extends State<ActiveOrderPageWidget> {
                     if (listViewOrderTravelRecordList.isEmpty) {
                       return Center(
                         child: Image.asset(
-                          'assets/images/app_launcher.png',
+                          'assets/images/No Messages - Empty Inbox.png',
+                          width: 250,
+                          fit: BoxFit.fill,
                         ),
                       );
                     }
@@ -412,7 +416,7 @@ class _ActiveOrderPageWidgetState extends State<ActiveOrderPageWidget> {
                                             ),
                                             Padding(
                                               padding: EdgeInsets.fromLTRB(
-                                                  0, 0, 10, 0),
+                                                  20, 0, 10, 0),
                                               child: Column(
                                                 mainAxisSize: MainAxisSize.max,
                                                 mainAxisAlignment:
@@ -422,7 +426,7 @@ class _ActiveOrderPageWidgetState extends State<ActiveOrderPageWidget> {
                                                   Padding(
                                                     padding:
                                                         EdgeInsets.fromLTRB(
-                                                            0, 0, 0, 10),
+                                                            1, 0, 0, 10),
                                                     child: FFButtonWidget(
                                                       onPressed: () async {
                                                         await Navigator.push(
@@ -446,9 +450,9 @@ class _ActiveOrderPageWidgetState extends State<ActiveOrderPageWidget> {
                                                           ),
                                                         );
                                                       },
-                                                      text: 'Cetak',
-                                                      icon: FaIcon(
-                                                        FontAwesomeIcons.print,
+                                                      text: 'Tiket',
+                                                      icon: Icon(
+                                                        Icons.text_snippet,
                                                         size: 20,
                                                       ),
                                                       options: FFButtonOptions(

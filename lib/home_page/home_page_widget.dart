@@ -4,6 +4,7 @@ import '../backend/backend.dart';
 import '../editprofile/editprofile_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
+import '../infomation_app_page/infomation_app_page_widget.dart';
 import '../loginpage/loginpage_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -41,7 +42,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
         return Scaffold(
           key: scaffoldKey,
           appBar: AppBar(
-            backgroundColor: FlutterFlowTheme.tertiary1,
+            backgroundColor: FlutterFlowTheme.primaryColor,
             automaticallyImplyLeading: false,
             leading: IconButton(
               onPressed: () async {
@@ -56,7 +57,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
             ),
             actions: [],
             centerTitle: true,
-            elevation: 4,
+            elevation: 0,
           ),
           backgroundColor: FlutterFlowTheme.base1,
           drawer: Drawer(
@@ -327,23 +328,81 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(40),
                           ),
+                          child: InkWell(
+                            onTap: () async {
+                              await Navigator.push(
+                                context,
+                                PageTransition(
+                                  type: PageTransitionType.fade,
+                                  duration: Duration(milliseconds: 300),
+                                  reverseDuration: Duration(milliseconds: 300),
+                                  child: InfomationAppPageWidget(),
+                                ),
+                              );
+                            },
+                            child: Column(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                IconButton(
+                                  onPressed: () {
+                                    print('IconButton pressed ...');
+                                  },
+                                  icon: Icon(
+                                    Icons.info_outline,
+                                    color: FlutterFlowTheme.tertiaryColor,
+                                    size: 100,
+                                  ),
+                                  iconSize: 100,
+                                ),
+                                Text(
+                                  'Informasi',
+                                  style: FlutterFlowTheme.subtitle2.override(
+                                    fontFamily: 'Ubuntu',
+                                    color: FlutterFlowTheme.tertiaryColor,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(1, 1, 1, 1),
+                        child: Card(
+                          clipBehavior: Clip.antiAliasWithSaveLayer,
+                          color: FlutterFlowTheme.secondary1,
+                          elevation: 5,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(40),
+                          ),
                           child: Column(
                             mainAxisSize: MainAxisSize.max,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               IconButton(
-                                onPressed: () {
-                                  print('IconButton pressed ...');
+                                onPressed: () async {
+                                  await Navigator.push(
+                                    context,
+                                    PageTransition(
+                                      type: PageTransitionType.bottomToTop,
+                                      duration: Duration(milliseconds: 300),
+                                      reverseDuration:
+                                          Duration(milliseconds: 300),
+                                      child: EditprofileWidget(),
+                                    ),
+                                  );
                                 },
                                 icon: Icon(
-                                  Icons.info_outline,
+                                  Icons.person,
                                   color: FlutterFlowTheme.tertiaryColor,
                                   size: 100,
                                 ),
                                 iconSize: 100,
                               ),
                               Text(
-                                'Informasi',
+                                'Edit Profil',
                                 style: FlutterFlowTheme.subtitle2.override(
                                   fontFamily: 'Ubuntu',
                                   color: FlutterFlowTheme.tertiaryColor,

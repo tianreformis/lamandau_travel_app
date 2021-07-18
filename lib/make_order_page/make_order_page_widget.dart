@@ -49,7 +49,7 @@ class _MakeOrderPageWidgetState extends State<MakeOrderPageWidget> {
     return Scaffold(
       key: scaffoldKey,
       appBar: AppBar(
-        backgroundColor: FlutterFlowTheme.secondary1,
+        backgroundColor: FlutterFlowTheme.primaryColor,
         automaticallyImplyLeading: false,
         leading: Padding(
           padding: EdgeInsets.fromLTRB(0, 0, 0, 5),
@@ -59,7 +59,8 @@ class _MakeOrderPageWidgetState extends State<MakeOrderPageWidget> {
             },
             child: Card(
               clipBehavior: Clip.antiAliasWithSaveLayer,
-              color: Color(0xFFF5F5F5),
+              color: Color(0x00F5F5F5),
+              elevation: 0,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20),
               ),
@@ -69,7 +70,7 @@ class _MakeOrderPageWidgetState extends State<MakeOrderPageWidget> {
                 },
                 child: Icon(
                   Icons.arrow_back,
-                  color: Colors.black,
+                  color: FlutterFlowTheme.tertiaryColor,
                   size: 24,
                 ),
               ),
@@ -82,7 +83,7 @@ class _MakeOrderPageWidgetState extends State<MakeOrderPageWidget> {
             width: 200,
             height: 45,
             decoration: BoxDecoration(
-              color: FlutterFlowTheme.tertiaryColor,
+              color: Color(0x00FFFFFF),
               borderRadius: BorderRadius.circular(20),
               shape: BoxShape.rectangle,
             ),
@@ -93,6 +94,7 @@ class _MakeOrderPageWidgetState extends State<MakeOrderPageWidget> {
                 textAlign: TextAlign.center,
                 style: FlutterFlowTheme.title1.override(
                   fontFamily: 'Ubuntu',
+                  color: FlutterFlowTheme.tertiaryColor,
                 ),
               ),
             ),
@@ -100,9 +102,9 @@ class _MakeOrderPageWidgetState extends State<MakeOrderPageWidget> {
         ),
         actions: [],
         centerTitle: true,
-        elevation: 4,
+        elevation: 0,
       ),
-      backgroundColor: FlutterFlowTheme.base1,
+      backgroundColor: FlutterFlowTheme.primaryColor,
       body: SafeArea(
         child: Column(
           mainAxisSize: MainAxisSize.max,
@@ -141,6 +143,7 @@ class _MakeOrderPageWidgetState extends State<MakeOrderPageWidget> {
                               borderRadius: BorderRadius.circular(10),
                             ),
                             child: FlutterFlowDropDown(
+                              initialOption: 'Pilih Rute',
                               options: [
                                 'Kubung - Nangabulik',
                                 'Sekombulan - Nangabulik',
@@ -189,6 +192,7 @@ class _MakeOrderPageWidgetState extends State<MakeOrderPageWidget> {
                               borderRadius: BorderRadius.circular(10),
                             ),
                             child: FlutterFlowDropDown(
+                              initialOption: 'Pilih Kursi',
                               options: [
                                 '02. Samping Supir',
                                 '03. Belakang Supir',
@@ -231,13 +235,13 @@ class _MakeOrderPageWidgetState extends State<MakeOrderPageWidget> {
                           ),
                           FlutterFlowPlacePicker(
                             googleMapsApiKey: Platform.isAndroid
-                                ? ''
+                                ? 'AIzaSyDBH6NvqxTTrbrdDfwvML1D85Tc9xX6MrY'
                                 : Platform.isIOS
-                                    ? ''
-                                    : '',
+                                    ? 'AIzaSyB-VkPAUsW9DR0Ksci5blQrMLU2kTzUeW8'
+                                    : 'AIzaSyALfwqSPFGHzoMv_TKJhg4qVMoSv_iderQ',
                             onSelect: (latlng) =>
                                 setState(() => placePickerValue = latlng),
-                            defaultText: 'Pilih Lokasi',
+                            defaultText: 'Select Location',
                             icon: Icon(
                               Icons.place,
                               color: Colors.white,
