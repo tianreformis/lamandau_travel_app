@@ -249,73 +249,45 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(40),
                           ),
-                          child: InkWell(
-                            onTap: () async {
-                              await Navigator.push(
-                                context,
-                                PageTransition(
-                                  type: PageTransitionType.fade,
-                                  duration: Duration(milliseconds: 300),
-                                  reverseDuration: Duration(milliseconds: 300),
-                                  child: ActiveOrderPageWidget(),
-                                ),
-                              );
-                            },
-                            child: Column(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Align(
-                                  alignment: Alignment(0, 0),
-                                  child: IconButton(
-                                    onPressed: () async {
-                                      await Navigator.push(
-                                        context,
-                                        PageTransition(
-                                          type: PageTransitionType.fade,
-                                          duration: Duration(milliseconds: 300),
-                                          reverseDuration:
-                                              Duration(milliseconds: 300),
-                                          child: ActiveOrderPageWidget(),
-                                        ),
-                                      );
-                                    },
-                                    icon: FaIcon(
-                                      FontAwesomeIcons.carAlt,
-                                      color: FlutterFlowTheme.tertiaryColor,
-                                      size: 100,
-                                    ),
-                                    iconSize: 100,
-                                  ),
-                                ),
-                                Align(
-                                  alignment: Alignment(0, -0.65),
-                                  child: InkWell(
-                                    onTap: () async {
-                                      await Navigator.push(
-                                        context,
-                                        PageTransition(
-                                          type: PageTransitionType.fade,
-                                          duration: Duration(milliseconds: 300),
-                                          reverseDuration:
-                                              Duration(milliseconds: 300),
-                                          child: ActiveOrderPageWidget(),
-                                        ),
-                                      );
-                                    },
-                                    child: Text(
-                                      'Buat Order',
-                                      style:
-                                          FlutterFlowTheme.subtitle2.override(
-                                        fontFamily: 'Ubuntu',
-                                        color: FlutterFlowTheme.tertiaryColor,
-                                        fontWeight: FontWeight.bold,
+                          child: Column(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Align(
+                                alignment: Alignment(0, 0),
+                                child: IconButton(
+                                  onPressed: () async {
+                                    await Navigator.push(
+                                      context,
+                                      PageTransition(
+                                        type: PageTransitionType.bottomToTop,
+                                        duration: Duration(milliseconds: 300),
+                                        reverseDuration:
+                                            Duration(milliseconds: 300),
+                                        child: ActiveOrderPageWidget(),
                                       ),
-                                    ),
+                                    );
+                                  },
+                                  icon: FaIcon(
+                                    FontAwesomeIcons.carAlt,
+                                    color: FlutterFlowTheme.tertiaryColor,
+                                    size: 100,
                                   ),
-                                )
-                              ],
-                            ),
+                                  iconSize: 100,
+                                ),
+                              ),
+                              Align(
+                                alignment: Alignment(0, -0.65),
+                                child: Text(
+                                  'Buat Order',
+                                  style: FlutterFlowTheme.subtitle2.override(
+                                    fontFamily: 'Ubuntu',
+                                    color: FlutterFlowTheme.tertiaryColor,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              )
+                            ],
                           ),
                         ),
                       ),
@@ -328,43 +300,39 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(40),
                           ),
-                          child: InkWell(
-                            onTap: () async {
-                              await Navigator.push(
-                                context,
-                                PageTransition(
-                                  type: PageTransitionType.fade,
-                                  duration: Duration(milliseconds: 300),
-                                  reverseDuration: Duration(milliseconds: 300),
-                                  child: InfomationAppPageWidget(),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              IconButton(
+                                onPressed: () async {
+                                  await Navigator.push(
+                                    context,
+                                    PageTransition(
+                                      type: PageTransitionType.bottomToTop,
+                                      duration: Duration(milliseconds: 300),
+                                      reverseDuration:
+                                          Duration(milliseconds: 300),
+                                      child: InfomationAppPageWidget(),
+                                    ),
+                                  );
+                                },
+                                icon: Icon(
+                                  Icons.info_outline,
+                                  color: FlutterFlowTheme.tertiaryColor,
+                                  size: 100,
                                 ),
-                              );
-                            },
-                            child: Column(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                IconButton(
-                                  onPressed: () {
-                                    print('IconButton pressed ...');
-                                  },
-                                  icon: Icon(
-                                    Icons.info_outline,
-                                    color: FlutterFlowTheme.tertiaryColor,
-                                    size: 100,
-                                  ),
-                                  iconSize: 100,
+                                iconSize: 100,
+                              ),
+                              Text(
+                                'Informasi',
+                                style: FlutterFlowTheme.subtitle2.override(
+                                  fontFamily: 'Ubuntu',
+                                  color: FlutterFlowTheme.tertiaryColor,
+                                  fontWeight: FontWeight.bold,
                                 ),
-                                Text(
-                                  'Informasi',
-                                  style: FlutterFlowTheme.subtitle2.override(
-                                    fontFamily: 'Ubuntu',
-                                    color: FlutterFlowTheme.tertiaryColor,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                )
-                              ],
-                            ),
+                              )
+                            ],
                           ),
                         ),
                       ),
@@ -422,82 +390,53 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(40),
                           ),
-                          child: InkWell(
-                            onTap: () async {
-                              await showDialog(
-                                context: context,
-                                builder: (alertDialogContext) {
-                                  return AlertDialog(
-                                    title: Text('Keluar'),
-                                    content: Text('Yakin, Keluar?'),
-                                    actions: [
-                                      TextButton(
-                                        onPressed: () =>
-                                            Navigator.pop(alertDialogContext),
-                                        child: Text('Batal'),
-                                      ),
-                                      TextButton(
-                                        onPressed: () async {
-                                          Navigator.pop(alertDialogContext);
-                                          await signOut();
-                                          ;
-                                        },
-                                        child: Text('Konfirmasi'),
-                                      ),
-                                    ],
+                          child: Column(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              IconButton(
+                                onPressed: () async {
+                                  await showDialog(
+                                    context: context,
+                                    builder: (alertDialogContext) {
+                                      return AlertDialog(
+                                        title: Text('Keluar'),
+                                        content: Text('Yakin, Keluar?'),
+                                        actions: [
+                                          TextButton(
+                                            onPressed: () => Navigator.pop(
+                                                alertDialogContext),
+                                            child: Text('Batal'),
+                                          ),
+                                          TextButton(
+                                            onPressed: () async {
+                                              Navigator.pop(alertDialogContext);
+                                              await signOut();
+                                              ;
+                                            },
+                                            child: Text('Konfirmasi'),
+                                          ),
+                                        ],
+                                      );
+                                    },
                                   );
                                 },
-                              );
-                            },
-                            child: Column(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                IconButton(
-                                  onPressed: () async {
-                                    await showDialog(
-                                      context: context,
-                                      builder: (alertDialogContext) {
-                                        return AlertDialog(
-                                          title: Text('Keluar'),
-                                          content: Text('Yakin, Keluar?'),
-                                          actions: [
-                                            TextButton(
-                                              onPressed: () => Navigator.pop(
-                                                  alertDialogContext),
-                                              child: Text('Batal'),
-                                            ),
-                                            TextButton(
-                                              onPressed: () async {
-                                                Navigator.pop(
-                                                    alertDialogContext);
-                                                await signOut();
-                                                ;
-                                              },
-                                              child: Text('Konfirmasi'),
-                                            ),
-                                          ],
-                                        );
-                                      },
-                                    );
-                                  },
-                                  icon: Icon(
-                                    Icons.close_sharp,
-                                    color: FlutterFlowTheme.tertiaryColor,
-                                    size: 100,
-                                  ),
-                                  iconSize: 100,
+                                icon: Icon(
+                                  Icons.close_sharp,
+                                  color: FlutterFlowTheme.tertiaryColor,
+                                  size: 100,
                                 ),
-                                Text(
-                                  'Keluar',
-                                  style: FlutterFlowTheme.subtitle2.override(
-                                    fontFamily: 'Ubuntu',
-                                    color: FlutterFlowTheme.tertiaryColor,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                )
-                              ],
-                            ),
+                                iconSize: 100,
+                              ),
+                              Text(
+                                'Keluar',
+                                style: FlutterFlowTheme.subtitle2.override(
+                                  fontFamily: 'Ubuntu',
+                                  color: FlutterFlowTheme.tertiaryColor,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              )
+                            ],
                           ),
                         ),
                       )

@@ -64,33 +64,7 @@ class _ActiveOrderPageWidgetState extends State<ActiveOrderPageWidget> {
           key: scaffoldKey,
           appBar: AppBar(
             backgroundColor: FlutterFlowTheme.primaryColor,
-            automaticallyImplyLeading: false,
-            leading: Padding(
-              padding: EdgeInsets.fromLTRB(0, 0, 0, 5),
-              child: InkWell(
-                onTap: () async {
-                  Navigator.pop(context);
-                },
-                child: Card(
-                  clipBehavior: Clip.antiAliasWithSaveLayer,
-                  color: FlutterFlowTheme.primaryColor,
-                  elevation: 0,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: InkWell(
-                    onTap: () async {
-                      Navigator.pop(context);
-                    },
-                    child: Icon(
-                      Icons.arrow_back,
-                      color: FlutterFlowTheme.tertiaryColor,
-                      size: 24,
-                    ),
-                  ),
-                ),
-              ),
-            ),
+            automaticallyImplyLeading: true,
             title: Padding(
               padding: EdgeInsets.fromLTRB(0, 0, 0, 5),
               child: Container(
@@ -166,300 +140,376 @@ class _ActiveOrderPageWidgetState extends State<ActiveOrderPageWidget> {
               iconSize: 30,
             ),
           ),
-          body: Column(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Expanded(
-                child: StreamBuilder<List<OrderTravelRecord>>(
-                  stream: queryOrderTravelRecord(
-                    queryBuilder: (orderTravelRecord) => orderTravelRecord
-                        .where('users', isEqualTo: widget.userRecord)
-                        .orderBy('created_at', descending: true),
-                  ),
-                  builder: (context, snapshot) {
-                    // Customize what your widget looks like when it's loading.
-                    if (!snapshot.hasData) {
-                      return Center(
-                        child: SizedBox(
-                          width: 50,
-                          height: 50,
-                          child: CircularProgressIndicator(
-                            color: FlutterFlowTheme.primaryColor,
+          body: SafeArea(
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Expanded(
+                  child: StreamBuilder<List<OrderTravelRecord>>(
+                    stream: queryOrderTravelRecord(
+                      queryBuilder: (orderTravelRecord) => orderTravelRecord
+                          .where('users', isEqualTo: widget.userRecord)
+                          .orderBy('created_at', descending: true),
+                    ),
+                    builder: (context, snapshot) {
+                      // Customize what your widget looks like when it's loading.
+                      if (!snapshot.hasData) {
+                        return Center(
+                          child: SizedBox(
+                            width: 50,
+                            height: 50,
+                            child: CircularProgressIndicator(
+                              color: FlutterFlowTheme.primaryColor,
+                            ),
                           ),
-                        ),
-                      );
-                    }
-                    List<OrderTravelRecord> listViewOrderTravelRecordList =
-                        snapshot.data;
-                    if (listViewOrderTravelRecordList.isEmpty) {
-                      return Center(
-                        child: Image.asset(
-                          'assets/images/No Messages - Empty Inbox.png',
-                          width: 250,
-                          fit: BoxFit.fill,
-                        ),
-                      );
-                    }
-                    return ListView.builder(
-                      padding: EdgeInsets.zero,
-                      shrinkWrap: true,
-                      scrollDirection: Axis.vertical,
-                      itemCount: listViewOrderTravelRecordList.length,
-                      itemBuilder: (context, listViewIndex) {
-                        final listViewOrderTravelRecord =
-                            listViewOrderTravelRecordList[listViewIndex];
-                        return StreamBuilder<UsersRecord>(
-                          stream: UsersRecord.getDocument(
-                              listViewOrderTravelRecord.users),
-                          builder: (context, snapshot) {
-                            // Customize what your widget looks like when it's loading.
-                            if (!snapshot.hasData) {
-                              return Center(
-                                child: SizedBox(
-                                  width: 50,
-                                  height: 50,
-                                  child: CircularProgressIndicator(
-                                    color: FlutterFlowTheme.primaryColor,
+                        );
+                      }
+                      List<OrderTravelRecord> listViewOrderTravelRecordList =
+                          snapshot.data;
+                      if (listViewOrderTravelRecordList.isEmpty) {
+                        return Center(
+                          child: Image.asset(
+                            'assets/images/No Messages - Empty Inbox.png',
+                            width: 250,
+                            fit: BoxFit.fill,
+                          ),
+                        );
+                      }
+                      return ListView.builder(
+                        padding: EdgeInsets.zero,
+                        shrinkWrap: true,
+                        scrollDirection: Axis.vertical,
+                        itemCount: listViewOrderTravelRecordList.length,
+                        itemBuilder: (context, listViewIndex) {
+                          final listViewOrderTravelRecord =
+                              listViewOrderTravelRecordList[listViewIndex];
+                          return StreamBuilder<UsersRecord>(
+                            stream: UsersRecord.getDocument(
+                                listViewOrderTravelRecord.users),
+                            builder: (context, snapshot) {
+                              // Customize what your widget looks like when it's loading.
+                              if (!snapshot.hasData) {
+                                return Center(
+                                  child: SizedBox(
+                                    width: 50,
+                                    height: 50,
+                                    child: CircularProgressIndicator(
+                                      color: FlutterFlowTheme.primaryColor,
+                                    ),
                                   ),
-                                ),
-                              );
-                            }
-                            final cardUsersRecord = snapshot.data;
-                            return Padding(
-                              padding: EdgeInsets.fromLTRB(5, 5, 5, 0),
-                              child: Card(
-                                clipBehavior: Clip.antiAliasWithSaveLayer,
-                                color: FlutterFlowTheme.base1,
-                                elevation: 4,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.max,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Padding(
-                                      padding: EdgeInsets.fromLTRB(0, 5, 0, 5),
-                                      child: SingleChildScrollView(
-                                        scrollDirection: Axis.horizontal,
-                                        child: Row(
-                                          mainAxisSize: MainAxisSize.max,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Padding(
-                                              padding: EdgeInsets.fromLTRB(
-                                                  20, 0, 0, 0),
-                                              child: Column(
-                                                mainAxisSize: MainAxisSize.max,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Padding(
-                                                    padding:
-                                                        EdgeInsets.fromLTRB(
-                                                            0, 4, 0, 4),
-                                                    child: Row(
-                                                      mainAxisSize:
-                                                          MainAxisSize.max,
-                                                      children: [
-                                                        FaIcon(
-                                                          FontAwesomeIcons
-                                                              .locationArrow,
-                                                          color: Colors.black,
-                                                          size: 24,
-                                                        ),
-                                                        Padding(
-                                                          padding: EdgeInsets
-                                                              .fromLTRB(
-                                                                  10, 0, 0, 0),
-                                                          child: Text(
-                                                            listViewOrderTravelRecord
-                                                                .rute,
-                                                            style:
-                                                                FlutterFlowTheme
-                                                                    .title3
-                                                                    .override(
-                                                              fontFamily:
-                                                                  'Ubuntu',
-                                                              color:
-                                                                  Colors.black,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold,
-                                                            ),
-                                                          ),
-                                                        )
-                                                      ],
-                                                    ),
-                                                  ),
-                                                  Padding(
-                                                    padding:
-                                                        EdgeInsets.fromLTRB(
-                                                            0, 4, 0, 4),
-                                                    child: Row(
-                                                      mainAxisSize:
-                                                          MainAxisSize.max,
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .start,
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .center,
-                                                      children: [
-                                                        Padding(
-                                                          padding: EdgeInsets
-                                                              .fromLTRB(
-                                                                  1, 0, 0, 0),
-                                                          child: FaIcon(
+                                );
+                              }
+                              final cardUsersRecord = snapshot.data;
+                              return Padding(
+                                padding: EdgeInsets.fromLTRB(5, 5, 5, 0),
+                                child: Card(
+                                  clipBehavior: Clip.antiAliasWithSaveLayer,
+                                  color: FlutterFlowTheme.base1,
+                                  elevation: 4,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.max,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Padding(
+                                        padding:
+                                            EdgeInsets.fromLTRB(0, 5, 0, 5),
+                                        child: SingleChildScrollView(
+                                          scrollDirection: Axis.horizontal,
+                                          child: Row(
+                                            mainAxisSize: MainAxisSize.max,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Padding(
+                                                padding: EdgeInsets.fromLTRB(
+                                                    20, 0, 0, 0),
+                                                child: Column(
+                                                  mainAxisSize:
+                                                      MainAxisSize.max,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Padding(
+                                                      padding:
+                                                          EdgeInsets.fromLTRB(
+                                                              0, 4, 0, 4),
+                                                      child: Row(
+                                                        mainAxisSize:
+                                                            MainAxisSize.max,
+                                                        children: [
+                                                          FaIcon(
                                                             FontAwesomeIcons
-                                                                .carAlt,
+                                                                .locationArrow,
                                                             color: Colors.black,
-                                                            size: 24,
+                                                            size: 20,
                                                           ),
-                                                        ),
-                                                        Padding(
-                                                          padding: EdgeInsets
-                                                              .fromLTRB(
-                                                                  10, 4, 0, 4),
-                                                          child: Text(
-                                                            listViewOrderTravelRecord
-                                                                .seatNumber,
-                                                            style:
-                                                                FlutterFlowTheme
-                                                                    .subtitle2
-                                                                    .override(
-                                                              fontFamily:
-                                                                  'Ubuntu',
+                                                          Padding(
+                                                            padding: EdgeInsets
+                                                                .fromLTRB(10, 0,
+                                                                    0, 0),
+                                                            child: Text(
+                                                              listViewOrderTravelRecord
+                                                                  .rute,
+                                                              style:
+                                                                  FlutterFlowTheme
+                                                                      .subtitle2
+                                                                      .override(
+                                                                fontFamily:
+                                                                    'Ubuntu',
+                                                                color: Colors
+                                                                    .black,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w600,
+                                                              ),
+                                                            ),
+                                                          )
+                                                        ],
+                                                      ),
+                                                    ),
+                                                    Padding(
+                                                      padding:
+                                                          EdgeInsets.fromLTRB(
+                                                              0, 4, 0, 4),
+                                                      child: Row(
+                                                        mainAxisSize:
+                                                            MainAxisSize.max,
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .start,
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .center,
+                                                        children: [
+                                                          Padding(
+                                                            padding: EdgeInsets
+                                                                .fromLTRB(
+                                                                    1, 0, 0, 0),
+                                                            child: FaIcon(
+                                                              FontAwesomeIcons
+                                                                  .carAlt,
                                                               color:
                                                                   Colors.black,
+                                                              size: 20,
                                                             ),
                                                           ),
-                                                        )
-                                                      ],
-                                                    ),
-                                                  ),
-                                                  Padding(
-                                                    padding:
-                                                        EdgeInsets.fromLTRB(
-                                                            0, 4, 0, 4),
-                                                    child: Row(
-                                                      mainAxisSize:
-                                                          MainAxisSize.max,
-                                                      children: [
-                                                        FaIcon(
-                                                          FontAwesomeIcons
-                                                              .calendarCheck,
-                                                          color: Colors.black,
-                                                          size: 24,
-                                                        ),
-                                                        Padding(
-                                                          padding: EdgeInsets
-                                                              .fromLTRB(
-                                                                  10, 4, 0, 4),
-                                                          child: Text(
-                                                            dateTimeFormat(
-                                                                'MMMEd',
-                                                                listViewOrderTravelRecord
-                                                                    .createdAt),
-                                                            textAlign:
-                                                                TextAlign.start,
-                                                            style:
-                                                                FlutterFlowTheme
-                                                                    .subtitle2
-                                                                    .override(
-                                                              fontFamily:
-                                                                  'Ubuntu',
-                                                              color:
-                                                                  Colors.black,
+                                                          Padding(
+                                                            padding: EdgeInsets
+                                                                .fromLTRB(10, 4,
+                                                                    0, 4),
+                                                            child: Text(
+                                                              listViewOrderTravelRecord
+                                                                  .seatNumber,
+                                                              style:
+                                                                  FlutterFlowTheme
+                                                                      .subtitle2
+                                                                      .override(
+                                                                fontFamily:
+                                                                    'Ubuntu',
+                                                                color: Colors
+                                                                    .black,
+                                                              ),
                                                             ),
-                                                          ),
-                                                        )
-                                                      ],
+                                                          )
+                                                        ],
+                                                      ),
                                                     ),
-                                                  ),
-                                                  Padding(
-                                                    padding:
-                                                        EdgeInsets.fromLTRB(
-                                                            0, 4, 0, 4),
-                                                    child: Row(
-                                                      mainAxisSize:
-                                                          MainAxisSize.max,
-                                                      children: [
-                                                        Icon(
-                                                          Icons
-                                                              .people_alt_sharp,
-                                                          color: Colors.black,
-                                                          size: 24,
-                                                        ),
-                                                        Padding(
-                                                          padding: EdgeInsets
-                                                              .fromLTRB(
-                                                                  10, 0, 0, 0),
-                                                          child: Text(
-                                                            cardUsersRecord
-                                                                .displayName,
-                                                            style:
-                                                                FlutterFlowTheme
-                                                                    .bodyText2
-                                                                    .override(
-                                                              fontFamily:
-                                                                  'Ubuntu',
+                                                    Padding(
+                                                      padding:
+                                                          EdgeInsets.fromLTRB(
+                                                              0, 4, 0, 4),
+                                                      child: Row(
+                                                        mainAxisSize:
+                                                            MainAxisSize.max,
+                                                        children: [
+                                                          FaIcon(
+                                                            FontAwesomeIcons
+                                                                .calendarCheck,
+                                                            color: Colors.black,
+                                                            size: 20,
+                                                          ),
+                                                          Padding(
+                                                            padding: EdgeInsets
+                                                                .fromLTRB(10, 4,
+                                                                    0, 4),
+                                                            child: Text(
+                                                              dateTimeFormat(
+                                                                  'MMMEd',
+                                                                  listViewOrderTravelRecord
+                                                                      .createdAt),
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .start,
+                                                              style:
+                                                                  FlutterFlowTheme
+                                                                      .subtitle2
+                                                                      .override(
+                                                                fontFamily:
+                                                                    'Ubuntu',
+                                                                color: Colors
+                                                                    .black,
+                                                              ),
                                                             ),
-                                                          ),
-                                                        )
-                                                      ],
+                                                          )
+                                                        ],
+                                                      ),
                                                     ),
-                                                  )
-                                                ],
+                                                    Padding(
+                                                      padding:
+                                                          EdgeInsets.fromLTRB(
+                                                              0, 4, 0, 4),
+                                                      child: Row(
+                                                        mainAxisSize:
+                                                            MainAxisSize.max,
+                                                        children: [
+                                                          Icon(
+                                                            Icons
+                                                                .people_alt_sharp,
+                                                            color: Colors.black,
+                                                            size: 20,
+                                                          ),
+                                                          Padding(
+                                                            padding: EdgeInsets
+                                                                .fromLTRB(10, 0,
+                                                                    0, 0),
+                                                            child: Text(
+                                                              cardUsersRecord
+                                                                  .displayName,
+                                                              style:
+                                                                  FlutterFlowTheme
+                                                                      .bodyText2
+                                                                      .override(
+                                                                fontFamily:
+                                                                    'Ubuntu',
+                                                              ),
+                                                            ),
+                                                          )
+                                                        ],
+                                                      ),
+                                                    )
+                                                  ],
+                                                ),
                                               ),
-                                            ),
-                                            Padding(
-                                              padding: EdgeInsets.fromLTRB(
-                                                  20, 0, 10, 0),
-                                              child: Column(
-                                                mainAxisSize: MainAxisSize.max,
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Padding(
-                                                    padding:
-                                                        EdgeInsets.fromLTRB(
-                                                            1, 0, 0, 10),
-                                                    child: FFButtonWidget(
-                                                      onPressed: () async {
-                                                        await Navigator.push(
-                                                          context,
-                                                          PageTransition(
-                                                            type:
-                                                                PageTransitionType
-                                                                    .fade,
-                                                            duration: Duration(
-                                                                milliseconds:
-                                                                    300),
-                                                            reverseDuration:
-                                                                Duration(
-                                                                    milliseconds:
-                                                                        300),
-                                                            child:
-                                                                ReportPageWidget(
-                                                              orderTravelParameter:
-                                                                  listViewOrderTravelRecord,
+                                              Padding(
+                                                padding: EdgeInsets.fromLTRB(
+                                                    20, 0, 10, 0),
+                                                child: Column(
+                                                  mainAxisSize:
+                                                      MainAxisSize.max,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    Padding(
+                                                      padding:
+                                                          EdgeInsets.fromLTRB(
+                                                              1, 0, 0, 10),
+                                                      child: FFButtonWidget(
+                                                        onPressed: () async {
+                                                          await Navigator.push(
+                                                            context,
+                                                            PageTransition(
+                                                              type:
+                                                                  PageTransitionType
+                                                                      .fade,
+                                                              duration: Duration(
+                                                                  milliseconds:
+                                                                      300),
+                                                              reverseDuration:
+                                                                  Duration(
+                                                                      milliseconds:
+                                                                          300),
+                                                              child:
+                                                                  ReportPageWidget(
+                                                                orderTravelParameter:
+                                                                    listViewOrderTravelRecord,
+                                                              ),
                                                             ),
+                                                          );
+                                                        },
+                                                        text: 'Tiket',
+                                                        icon: Icon(
+                                                          Icons.text_snippet,
+                                                          size: 20,
+                                                        ),
+                                                        options:
+                                                            FFButtonOptions(
+                                                          width: 130,
+                                                          height: 40,
+                                                          color:
+                                                              Color(0xFF44CB85),
+                                                          textStyle:
+                                                              FlutterFlowTheme
+                                                                  .subtitle2
+                                                                  .override(
+                                                            fontFamily:
+                                                                'Ubuntu',
+                                                            color: Colors.white,
+                                                            fontWeight:
+                                                                FontWeight.bold,
                                                           ),
+                                                          elevation: 3,
+                                                          borderSide:
+                                                              BorderSide(
+                                                            color: Colors
+                                                                .transparent,
+                                                            width: 1,
+                                                          ),
+                                                          borderRadius: 12,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    FFButtonWidget(
+                                                      onPressed: () async {
+                                                        await showDialog(
+                                                          context: context,
+                                                          builder:
+                                                              (alertDialogContext) {
+                                                            return AlertDialog(
+                                                              title: Text(
+                                                                  'Batalkan Pesanan'),
+                                                              content: Text(
+                                                                  'Apakah anda yakin ingin membatalkan pesanan?'),
+                                                              actions: [
+                                                                TextButton(
+                                                                  onPressed: () =>
+                                                                      Navigator.pop(
+                                                                          alertDialogContext),
+                                                                  child: Text(
+                                                                      'Tidak Jadi'),
+                                                                ),
+                                                                TextButton(
+                                                                  onPressed:
+                                                                      () async {
+                                                                    Navigator.pop(
+                                                                        alertDialogContext);
+                                                                    await listViewOrderTravelRecord
+                                                                        .reference
+                                                                        .delete();
+                                                                    ;
+                                                                  },
+                                                                  child: Text(
+                                                                      'Ya'),
+                                                                ),
+                                                              ],
+                                                            );
+                                                          },
                                                         );
                                                       },
-                                                      text: 'Tiket',
+                                                      text: 'Batal',
                                                       icon: Icon(
-                                                        Icons.text_snippet,
+                                                        Icons.cancel_outlined,
                                                         size: 20,
                                                       ),
                                                       options: FFButtonOptions(
                                                         width: 130,
                                                         height: 40,
                                                         color:
-                                                            Color(0xFF44CB85),
+                                                            Color(0xFFE05034),
                                                         textStyle:
                                                             FlutterFlowTheme
                                                                 .subtitle2
@@ -469,7 +519,6 @@ class _ActiveOrderPageWidgetState extends State<ActiveOrderPageWidget> {
                                                           fontWeight:
                                                               FontWeight.bold,
                                                         ),
-                                                        elevation: 3,
                                                         borderSide: BorderSide(
                                                           color: Colors
                                                               .transparent,
@@ -477,90 +526,27 @@ class _ActiveOrderPageWidgetState extends State<ActiveOrderPageWidget> {
                                                         ),
                                                         borderRadius: 12,
                                                       ),
-                                                    ),
-                                                  ),
-                                                  FFButtonWidget(
-                                                    onPressed: () async {
-                                                      await showDialog(
-                                                        context: context,
-                                                        builder:
-                                                            (alertDialogContext) {
-                                                          return AlertDialog(
-                                                            title: Text(
-                                                                'Batalkan Pesanan'),
-                                                            content: Text(
-                                                                'Apakah anda yakin ingin membatalkan pesanan?'),
-                                                            actions: [
-                                                              TextButton(
-                                                                onPressed: () =>
-                                                                    Navigator.pop(
-                                                                        alertDialogContext),
-                                                                child: Text(
-                                                                    'Tidak Jadi'),
-                                                              ),
-                                                              TextButton(
-                                                                onPressed:
-                                                                    () async {
-                                                                  Navigator.pop(
-                                                                      alertDialogContext);
-                                                                  await listViewOrderTravelRecord
-                                                                      .reference
-                                                                      .delete();
-                                                                  ;
-                                                                },
-                                                                child:
-                                                                    Text('Ya'),
-                                                              ),
-                                                            ],
-                                                          );
-                                                        },
-                                                      );
-                                                    },
-                                                    text: 'Batal',
-                                                    icon: Icon(
-                                                      Icons.cancel_outlined,
-                                                      size: 20,
-                                                    ),
-                                                    options: FFButtonOptions(
-                                                      width: 130,
-                                                      height: 40,
-                                                      color: Color(0xFFE05034),
-                                                      textStyle:
-                                                          FlutterFlowTheme
-                                                              .subtitle2
-                                                              .override(
-                                                        fontFamily: 'Ubuntu',
-                                                        color: Colors.white,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                      ),
-                                                      borderSide: BorderSide(
-                                                        color:
-                                                            Colors.transparent,
-                                                        width: 1,
-                                                      ),
-                                                      borderRadius: 12,
-                                                    ),
-                                                  )
-                                                ],
-                                              ),
-                                            )
-                                          ],
+                                                    )
+                                                  ],
+                                                ),
+                                              )
+                                            ],
+                                          ),
                                         ),
-                                      ),
-                                    )
-                                  ],
+                                      )
+                                    ],
+                                  ),
                                 ),
-                              ),
-                            );
-                          },
-                        );
-                      },
-                    );
-                  },
-                ),
-              )
-            ],
+                              );
+                            },
+                          );
+                        },
+                      );
+                    },
+                  ),
+                )
+              ],
+            ),
           ),
         );
       },

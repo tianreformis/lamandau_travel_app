@@ -50,33 +50,8 @@ class _MakeOrderPageWidgetState extends State<MakeOrderPageWidget> {
       key: scaffoldKey,
       appBar: AppBar(
         backgroundColor: FlutterFlowTheme.primaryColor,
-        automaticallyImplyLeading: false,
-        leading: Padding(
-          padding: EdgeInsets.fromLTRB(0, 0, 0, 5),
-          child: InkWell(
-            onTap: () async {
-              Navigator.pop(context);
-            },
-            child: Card(
-              clipBehavior: Clip.antiAliasWithSaveLayer,
-              color: Color(0x00F5F5F5),
-              elevation: 0,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: InkWell(
-                onTap: () async {
-                  Navigator.pop(context);
-                },
-                child: Icon(
-                  Icons.arrow_back,
-                  color: FlutterFlowTheme.tertiaryColor,
-                  size: 24,
-                ),
-              ),
-            ),
-          ),
-        ),
+        iconTheme: IconThemeData(color: FlutterFlowTheme.tertiaryColor),
+        automaticallyImplyLeading: true,
         title: Padding(
           padding: EdgeInsets.fromLTRB(0, 0, 0, 5),
           child: Container(
@@ -234,11 +209,12 @@ class _MakeOrderPageWidgetState extends State<MakeOrderPageWidget> {
                             ),
                           ),
                           FlutterFlowPlacePicker(
-                            googleMapsApiKey: Platform.isAndroid
-                                ? 'AIzaSyDBH6NvqxTTrbrdDfwvML1D85Tc9xX6MrY'
-                                : Platform.isIOS
-                                    ? 'AIzaSyB-VkPAUsW9DR0Ksci5blQrMLU2kTzUeW8'
-                                    : 'AIzaSyALfwqSPFGHzoMv_TKJhg4qVMoSv_iderQ',
+                            iOSGoogleMapsApiKey:
+                                'AIzaSyB-VkPAUsW9DR0Ksci5blQrMLU2kTzUeW8',
+                            androidGoogleMapsApiKey:
+                                'AIzaSyDBH6NvqxTTrbrdDfwvML1D85Tc9xX6MrY',
+                            webGoogleMapsApiKey:
+                                'AIzaSyALfwqSPFGHzoMv_TKJhg4qVMoSv_iderQ',
                             onSelect: (latlng) =>
                                 setState(() => placePickerValue = latlng),
                             defaultText: 'Select Location',
