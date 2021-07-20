@@ -40,6 +40,7 @@ class _LoginpageWidgetState extends State<LoginpageWidget> {
       autovalidateMode: AutovalidateMode.always,
       child: Scaffold(
         key: scaffoldKey,
+        backgroundColor: FlutterFlowTheme.primaryColor,
         body: SafeArea(
           child: Stack(
             children: [

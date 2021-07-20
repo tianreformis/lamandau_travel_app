@@ -40,6 +40,7 @@ class _SignupWidgetState extends State<SignupWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
+      backgroundColor: FlutterFlowTheme.primaryColor,
       body: SafeArea(
         child: Stack(
           children: [

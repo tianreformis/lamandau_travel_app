@@ -5,13 +5,11 @@ import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../flutter_flow/lat_lng.dart';
-import '../testpage/testpage_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mapbox_search/mapbox_search.dart';
-import 'package:page_transition/page_transition.dart';
 
 class ReportPageWidget extends StatefulWidget {
   ReportPageWidget({
@@ -53,32 +51,7 @@ class _ReportPageWidgetState extends State<ReportPageWidget> {
           key: scaffoldKey,
           appBar: AppBar(
             backgroundColor: Color(0x00A2DBFA),
-            automaticallyImplyLeading: false,
-            leading: Padding(
-              padding: EdgeInsets.fromLTRB(0, 0, 0, 5),
-              child: InkWell(
-                onTap: () async {
-                  Navigator.pop(context);
-                },
-                child: Card(
-                  clipBehavior: Clip.antiAliasWithSaveLayer,
-                  color: Color(0x00EC5555),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(0),
-                  ),
-                  child: InkWell(
-                    onTap: () async {
-                      Navigator.pop(context);
-                    },
-                    child: Icon(
-                      Icons.arrow_back,
-                      color: FlutterFlowTheme.tertiaryColor,
-                      size: 24,
-                    ),
-                  ),
-                ),
-              ),
-            ),
+            automaticallyImplyLeading: true,
             title: Padding(
               padding: EdgeInsets.fromLTRB(0, 0, 0, 5),
               child: Container(
@@ -91,25 +64,12 @@ class _ReportPageWidgetState extends State<ReportPageWidget> {
                 ),
                 child: Padding(
                   padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
-                  child: InkWell(
-                    onTap: () async {
-                      await Navigator.push(
-                        context,
-                        PageTransition(
-                          type: PageTransitionType.fade,
-                          duration: Duration(milliseconds: 300),
-                          reverseDuration: Duration(milliseconds: 300),
-                          child: TestpageWidget(),
-                        ),
-                      );
-                    },
-                    child: Text(
-                      'Tiket Travel',
-                      textAlign: TextAlign.center,
-                      style: FlutterFlowTheme.title1.override(
-                        fontFamily: 'Ubuntu',
-                        color: FlutterFlowTheme.tertiaryColor,
-                      ),
+                  child: Text(
+                    'Tiket Travel',
+                    textAlign: TextAlign.center,
+                    style: FlutterFlowTheme.title1.override(
+                      fontFamily: 'Ubuntu',
+                      color: FlutterFlowTheme.tertiaryColor,
                     ),
                   ),
                 ),

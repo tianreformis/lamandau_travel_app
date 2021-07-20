@@ -4,7 +4,6 @@ import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../make_order_page/make_order_page_widget.dart';
 import '../report_page/report_page_widget.dart';
-import '../testpage/testpage_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -77,25 +76,12 @@ class _ActiveOrderPageWidgetState extends State<ActiveOrderPageWidget> {
                 ),
                 child: Padding(
                   padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
-                  child: InkWell(
-                    onTap: () async {
-                      await Navigator.push(
-                        context,
-                        PageTransition(
-                          type: PageTransitionType.fade,
-                          duration: Duration(milliseconds: 300),
-                          reverseDuration: Duration(milliseconds: 300),
-                          child: TestpageWidget(),
-                        ),
-                      );
-                    },
-                    child: Text(
-                      'Pesanan Aktif',
-                      textAlign: TextAlign.center,
-                      style: FlutterFlowTheme.title1.override(
-                        fontFamily: 'Ubuntu',
-                        color: FlutterFlowTheme.tertiaryColor,
-                      ),
+                  child: Text(
+                    'Pesanan Aktif',
+                    textAlign: TextAlign.center,
+                    style: FlutterFlowTheme.title1.override(
+                      fontFamily: 'Ubuntu',
+                      color: FlutterFlowTheme.tertiaryColor,
                     ),
                   ),
                 ),

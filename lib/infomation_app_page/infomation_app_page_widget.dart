@@ -23,7 +23,7 @@ class _InfomationAppPageWidgetState extends State<InfomationAppPageWidget> {
       key: scaffoldKey,
       appBar: AppBar(
         backgroundColor: FlutterFlowTheme.primaryColor,
-        automaticallyImplyLeading: false,
+        automaticallyImplyLeading: true,
         leading: InkWell(
           onTap: () async {
             Navigator.pop(context);
