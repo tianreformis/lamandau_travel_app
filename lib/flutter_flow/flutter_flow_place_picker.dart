@@ -6,6 +6,7 @@ import 'package:google_maps_webservice/places.dart';
 
 import 'flutter_flow_widgets.dart';
 import 'lat_lng.dart';
+import 'place.dart';
 
 class FlutterFlowPlacePicker extends StatefulWidget {
   const FlutterFlowPlacePicker({
@@ -26,7 +27,7 @@ class FlutterFlowPlacePicker extends StatefulWidget {
   final String defaultText;
   final Widget icon;
   final FFButtonOptions buttonOptions;
-  final Function(LatLng location) onSelect;
+  final Function(FFPlace place) onSelect;
   final String proxyBaseUrl;
 
   @override
@@ -82,9 +83,34 @@ class _FFPlacePickerState extends State<FlutterFlowPlacePicker> {
     setState(() {
       _selectedPlace = detail.result.name;
     });
-    widget.onSelect(LatLng(
-      detail.result.geometry.location.lat,
-      detail.result.geometry.location.lng,
-    ));
+
+    widget.onSelect(
+      FFPlace(
+        latLng: LatLng(
+          detail.result.geometry.location.lat,
+          detail.result.geometry.location.lng,
+        ),
+        name: detail.result.name,
+        address: detail.result.formattedAddress,
+        city: detail.result.addressComponents
+            .firstWhere((element) => element.types.contains('locality'),
+                orElse: () => null)
+            ?.shortName,
+        state: detail.result.addressComponents
+            .firstWhere(
+                (element) =>
+                    element.types.contains('administrative_area_level_1'),
+                orElse: () => null)
+            ?.shortName,
+        country: detail.result.addressComponents
+            .firstWhere((element) => element.types.contains('country'),
+                orElse: () => null)
+            ?.shortName,
+        zipCode: detail.result.addressComponents
+            .firstWhere((element) => element.types.contains('postal_code'),
+                orElse: () => null)
+            ?.shortName,
+      ),
+    );
   }
 }

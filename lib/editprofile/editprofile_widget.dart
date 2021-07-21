@@ -13,7 +13,12 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
 
 class EditprofileWidget extends StatefulWidget {
-  EditprofileWidget({Key key}) : super(key: key);
+  EditprofileWidget({
+    Key key,
+    this.userRecordPP,
+  }) : super(key: key);
+
+  final UsersRecord userRecordPP;
 
   @override
   _EditprofileWidgetState createState() => _EditprofileWidgetState();
@@ -29,8 +34,10 @@ class _EditprofileWidgetState extends State<EditprofileWidget> {
   @override
   void initState() {
     super.initState();
-    textController1 = TextEditingController();
-    textController2 = TextEditingController();
+    textController1 =
+        TextEditingController(text: widget.userRecordPP.displayName);
+    textController2 =
+        TextEditingController(text: widget.userRecordPP.phoneNumber);
   }
 
   @override
@@ -127,7 +134,7 @@ class _EditprofileWidgetState extends State<EditprofileWidget> {
                                           shape: BoxShape.circle,
                                         ),
                                         child: Image.network(
-                                          editprofileUsersRecord.photoUrl,
+                                          widget.userRecordPP.photoUrl,
                                         ),
                                       ),
                                     ),
@@ -314,10 +321,8 @@ class _EditprofileWidgetState extends State<EditprofileWidget> {
                                           padding:
                                               EdgeInsets.fromLTRB(10, 0, 0, 0),
                                           child: Text(
-                                            dateTimeFormat(
-                                                'MMMMEEEEd',
-                                                editprofileUsersRecord
-                                                    .birthDate),
+                                            dateTimeFormat('yMd',
+                                                widget.userRecordPP.birthDate),
                                             style: FlutterFlowTheme.bodyText1
                                                 .override(
                                               fontFamily: 'Ubuntu',

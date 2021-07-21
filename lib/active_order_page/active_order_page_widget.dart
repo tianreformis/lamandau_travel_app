@@ -104,7 +104,7 @@ class _ActiveOrderPageWidgetState extends State<ActiveOrderPageWidget> {
                 ),
               );
             },
-            backgroundColor: FlutterFlowTheme.primaryColor,
+            backgroundColor: Color(0xFF44CB85),
             elevation: 8,
             child: IconButton(
               onPressed: () async {

@@ -6,13 +6,19 @@ import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../infomation_app_page/infomation_app_page_widget.dart';
 import '../loginpage/loginpage_widget.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
 
 class HomePageWidget extends StatefulWidget {
-  HomePageWidget({Key key}) : super(key: key);
+  HomePageWidget({
+    Key key,
+    this.userRecord,
+  }) : super(key: key);
+
+  final DocumentReference userRecord;
 
   @override
   _HomePageWidgetState createState() => _HomePageWidgetState();
@@ -83,7 +89,9 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                             type: PageTransitionType.fade,
                             duration: Duration(milliseconds: 300),
                             reverseDuration: Duration(milliseconds: 300),
-                            child: EditprofileWidget(),
+                            child: EditprofileWidget(
+                              userRecordPP: homePageUsersRecord,
+                            ),
                           ),
                         );
                       },
@@ -121,7 +129,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                   padding: EdgeInsets.fromLTRB(10, 10, 10, 50),
                   child: Card(
                     clipBehavior: Clip.antiAliasWithSaveLayer,
-                    color: FlutterFlowTheme.tertiary1,
+                    color: Color(0xFFE05034),
                     elevation: 5,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(50),
@@ -217,7 +225,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                             Padding(
                               padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
                               child: Text(
-                                currentUserDisplayName,
+                                homePageUsersRecord.displayName,
                                 style: FlutterFlowTheme.bodyText1.override(
                                   fontFamily: 'Ubuntu',
                                 ),
